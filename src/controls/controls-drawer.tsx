@@ -212,6 +212,7 @@ function GeneralSettings() {
     sortByLevel,
     useGranularLevels,
     playerPicks,
+    totalSets,
   } = configState;
   const availableDifficulties = useMemo(() => {
     if (!gameData) {
@@ -281,6 +282,27 @@ function GeneralSettings() {
 
   return (
     <>
+      <div className={styles.inlineControls}>
+        <FormGroup
+          label={t("controls.totalSets")}
+          contentClassName={styles.narrowInput}
+        >
+          <NumericInput
+            fill
+            size="large"
+            type="number"
+            inputMode="numeric"
+            value={totalSets}
+            min={1}
+            max={26}
+            onValueChange={(totalSets) => {
+              if (!isNaN(totalSets)) {
+                updateState({ totalSets });
+              }
+            }}
+          />
+        </FormGroup>
+      </div>
       <div className={styles.inlineControls}>
         <FormGroup
           label={t("controls.chartCount")}

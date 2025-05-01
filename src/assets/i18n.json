@@ -24,6 +24,7 @@
     "controls": {
       "drawerTitle": "Settings",
       "hideShowFilters": "Chart Filters",
+      "totalSets": "Sets to draw",
       "chartCount": "Number to draw",
       "playerPicks": "Free picks",
       "upperBoundLvl": "Lvl Max",
