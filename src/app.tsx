@@ -89,6 +89,13 @@ const router = createBrowserRouter([
         },
       },
       {
+        path: "cards-bracket",
+        lazy: async () => {
+          const { CardsBracket } = await import("./obs-sources/cards");
+          return { Component: CardsBracket };
+        },
+      },
+      {
         path: "title",
         lazy: async () => {
           const { CabTitle } = await import("./obs-sources/text");
