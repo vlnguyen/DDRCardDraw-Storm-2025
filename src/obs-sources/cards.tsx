@@ -22,7 +22,7 @@ export function CardsBracket() {
 
   return (
     <div className={styles.cardsBracketContainer}>
-      <div>
+      <div className={styles.cardsBracketDrawsContainer}>
         {draws.map((drawing) => (
           <div>
             <h1 className={styles.title}>{drawing.meta.title}</h1>

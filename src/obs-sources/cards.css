@@ -9,6 +9,11 @@
   margin: 8px;
 }
 
+.cardsBracketDrawsContainer {
+  padding: 16px 8px;
+  background-color: black;;
+}
+
 .title {
   text-align: center;
   margin: 0;
