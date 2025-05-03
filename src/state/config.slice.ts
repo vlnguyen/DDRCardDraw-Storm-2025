@@ -23,6 +23,7 @@ export interface ConfigState {
   defaultPlayersPerDraw: number;
   sortByLevel: boolean;
   useGranularLevels: boolean;
+  totalSets: number;
 }
 
 export const defaultConfig: Omit<ConfigState, "id" | "name" | "gameKey"> = {
@@ -45,6 +46,7 @@ export const defaultConfig: Omit<ConfigState, "id" | "name" | "gameKey"> = {
   sortByLevel: false,
   defaultPlayersPerDraw: 2,
   useGranularLevels: false,
+  totalSets: 1,
 };
 
 const adapter = createEntityAdapter<ConfigState>({});

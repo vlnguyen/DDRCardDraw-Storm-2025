@@ -240,6 +240,7 @@ export function draw(
   gameData: GameData,
   configData: ConfigState,
   startPoint: StartingPoint,
+  setIndex?: number,
 ): Drawing {
   const {
     chartCount: numChartsToRandom,
@@ -473,6 +474,13 @@ export function draw(
     winners: {},
     playerDisplayOrder: players.map((_, idx) => idx),
     ...startPoint,
+    meta: {
+      ...startPoint.meta,
+      title:
+        setIndex === undefined
+          ? startPoint.meta.title
+          : `${startPoint.meta.title} [Set ${String.fromCharCode(setIndex + "A".charCodeAt(0))}]`,
+    },
     charts,
   };
 }

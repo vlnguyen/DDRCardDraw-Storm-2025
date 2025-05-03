@@ -43,13 +43,23 @@ export function createDraw(
       return "nok"; // no draw was possible
     }
 
-    const drawing = draw(gameData, config, startggTargetSet);
-    trackDraw(drawing.charts.length, gameData.i18n.en.name as string);
-    if (!drawing.charts.length) {
-      return "nok"; // could not draw the requested number of charts
+    for (let setIndex = config.totalSets - 1; setIndex >= 0; setIndex--) {
+      const isMultiSetDraw = config.totalSets > 1;
+      const drawing = draw(
+        gameData,
+        config,
+        startggTargetSet,
+        isMultiSetDraw ? setIndex : undefined,
+      );
+
+      trackDraw(drawing.charts.length, gameData.i18n.en.name as string);
+      if (!drawing.charts.length) {
+        return "nok"; // could not draw the requested number of charts
+      }
+
+      dispatch(drawingsSlice.actions.addDrawing(drawing));
     }
 
-    dispatch(drawingsSlice.actions.addDrawing(drawing));
     return "ok";
   };
 }
