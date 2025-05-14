@@ -1,0 +1,16 @@
+.poolsScoresTable {
+  table-layout: fixed;
+  text-align: left;
+}
+
+.scoreCol {
+  width: 80px;
+}
+
+input {
+  width: 100%;
+  max-width: 100%;
+  box-sizing: border-box;
+  min-width: 0;
+  padding: 2px;
+}

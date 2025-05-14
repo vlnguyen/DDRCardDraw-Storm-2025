@@ -5,6 +5,7 @@ import { Header } from "../header";
 import { PartySocketManager } from "../party/client";
 import { urqlClient } from "../startgg-gql";
 import { store } from "../state/store";
+import { PoolsScores } from "./pools-scores";
 
 export function StreamDashboard() {
   const params = useParams<"roomName">();
@@ -28,7 +29,7 @@ export function StreamDashboard() {
               gap: 8,
             }}
           >
-            <div>{params.roomName}</div>
+            <PoolsScores />
           </div>
         </UrqlProvider>
       </PartySocketManager>

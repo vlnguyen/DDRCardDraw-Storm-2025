@@ -8,9 +8,19 @@ export interface CabInfo {
   id: string;
 }
 
+export interface PoolPlayer {
+  playerName: string;
+  scores: number[];
+}
+
+interface StreamDashboard {
+  poolPlayers: PoolPlayer[]
+}
+
 interface EventState {
   eventName: string;
   cabs: Record<string, CabInfo>;
+  streamDashboard: StreamDashboard;
 }
 
 const initialState: EventState = {
@@ -21,6 +31,18 @@ const initialState: EventState = {
       name: "Primary Cab",
       activeMatch: null,
     },
+  },
+  streamDashboard: {
+    poolPlayers: [
+      {
+        playerName: "VincentITG",
+        scores: [9975, 9684, 9789, 9854],
+      },
+      {
+        playerName: "BlizzrdBall",
+        scores: [9674, 9739, 9485, 9769],
+      }
+    ]
   },
 };
 
@@ -47,6 +69,9 @@ export const eventSlice = createSlice({
       const cab = state.cabs[action.payload.cabId];
       if (!cab) return;
       cab.activeMatch = action.payload.matchId;
+    },
+    updatePoolPlayers(state, action: PayloadAction<PoolPlayer[]>) {
+      state.streamDashboard.poolPlayers = action.payload
     },
   },
   selectors: {
