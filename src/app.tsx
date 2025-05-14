@@ -78,6 +78,12 @@ const router = createBrowserRouter([
     }),
   },
   {
+    path: "e/:roomName/stream-dashboard",
+    lazy: async () => ({
+      Component: (await import("./stream-dashboard")).StreamDashboard,
+    }),
+  },
+  {
     path: "e/:roomName/cab/:cabId/source",
     element: <ObsSource />,
     children: [

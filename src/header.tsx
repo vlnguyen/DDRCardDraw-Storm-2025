@@ -7,7 +7,7 @@ import {
   Navbar,
   Popover,
 } from "@blueprintjs/core";
-import { Trash, InfoSign, Menu as MenuIcon, Help } from "@blueprintjs/icons";
+import { Trash, InfoSign, Menu as MenuIcon, Help, Layers, Control } from "@blueprintjs/icons";
 import { useCallback, useState } from "react";
 import { About } from "./about";
 import { HeaderControls } from "./controls";
@@ -17,8 +17,10 @@ import { ThemeToggle } from "./theme-toggle";
 import { useAppDispatch, useAppState } from "./state/store";
 import { drawingsSlice } from "./state/drawings.slice";
 import { EventModeGated } from "./common-components/app-mode";
+import { useParams } from "react-router-dom";
 
 export function Header() {
+  const params = useParams<"roomName">();
   const [aboutOpen, setAboutOpen] = useState(false);
   const dispatch = useAppDispatch();
   const clearDrawings = useCallback(
@@ -30,6 +32,20 @@ export function Header() {
 
   const menu = (
     <Menu>
+      {params.roomName && (
+        <>
+          <MenuItem
+            icon={<Control />}
+            href={`/e/${params.roomName}/stream-dashboard`}
+            text={t("streamDashboard")}
+          />
+          <MenuItem
+            icon={<Layers />}
+            href={`/e/${params.roomName}`}
+            text={t("draws")}
+          />
+        </>
+      )}
       <MenuItem
         icon={<Trash />}
         onClick={clearDrawings}
