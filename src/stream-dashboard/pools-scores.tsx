@@ -1,4 +1,7 @@
 import { useCallback, useState } from "react";
+import { Add, BanCircle } from "@blueprintjs/icons";
+import { OverlayToaster } from "@blueprintjs/core";
+
 import { eventSlice, PoolPlayer } from "../state/event.slice";
 import { useAppDispatch, useAppState } from "../state/store";
 
@@ -14,9 +17,16 @@ export function PoolsScores() {
     0,
   )
 
-  const handleSubmit = useCallback((e: React.FormEvent<HTMLFormElement>) => {
+  const handleSubmit = useCallback(async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault()
     dispatch(eventSlice.actions.updatePoolPlayers(poolPlayers))
+
+    const toaster = await OverlayToaster.createAsync({ position: 'top' })
+    toaster.show({
+      message: 'Pools scores updated.',
+      intent: 'success',
+      timeout: 5000,
+    })
   }, [dispatch, poolPlayers])
 
   const handleNameChange = useCallback((poolPlayerIndex: number) => {
@@ -52,6 +62,26 @@ export function PoolsScores() {
     }
   }, [])
 
+  const handleAddScore = useCallback(() => {
+    setPoolPlayers(prevPoolPlayers => prevPoolPlayers.map(prevPlayer => {
+      return {
+        ...prevPlayer,
+        scores: [...prevPlayer.scores, 0],
+      }
+    }))
+  }, [])
+
+  const handleRemoveScore = useCallback((scoreIndex: number) => {
+    return () => {
+      setPoolPlayers(prevPoolPlayers => prevPoolPlayers.map(prevPlayer => {
+        return {
+          ...prevPlayer,
+          scores: prevPlayer.scores.filter((_, prevScoreIndex) => prevScoreIndex !== scoreIndex)
+        }
+      }))
+    }
+  }, [])
+
   return (
     <form onSubmit={handleSubmit}>
       <h1>Pools Scores</h1>
@@ -61,6 +91,7 @@ export function PoolsScores() {
           {Array.from({ length: maxSongs }).map((_, scoreIndex) => (
             <col key={scoreIndex} className={styles.scoreCol} />
           ))}
+          <col />
         </colgroup>
         <thead>
           <tr>
@@ -68,8 +99,16 @@ export function PoolsScores() {
             {Array.from({ length: maxSongs }).map((_, index) => (
               <th key={index}>
                 Score {index + 1}
+                {maxSongs !== 1 && (
+                  <>
+                    {' '}<button type="button" onClick={handleRemoveScore(index)}><BanCircle /></button>
+                  </>
+                )}
               </th>
             ))}
+            <th>
+              Add Score <button type="button" onClick={handleAddScore}><Add /></button>
+            </th>
           </tr>
         </thead>
         <tbody>
