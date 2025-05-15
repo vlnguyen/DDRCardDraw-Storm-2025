@@ -61,6 +61,8 @@
     "noMatchingCharts": "No chart matching filters",
     "draw": "Draw!",
     "clearDrawings": "Clear Draws",
+    "streamDashboard": "Stream Dashboard",
+    "draws": "Draws",
     "updateLoading": "Installing an update...",
     "updateReady": "Update ready, refresh for the freshest code around!",
     "credits": "Credits",
