@@ -71,12 +71,34 @@ export function PoolsScores() {
 
   const handleRemoveScore = useCallback((scoreIndex: number) => {
     return () => {
-      setPoolPlayers(prevPoolPlayers => prevPoolPlayers.map(prevPlayer => {
-        return {
-          ...prevPlayer,
-          scores: prevPlayer.scores.filter((_, prevScoreIndex) => prevScoreIndex !== scoreIndex)
+      setPoolPlayers(prevPoolPlayers => {
+        return prevPoolPlayers.map(prevPlayer => {
+          return {
+            ...prevPlayer,
+            scores: prevPlayer.scores.filter((_, prevScoreIndex) => prevScoreIndex !== scoreIndex)
+          }
+        })
+      })
+    }
+  }, [])
+
+  const handleAddPlayer = useCallback(() => {
+    setPoolPlayers(prevPoolPlayers => {
+      return [
+        ...prevPoolPlayers,
+        {
+          playerName: 'Player',
+          scores: Array(numSongs).fill(0),
         }
-      }))
+      ]
+    })
+  }, [numSongs])
+
+  const handleRemovePlayer = useCallback((playerIndex: number) => {
+    return () => {
+      setPoolPlayers(prevPoolPlayers => {
+        return prevPoolPlayers.filter((_, prevPlayerIndex) => prevPlayerIndex !== playerIndex)
+      })
     }
   }, [])
 
@@ -86,6 +108,7 @@ export function PoolsScores() {
       <table className={styles.poolsScoresTable}>
         <colgroup>
           <col />
+          <col />
           {Array.from({ length: numSongs }).map((_, scoreIndex) => (
             <col key={scoreIndex} className={styles.scoreCol} />
           ))}
@@ -93,11 +116,12 @@ export function PoolsScores() {
         </colgroup>
         <thead>
           <tr>
+            <th></th>
             <th className={styles.playerNameColumn}>Player</th>
             {Array.from({ length: numSongs }).map((_, index) => (
               <th key={index}>
                 Score {index + 1}
-                {numSongs > 0 && (
+                {numSongs > 1 && (
                   <>
                     {' '}<button type="button" onClick={handleRemoveScore(index)}><BanCircle /></button>
                   </>
@@ -112,6 +136,11 @@ export function PoolsScores() {
         <tbody>
           {poolPlayers.map(({ playerName, scores }, playerIndex) => (
             <tr key={playerIndex}>
+              <td>
+                {poolPlayers.length > 1 && (
+                  <button type="button" onClick={handleRemovePlayer(playerIndex)}><BanCircle /></button>
+                )}
+              </td>
               <td>
                 <input
                   value={playerName}
@@ -131,9 +160,12 @@ export function PoolsScores() {
           ))}
         </tbody>
       </table>
-      <button>
-        Save
-      </button>
+      <div>
+        <b>Add Player <button type="button" onClick={handleAddPlayer}><Add /></button></b>
+      </div>
+      <div>
+        <button>Save</button>
+      </div>
     </form>
   )
 }
