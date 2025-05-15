@@ -84,6 +84,19 @@ const router = createBrowserRouter([
     }),
   },
   {
+    path: "e/:roomName/source",
+    element: <ObsSource />,
+    children: [
+      {
+        path: "pools-scores",
+        lazy: async () => {
+          const { PoolsScoresSource } = await import("./obs-sources/pools");
+          return { Component: PoolsScoresSource };
+        },
+      },
+    ]
+  },
+  {
     path: "e/:roomName/cab/:cabId/source",
     element: <ObsSource />,
     children: [
