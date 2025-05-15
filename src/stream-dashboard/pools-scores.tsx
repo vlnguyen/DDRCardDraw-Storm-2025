@@ -12,10 +12,8 @@ export function PoolsScores() {
   const dispatch = useAppDispatch()
 
   const [poolPlayers, setPoolPlayers] = useState<PoolPlayer[]>(poolPlayersState)
-  const maxSongs = poolPlayers.reduce(
-    (prevMax, poolPlayer) => poolPlayer.scores.length > prevMax ? poolPlayer.scores.length : prevMax,
-    0,
-  )
+  // List of players and scores are both guaranteed to be non-empty
+  const numSongs = poolPlayers[0].scores.length
 
   const handleSubmit = useCallback(async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault()
@@ -88,7 +86,7 @@ export function PoolsScores() {
       <table className={styles.poolsScoresTable}>
         <colgroup>
           <col />
-          {Array.from({ length: maxSongs }).map((_, scoreIndex) => (
+          {Array.from({ length: numSongs }).map((_, scoreIndex) => (
             <col key={scoreIndex} className={styles.scoreCol} />
           ))}
           <col />
@@ -96,10 +94,10 @@ export function PoolsScores() {
         <thead>
           <tr>
             <th className={styles.playerNameColumn}>Player</th>
-            {Array.from({ length: maxSongs }).map((_, index) => (
+            {Array.from({ length: numSongs }).map((_, index) => (
               <th key={index}>
                 Score {index + 1}
-                {maxSongs !== 1 && (
+                {numSongs > 0 && (
                   <>
                     {' '}<button type="button" onClick={handleRemoveScore(index)}><BanCircle /></button>
                   </>
