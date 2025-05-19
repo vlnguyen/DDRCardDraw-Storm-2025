@@ -108,6 +108,7 @@ export interface Drawing {
   id: string;
   /** Which set this is in a multi-set draw, if this is undefined then it's a single-set draw */
   setNumber?: number;
+  totalSets?: number;
   configId: string;
   meta: SimpleMeta | StartggVersusMeta | StartggGauntletMeta;
   /** index of items of the players array, in the order they should be displayed */

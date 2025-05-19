@@ -241,6 +241,7 @@ export function draw(
   configData: ConfigState,
   startPoint: StartingPoint,
   setIndex?: number,
+  totalSets?: number,
 ): Drawing {
   const {
     chartCount: numChartsToRandom,
@@ -468,6 +469,7 @@ export function draw(
   return {
     id: `draw-${nanoid(10)}`,
     setNumber: setIndex !== undefined ? setIndex + 1 : undefined,
+    totalSets: totalSets,
     configId: configData.id,
     bans: {},
     protects: {},

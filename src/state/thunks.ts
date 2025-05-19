@@ -50,6 +50,7 @@ export function createDraw(
         config,
         startggTargetSet,
         isMultiSetDraw ? setIndex : undefined,
+        config.totalSets,
       );
 
       trackDraw(drawing.charts.length, gameData.i18n.en.name as string);

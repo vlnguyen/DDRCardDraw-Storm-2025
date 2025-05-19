@@ -15,6 +15,7 @@ export function SetLabels() {
   const playerDisplayOrder = useDrawing((d) => d.playerDisplayOrder);
   const meta = useDrawing((d) => d.meta);
   const setNumber = useDrawing((d) => d.setNumber)
+  const totalSets = useDrawing((d) => d.totalSets)
   const winners = useDrawing((d) => d.winners);
   if (!showLabels) {
     return null;
@@ -37,8 +38,8 @@ export function SetLabels() {
   return (
     <div className={styles.headers}>
       <div className={styles.title}>
-        {setNumber
-          ? `${meta.title} [Set ${String.fromCharCode(setNumber - 1 + "A".charCodeAt(0))}]`
+        {setNumber && totalSets
+          ? `${meta.title} [Set ${setNumber}/${totalSets}]`
           : meta.title}
       </div>
       <div className={styles.players}>
