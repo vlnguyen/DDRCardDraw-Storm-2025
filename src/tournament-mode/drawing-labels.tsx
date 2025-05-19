@@ -14,6 +14,7 @@ export function SetLabels() {
   const showLabels = useAtomValue(showPlayerAndRoundLabels);
   const playerDisplayOrder = useDrawing((d) => d.playerDisplayOrder);
   const meta = useDrawing((d) => d.meta);
+  const setNumber = useDrawing((d) => d.setNumber)
   const winners = useDrawing((d) => d.winners);
   if (!showLabels) {
     return null;
@@ -35,7 +36,11 @@ export function SetLabels() {
 
   return (
     <div className={styles.headers}>
-      <div className={styles.title}>{meta.title}</div>
+      <div className={styles.title}>
+        {setNumber
+          ? `${meta.title} [Set ${String.fromCharCode(setNumber - 1 + "A".charCodeAt(0))}]`
+          : meta.title}
+      </div>
       <div className={styles.players}>
         {allPlayers.map((name, idx) => {
           const winCount = winsPerPlayer ? (

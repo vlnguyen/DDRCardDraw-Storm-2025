@@ -467,6 +467,7 @@ export function draw(
 
   return {
     id: `draw-${nanoid(10)}`,
+    setNumber: setIndex !== undefined ? setIndex + 1 : undefined,
     configId: configData.id,
     bans: {},
     protects: {},
@@ -474,13 +475,6 @@ export function draw(
     winners: {},
     playerDisplayOrder: players.map((_, idx) => idx),
     ...startPoint,
-    meta: {
-      ...startPoint.meta,
-      title:
-        setIndex === undefined
-          ? startPoint.meta.title
-          : `${startPoint.meta.title} [Set ${String.fromCharCode(setIndex + "A".charCodeAt(0))}]`,
-    },
     charts,
   };
 }
