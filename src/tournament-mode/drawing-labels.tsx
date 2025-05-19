@@ -1,21 +1,31 @@
 import { useCallback, Fragment } from "react";
 import { useDrawing } from "../drawing-context";
 import styles from "./drawing-labels.css";
-import { Icon } from "@blueprintjs/core";
-import { CaretLeft, CaretRight } from "@blueprintjs/icons";
+import { Button, Icon, Tooltip } from "@blueprintjs/core";
+import { CaretLeft, CaretRight, Trash } from "@blueprintjs/icons";
 import { useAtomValue } from "jotai";
 import { showPlayerAndRoundLabels } from "../config-state";
-import { useAppDispatch } from "../state/store";
+import { useAppDispatch, useAppState } from "../state/store";
 import { drawingsSlice } from "../state/drawings.slice";
 import { getAllPlayers } from "../models/Drawing";
 import { CountingSet } from "../utils/counting-set";
 
 export function SetLabels() {
+  const dispatch = useAppDispatch()
   const showLabels = useAtomValue(showPlayerAndRoundLabels);
   const playerDisplayOrder = useDrawing((d) => d.playerDisplayOrder);
   const meta = useDrawing((d) => d.meta);
+
+  const setId = useDrawing((d) => d.setId)
   const setNumber = useDrawing((d) => d.setNumber)
   const totalSets = useDrawing((d) => d.totalSets)
+  const drawings = useAppState(s => {
+    if (setId === undefined) {
+      return null
+    }
+    return Object.values(s.drawings.entities).filter(d => d.setId === setId)
+  })
+
   const winners = useDrawing((d) => d.winners);
   if (!showLabels) {
     return null;
@@ -35,13 +45,41 @@ export function SetLabels() {
 
   const allPlayers = getAllPlayers({ meta, playerDisplayOrder });
 
+  const handleDeleteSet = useCallback(() => {
+    if (!drawings) {
+      return
+    }
+    const drawingIds = drawings.map(d => d.id)
+    for (const drawingId of drawingIds) {
+      dispatch(drawingsSlice.actions.removeOne(drawingId))
+    }
+  }, [drawings])
+
   return (
     <div className={styles.headers}>
-      <div className={styles.title}>
-        {setNumber && totalSets
-          ? `${meta.title} [Set ${setNumber}/${totalSets}]`
-          : meta.title}
+      <div className={styles.drawHeader}>
+        <div className={styles.title}>
+          {setNumber && totalSets
+            ? `${meta.title} [Set ${setNumber}/${totalSets}]`
+            : meta.title}
+        </div>
+        {setId && setNumber === 1 && (
+          <div>
+            <Tooltip content="Delete this set">
+              <Button
+                minimal
+                icon={<Trash />}
+                onClick={() =>
+                  confirm(
+                    "This set will be permanently removed and cannot be recovered!",
+                  ) && handleDeleteSet()
+                }
+              />
+            </Tooltip>
+          </div>
+        )}
       </div>
+
       <div className={styles.players}>
         {allPlayers.map((name, idx) => {
           const winCount = winsPerPlayer ? (

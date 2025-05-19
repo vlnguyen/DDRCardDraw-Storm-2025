@@ -4,6 +4,8 @@ import { nanoid } from "nanoid";
 export interface CabInfo {
   /** drawing id if active */
   activeMatch: string | null;
+  /* set id if active */
+  activeSet: string | null;
   name: string;
   id: string;
 }
@@ -30,6 +32,7 @@ const initialState: EventState = {
       id: "default",
       name: "Primary Cab",
       activeMatch: null,
+      activeSet: null,
     },
   },
   streamDashboard: {
@@ -56,6 +59,7 @@ export const eventSlice = createSlice({
         id: nanoid(5),
         name: action.payload,
         activeMatch: null,
+        activeSet: null,
       };
       state.cabs[newCab.id] = newCab;
     },

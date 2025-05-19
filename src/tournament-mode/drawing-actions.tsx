@@ -151,6 +151,7 @@ export function DrawingActions() {
   const cabs = useAppState(eventSlice.selectors.allCabs);
   const drawingId = useDrawing((s) => s.id);
   const drawingMeta = useDrawing((s) => s.meta);
+  const isMultiSetDraw = useDrawing((s) => s.setId) !== undefined;
   const isTwoPlayers = playerCount(drawingMeta) === 2;
   const isGauntlet =
     drawingMeta.type === "startgg" && drawingMeta.subtype === "gauntlet";
@@ -263,17 +264,19 @@ export function DrawingActions() {
         <SaveToStartggButton />
       </EventModeGated>
       <AddCardButton />
-      <Tooltip content="Delete this draw">
-        <Button
-          minimal
-          icon={<Trash />}
-          onClick={() =>
-            confirm(
-              "This draw will be permanently removed and cannot be recovered!",
-            ) && dispatch(drawingsSlice.actions.removeOne(drawingId))
-          }
-        />
-      </Tooltip>
+      {!isMultiSetDraw && (
+        <Tooltip content="Delete this draw">
+          <Button
+            minimal
+            icon={<Trash />}
+            onClick={() =>
+              confirm(
+                "This draw will be permanently removed and cannot be recovered!",
+              ) && dispatch(drawingsSlice.actions.removeOne(drawingId))
+            }
+          />
+        </Tooltip>
+      )}
     </div>
   );
 }
