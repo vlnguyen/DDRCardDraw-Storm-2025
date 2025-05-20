@@ -13,19 +13,30 @@ export function CabCards() {
   return <ChartsOnly drawingId={drawingId} />;
 }
 
-export function CardsBracket() {
+export function CabSet() {
+  const params = useParams<"roomName" | "cabId">();
   const draws = useAppState((s) => {
-    const { drawings } = s;
-    const drawingIds = drawings.ids.slice(drawings.ids.length - 3).toReversed();
-    return drawingIds.map((drawingId) => drawings.entities[drawingId]);
+    const activeSetId = s.event.cabs[params.cabId!].activeSet
+    if (activeSetId === undefined) {
+      return undefined
+    }
+    return Object.values(s.drawings.entities)
+      .filter(d => d.setId === activeSetId)
+      .toReversed()
   });
+
+  if (!draws) {
+    return null;
+  }
 
   return (
     <div className={styles.cardsBracketContainer}>
       <div className={styles.cardsBracketDrawsContainer}>
         {draws.map((drawing) => (
           <div>
-            <h1 className={styles.title}>{drawing.meta.title}</h1>
+            <h1 className={styles.title}>
+              {drawing.meta.title} [Set {drawing.setNumber}/{drawing.totalSets}]
+            </h1>
             <ChartsOnly key={drawing.id} drawingId={drawing.id} />
           </div>
         ))}

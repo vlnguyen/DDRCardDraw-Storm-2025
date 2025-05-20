@@ -17,7 +17,7 @@ import { ThemeToggle } from "./theme-toggle";
 import { useAppDispatch, useAppState } from "./state/store";
 import { drawingsSlice } from "./state/drawings.slice";
 import { EventModeGated } from "./common-components/app-mode";
-import { useParams } from "react-router-dom";
+import { useMatch, useParams } from "react-router-dom";
 
 export function Header() {
   const params = useParams<"roomName">();
@@ -29,6 +29,7 @@ export function Header() {
   );
   const haveDrawings = useAppState(drawingsSlice.selectors.haveDrawings);
   const { t } = useIntl();
+  const isStreamDashboard = !!useMatch('/e/:roomName/stream-dashboard')
 
   const menu = (
     <Menu>
@@ -96,7 +97,9 @@ export function Header() {
         </Navbar.Heading>
       </Navbar.Group>
       <Navbar.Group align={Alignment.RIGHT}>
-        <HeaderControls />
+        {!isStreamDashboard && (
+          <HeaderControls />
+        )}
       </Navbar.Group>
     </Navbar>
   );

@@ -43,13 +43,16 @@ export function createDraw(
       return "nok"; // no draw was possible
     }
 
+    const isMultiSetDraw = config.totalSets > 1;
+    const setId = isMultiSetDraw ? `set-${nanoid(10)}` : undefined;
     for (let setIndex = config.totalSets - 1; setIndex >= 0; setIndex--) {
-      const isMultiSetDraw = config.totalSets > 1;
       const drawing = draw(
         gameData,
         config,
         startggTargetSet,
         isMultiSetDraw ? setIndex : undefined,
+        config.totalSets,
+        setId,
       );
 
       trackDraw(drawing.charts.length, gameData.i18n.en.name as string);

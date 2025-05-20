@@ -8,6 +8,12 @@
   position: relative;
 }
 
+.drawHeader {
+  display: flex;
+  flex-direction: row;
+  gap: 8px;
+}
+
 .title {
   display: flex;
   flex-direction: row;
