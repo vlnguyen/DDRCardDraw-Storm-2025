@@ -108,10 +108,10 @@ const router = createBrowserRouter([
         },
       },
       {
-        path: "cards-bracket",
+        path: "cards-set",
         lazy: async () => {
-          const { CardsBracket } = await import("./obs-sources/cards");
-          return { Component: CardsBracket };
+          const { CabSet } = await import("./obs-sources/cards");
+          return { Component: CabSet };
         },
       },
       {

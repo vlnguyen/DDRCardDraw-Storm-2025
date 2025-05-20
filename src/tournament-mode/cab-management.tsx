@@ -121,9 +121,15 @@ function CabSummary({ cab }: { cab: CabInfo }) {
       <MenuItem icon={<MobileVideo />} text="OBS Sources">
         <MenuItem
           icon={<Layers />}
-          text="Cards"
+          text="Cards (Match)"
           onClick={copySource}
           data-source="cards"
+        />
+        <MenuItem
+          icon={<Layers />}
+          text="Cards (Set)"
+          onClick={copySource}
+          data-source="cards-set"
         />
         <MenuItem
           icon={<Font />}
