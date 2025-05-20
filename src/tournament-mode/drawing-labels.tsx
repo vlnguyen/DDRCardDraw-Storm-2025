@@ -1,4 +1,4 @@
-import { useCallback, Fragment } from "react";
+import { useCallback, Fragment, useMemo } from "react";
 import { useDrawing } from "../drawing-context";
 import styles from "./drawing-labels.css";
 import { Button, Icon, Menu, MenuItem, Popover, Tooltip } from "@blueprintjs/core";
@@ -6,7 +6,7 @@ import { CaretLeft, CaretRight, CubeAdd, Trash } from "@blueprintjs/icons";
 import { useAtomValue } from "jotai";
 import { showPlayerAndRoundLabels } from "../config-state";
 import { useAppDispatch, useAppState } from "../state/store";
-import { drawingsSlice } from "../state/drawings.slice";
+import { drawingsSlice, getSetSelector } from "../state/drawings.slice";
 import { getAllPlayers } from "../models/Drawing";
 import { CountingSet } from "../utils/counting-set";
 import { EventModeGated } from "../common-components/app-mode";
@@ -19,15 +19,14 @@ export function SetLabels() {
   const meta = useDrawing((d) => d.meta);
 
   const cabs = useAppState(eventSlice.selectors.allCabs);
-  const setId = useDrawing((d) => d.setId)
   const setNumber = useDrawing((d) => d.setNumber)
   const totalSets = useDrawing((d) => d.totalSets)
-  const drawings = useAppState(s => {
-    if (setId === undefined) {
-      return null
-    }
-    return Object.values(s.drawings.entities).filter(d => d.setId === setId)
-  })
+  const setId = useDrawing((d) => d.setId)
+
+  const setSelector = useMemo(() => {
+    return getSetSelector(setId)
+  }, [setId]);
+  const drawings = useAppState(setSelector)
 
   const winners = useDrawing((d) => d.winners);
   if (!showLabels) {
