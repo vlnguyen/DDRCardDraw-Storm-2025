@@ -188,6 +188,7 @@ function CabSummary({ cab }: { cab: CabInfo }) {
         </Popover>{" "}
       </h1>
       <CurrentMatch cab={cab} />
+      <CurrentSet cab={cab} />
     </div>
   );
 }
@@ -213,26 +214,6 @@ function CurrentMatch(props: { cab: CabInfo }) {
     if (!props.cab.activeMatch) return null;
     return s.drawings.entities[props.cab.activeMatch] || null;
   });
-  const setMainTab = useSetAtom(mainTabAtom);
-
-  const scrollToDrawing = useCallback(() => {
-    if (!drawing) {
-      return;
-    }
-    const el = document.getElementById(`drawing:${drawing.id}`);
-    if (!el) {
-      return;
-    }
-    const priorFocus = document.querySelector(
-      "[data-focused]",
-    ) as HTMLElement | null;
-    if (priorFocus) {
-      delete priorFocus.dataset.focused;
-    }
-    setMainTab("drawings");
-    el.scrollIntoView({ behavior: "smooth" });
-    el.dataset.focused = "";
-  }, [drawing, setMainTab]);
 
   if (!drawing) {
     return <p>No match</p>;
@@ -240,13 +221,14 @@ function CurrentMatch(props: { cab: CabInfo }) {
   const filledPlayers = drawing.playerDisplayOrder.map((pIdx, idx) =>
     playerNameByIndex(drawing.meta, pIdx, `Player ${idx + 1}`),
   );
+  const isMultiSetDraw = drawing.setId !== undefined
+
   return (
     <Card
       elevation={2}
       style={{ position: "relative" }}
       compact
       interactive
-      onClick={scrollToDrawing}
     >
       <Button
         minimal
@@ -255,7 +237,60 @@ function CurrentMatch(props: { cab: CabInfo }) {
         style={{ position: "absolute", right: "0.5em", top: "0.5em" }}
         onClick={removeCab}
       />
-      <h3>{drawing.meta.title}</h3>
+      <h3>
+        {isMultiSetDraw
+          ? `${drawing.meta.title} [Set ${drawing.setNumber}/${drawing.totalSets}]`
+          : drawing.meta.title
+        }
+      </h3>
+      <p>{listFormatter.format(filledPlayers)}</p>
+    </Card>
+  );
+}
+
+function CurrentSet(props: { cab: CabInfo }) {
+  const dispatch = useAppDispatch();
+  const removeSet = useCallback(
+    () =>
+      dispatch(
+        eventSlice.actions.assignSetToCab({
+          cabId: props.cab.id,
+          setId: null,
+        }),
+      ),
+    [dispatch, props.cab.id],
+  );
+
+  const drawings = useAppState((s) => {
+    if (!props.cab.activeSet) {
+      return null;
+    }
+    return Object.values(s.drawings.entities).filter(d => d.setId === props.cab.activeSet)
+  });
+
+  if (!drawings) {
+    return <p>No set</p>;
+  }
+
+  const filledPlayers = drawings[0].playerDisplayOrder.map((pIdx, idx) =>
+    playerNameByIndex(drawings[0].meta, pIdx, `Player ${idx + 1}`),
+  );
+
+  return (
+    <Card
+      elevation={2}
+      style={{ position: "relative" }}
+      compact
+      interactive
+    >
+      <Button
+        variant="minimal"
+        size="small"
+        icon={<Cross />}
+        style={{ position: "absolute", right: "0.5em", top: "0.5em" }}
+        onClick={removeSet}
+      />
+      <h3>{drawings[0].meta.title}</h3>
       <p>{listFormatter.format(filledPlayers)}</p>
     </Card>
   );

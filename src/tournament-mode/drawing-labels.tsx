@@ -1,14 +1,16 @@
 import { useCallback, Fragment } from "react";
 import { useDrawing } from "../drawing-context";
 import styles from "./drawing-labels.css";
-import { Button, Icon, Tooltip } from "@blueprintjs/core";
-import { CaretLeft, CaretRight, Trash } from "@blueprintjs/icons";
+import { Button, Icon, Menu, MenuItem, Popover, Tooltip } from "@blueprintjs/core";
+import { CaretLeft, CaretRight, CubeAdd, Trash } from "@blueprintjs/icons";
 import { useAtomValue } from "jotai";
 import { showPlayerAndRoundLabels } from "../config-state";
 import { useAppDispatch, useAppState } from "../state/store";
 import { drawingsSlice } from "../state/drawings.slice";
 import { getAllPlayers } from "../models/Drawing";
 import { CountingSet } from "../utils/counting-set";
+import { EventModeGated } from "../common-components/app-mode";
+import { eventSlice } from "../state/event.slice";
 
 export function SetLabels() {
   const dispatch = useAppDispatch()
@@ -16,6 +18,7 @@ export function SetLabels() {
   const playerDisplayOrder = useDrawing((d) => d.playerDisplayOrder);
   const meta = useDrawing((d) => d.meta);
 
+  const cabs = useAppState(eventSlice.selectors.allCabs);
   const setId = useDrawing((d) => d.setId)
   const setNumber = useDrawing((d) => d.setNumber)
   const totalSets = useDrawing((d) => d.totalSets)
@@ -64,19 +67,50 @@ export function SetLabels() {
             : meta.title}
         </div>
         {setId && setNumber === 1 && (
-          <div>
-            <Tooltip content="Delete this set">
-              <Button
-                minimal
-                icon={<Trash />}
-                onClick={() =>
-                  confirm(
-                    "This set will be permanently removed and cannot be recovered!",
-                  ) && handleDeleteSet()
-                }
-              />
-            </Tooltip>
-          </div>
+          <>
+            <div>
+              <Tooltip content="Delete this set">
+                <Button
+                  variant="minimal"
+                  icon={<Trash />}
+                  onClick={() =>
+                    confirm(
+                      "This set will be permanently removed and cannot be recovered!",
+                    ) && handleDeleteSet()
+                  }
+                />
+              </Tooltip>
+              <EventModeGated>
+                {!!cabs.length && (
+                  <Tooltip content="Assign Set to Cab">
+                    <Popover
+                      placement="bottom"
+                      content={
+                        <Menu>
+                          {cabs.map((cab) => (
+                            <MenuItem
+                              key={cab.id}
+                              text={cab.name}
+                              onClick={() =>
+                                dispatch(
+                                  eventSlice.actions.assignSetToCab({
+                                    cabId: cab.id,
+                                    setId: setId ?? null,
+                                  }),
+                                )
+                              }
+                            />
+                          ))}
+                        </Menu>
+                      }
+                    >
+                      <Button variant="minimal" icon={<CubeAdd />} />
+                    </Popover>
+                  </Tooltip>
+                )}
+              </EventModeGated>
+            </div>
+          </>
         )}
       </div>
 

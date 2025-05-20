@@ -74,6 +74,14 @@ export const eventSlice = createSlice({
       if (!cab) return;
       cab.activeMatch = action.payload.matchId;
     },
+    assignSetToCab(
+      state,
+      action: PayloadAction<{ cabId: string; setId: string | null }>,
+    ) {
+      const cab = state.cabs[action.payload.cabId];
+      if (!cab) return;
+      cab.activeSet = action.payload.setId;
+    },
     updatePoolPlayers(state, action: PayloadAction<PoolPlayer[]>) {
       state.streamDashboard.poolPlayers = action.payload
     },
