@@ -9,7 +9,7 @@ import {
   Tooltip,
 } from "@blueprintjs/core";
 import { useAppDispatch, useAppState } from "../state/store";
-import React, { ReactNode, useCallback, useState } from "react";
+import React, { ReactNode, useCallback, useMemo, useState } from "react";
 import { CabInfo, eventSlice } from "../state/event.slice";
 import {
   Add,
@@ -26,9 +26,8 @@ import {
 } from "@blueprintjs/icons";
 import { detectedLanguage } from "../utils";
 import { copyPlainTextToClipboard } from "../utils/share";
-import { useSetAtom } from "jotai";
-import { mainTabAtom } from "./main-view";
 import { playerNameByIndex } from "../models/Drawing";
+import { getSetSelector } from "../state/drawings.slice";
 
 export function CabManagement() {
   const [isCollapsed, setCollapsed] = useState(true);
@@ -267,12 +266,10 @@ function CurrentSet(props: { cab: CabInfo }) {
     [dispatch, props.cab.id],
   );
 
-  const drawings = useAppState((s) => {
-    if (!props.cab.activeSet) {
-      return null;
-    }
-    return Object.values(s.drawings.entities).filter(d => d.setId === props.cab.activeSet)
-  });
+  const setSelector = useMemo(() => {
+    return getSetSelector(props.cab.activeSet ?? undefined)
+  }, [props.cab.activeSet])
+  const drawings = useAppState(setSelector);
 
   if (!drawings) {
     return <p>No set</p>;

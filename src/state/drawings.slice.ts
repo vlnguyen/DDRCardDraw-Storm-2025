@@ -1,6 +1,8 @@
 import {
+  EntityState,
   PayloadAction,
   createEntityAdapter,
+  createSelector,
   createSlice,
 } from "@reduxjs/toolkit";
 import {
@@ -167,12 +169,27 @@ export const drawingsSlice = createSlice({
     haveDrawings(state) {
       return !!state.ids.length;
     },
+    getAllDrawings: createSelector([(state: EntityState<Drawing, string>) => state.entities], (entities: Record<string, Drawing>) => {
+      return Object.values(entities)
+    })
   },
 });
 
 export const drawingSelectors = drawingsAdapter.getSelectors(
   drawingsSlice.selectSlice,
 );
+
+export const getSetSelector = (setId?: string) => {
+  return createSelector(
+    [drawingsSlice.selectors.getAllDrawings],
+    (drawings) => {
+      if (setId === undefined) {
+        return null
+      }
+      return drawings.filter(d => setId && d.setId === setId).toReversed()
+    }
+  )
+}
 
 function moveChartInArray(
   drawing: Drawing,

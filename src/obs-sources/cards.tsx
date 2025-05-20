@@ -3,6 +3,8 @@ import { ChartsOnly } from "../drawn-set";
 import { useAppState } from "../state/store";
 
 import styles from "./cards.css";
+import { getSetSelector } from "../state/drawings.slice";
+import { useMemo } from "react";
 
 export function CabCards() {
   const params = useParams<"roomName" | "cabId">();
@@ -15,16 +17,11 @@ export function CabCards() {
 
 export function CabSet() {
   const params = useParams<"roomName" | "cabId">();
-  const draws = useAppState((s) => {
-    const activeSetId = s.event.cabs[params.cabId!].activeSet
-    if (activeSetId === undefined) {
-      return undefined
-    }
-    return Object.values(s.drawings.entities)
-      .filter(d => d.setId === activeSetId)
-      .toReversed()
-  });
-
+  const activeSetId = useAppState(s => s.event.cabs[params.cabId!].activeSet);
+  const setSelector = useMemo(() => {
+    return getSetSelector(activeSetId ?? undefined)
+  }, [activeSetId]);
+  const draws = useAppState(setSelector);
   if (!draws) {
     return null;
   }
@@ -33,7 +30,7 @@ export function CabSet() {
     <div className={styles.cardsBracketContainer}>
       <div className={styles.cardsBracketDrawsContainer}>
         {draws.map((drawing) => (
-          <div>
+          <div key={drawing.id}>
             <h1 className={styles.title}>
               {drawing.meta.title} [Set {drawing.setNumber}/{drawing.totalSets}]
             </h1>
