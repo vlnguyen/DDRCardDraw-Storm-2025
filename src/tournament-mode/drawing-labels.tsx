@@ -64,7 +64,8 @@ export function SetLabels() {
         <div className={styles.title}>
           {setNumber && totalSets
             ? `${meta.title} [Set ${setNumber}/${totalSets}]`
-            : meta.title}
+            : meta.title
+          }
         </div>
         {setId && setNumber === 1 && (
           <>
