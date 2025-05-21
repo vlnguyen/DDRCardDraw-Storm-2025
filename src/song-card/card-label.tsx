@@ -60,7 +60,7 @@ export function CardLabel({
   labelOverride,
   component = 'div',
 }: Props) {
-  const label = labelOverride ?? usePlayerLabelForIndex(playerIdx);
+  const label = usePlayerLabelForIndex(playerIdx, labelOverride);
 
   const rootClassname = classNames({
     [styles.cardLabel]: !ignoreDefaultStyles,

@@ -30,7 +30,7 @@ export function SetActions() {
     for (const drawingId of drawingIds) {
       dispatch(drawingsSlice.actions.removeOne(drawingId))
     }
-  }, [drawings])
+  }, [drawings, dispatch])
 
   return (
     <div>

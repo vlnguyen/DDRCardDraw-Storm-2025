@@ -51,7 +51,7 @@ export function SetLabels() {
             : meta.title
           }
         </div>
-        <SetActions />
+        {setNumber && <SetActions />}
       </div>
       {setBannedBy !== undefined && (
         <CardLabel
