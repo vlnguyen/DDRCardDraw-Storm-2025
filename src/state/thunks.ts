@@ -192,7 +192,7 @@ export function createPlusOneChart(drawingId: string): AppThunk {
 export function createPickBanPocket(
   drawingId: string,
   chartId: string,
-  type: "ban" | "protect" | "pocket" | "banSet",
+  type: "ban" | "protect" | "pocket",
   player: number,
   pick?: EligibleChart,
 ): AppThunk {

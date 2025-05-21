@@ -28,7 +28,6 @@ type PlayerIdx = number;
 
 interface IconCallbacks {
   onVeto: (p: PlayerIdx) => void;
-  onVetoSet: (p: PlayerIdx) => void;
   onProtect: (p: PlayerIdx) => void;
   onReplace: (p: PlayerIdx, chart: EligibleChart) => void;
   onRedraw: () => void;
@@ -56,7 +55,7 @@ function useIconCallbacksForChart(chartId: string): IconCallbacks {
 
   const handleBanPickPocket = useCallback(
     (
-      type: "ban" | "protect" | "pocket" | "banSet",
+      type: "ban" | "protect" | "pocket",
       player: number,
       pick?: EligibleChart,
     ) => dispatch(createPickBanPocket(drawingId, chartId, type, player, pick)),
@@ -66,7 +65,6 @@ function useIconCallbacksForChart(chartId: string): IconCallbacks {
   return useMemo(
     () => ({
       onVeto: handleBanPickPocket.bind(undefined, "ban"),
-      onVetoSet: handleBanPickPocket.bind(undefined, "banSet"),
       onProtect: handleBanPickPocket.bind(undefined, "protect"),
       onReplace: handleBanPickPocket.bind(undefined, "pocket"),
       onRedraw: () => {
@@ -168,7 +166,6 @@ export function SongCard(props: Props) {
           onProtect={iconCallbacks.onProtect}
           onStartPocketPick={setPocketPickPendingForPlayer}
           onVeto={iconCallbacks.onVeto}
-          onVetoSet={iconCallbacks.onVetoSet}
           onRedraw={iconCallbacks.onRedraw}
           onSetWinner={iconCallbacks.onSetWinner}
           onCopy={handleCopy}
