@@ -52,15 +52,31 @@ export function PoolsScoresSource() {
         </tr>
       </thead>
       <tbody>
-        {poolPlayersResults.map(({ playerName, scores, wins }, poolPlayerResultIndex) => (
-          <tr key={poolPlayerResultIndex}>
-            <td><b>{playerName}</b></td>
-            {scores.map((score, scoreIndex) => (
-              <td key={scoreIndex}>{getDisplayScore(score)}</td>
-            ))}
-            <td>{wins}</td>
-          </tr>
-        ))}
+        {poolPlayersResults.map(({ playerName, scores, wins }, poolPlayerResultIndex) => {
+          const medal = ((): string | null => {
+            switch (poolPlayerResultIndex) {
+              case 0:
+                return '🥇'
+              case 1:
+                return '🥈'
+              // only two players advance from pools
+              default:
+                return null
+            }
+          })();
+
+          return (
+            <tr key={poolPlayerResultIndex}>
+              <td>
+                {medal} <b>{playerName}</b>
+              </td>
+              {scores.map((score, scoreIndex) => (
+                <td key={scoreIndex}>{getDisplayScore(score)}</td>
+              ))}
+              <td>{wins}</td>
+            </tr>
+          )
+        })}
       </tbody>
     </table>
   )
