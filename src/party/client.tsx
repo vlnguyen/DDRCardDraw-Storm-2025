@@ -19,7 +19,7 @@ export function PartySocketManager(props: {
     host:
       process.env.NODE_ENV === "development"
         ? "localhost:1999"
-        : "ddr-card-draw-party.noahm.partykit.dev",
+        : "ddr-card-draw-party.vlnguyen.partykit.dev",
     onMessage(evt) {
       try {
         const data: Broadcast = JSON.parse(evt.data);
