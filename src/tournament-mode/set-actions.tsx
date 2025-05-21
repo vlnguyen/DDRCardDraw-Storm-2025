@@ -30,53 +30,51 @@ export function SetActions() {
   }, [drawings])
 
   return (
-    <>
+    <div>
       {setId && setNumber === 1 && (
         <>
-          <div>
-            <Tooltip content="Delete this set">
-              <Button
-                variant="minimal"
-                icon={<Trash />}
-                onClick={() =>
-                  confirm(
-                    "This set will be permanently removed and cannot be recovered!",
-                  ) && handleDeleteSet()
-                }
-              />
-            </Tooltip>
-            <EventModeGated>
-              {!!cabs.length && (
-                <Tooltip content="Assign Set to Cab">
-                  <Popover
-                    placement="bottom"
-                    content={
-                      <Menu>
-                        {cabs.map((cab) => (
-                          <MenuItem
-                            key={cab.id}
-                            text={cab.name}
-                            onClick={() =>
-                              dispatch(
-                                eventSlice.actions.assignSetToCab({
-                                  cabId: cab.id,
-                                  setId: setId ?? null,
-                                }),
-                              )
-                            }
-                          />
-                        ))}
-                      </Menu>
-                    }
-                  >
-                    <Button variant="minimal" icon={<CubeAdd />} />
-                  </Popover>
-                </Tooltip>
-              )}
-            </EventModeGated>
-          </div>
+          <EventModeGated>
+            {!!cabs.length && (
+              <Tooltip content="Assign Set to Cab">
+                <Popover
+                  placement="bottom"
+                  content={
+                    <Menu>
+                      {cabs.map((cab) => (
+                        <MenuItem
+                          key={cab.id}
+                          text={cab.name}
+                          onClick={() =>
+                            dispatch(
+                              eventSlice.actions.assignSetToCab({
+                                cabId: cab.id,
+                                setId: setId ?? null,
+                              }),
+                            )
+                          }
+                        />
+                      ))}
+                    </Menu>
+                  }
+                >
+                  <Button variant="minimal" icon={<CubeAdd />} />
+                </Popover>
+              </Tooltip>
+            )}
+          </EventModeGated>
+          <Tooltip content="Delete this set">
+            <Button
+              variant="minimal"
+              icon={<Trash />}
+              onClick={() =>
+                confirm(
+                  "This set will be permanently removed and cannot be recovered!",
+                ) && handleDeleteSet()
+              }
+            />
+          </Tooltip>
         </>
       )}
-    </>
+    </div>
   )
 }
