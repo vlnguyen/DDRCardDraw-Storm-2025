@@ -15,6 +15,7 @@ import { playerNameByIndex } from "../models/Drawing";
 interface Props {
   onStartPocketPick?: (p: number) => void;
   onVeto?: (p: number) => void;
+  onVetoSet?: (p: number) => void;
   onProtect?: (p: number) => void;
   onRedraw?: () => void;
   onSetWinner?: (p: number | null) => void;
@@ -25,6 +26,7 @@ export function IconMenu(props: Props) {
   const {
     onStartPocketPick,
     onVeto,
+    onVetoSet,
     onProtect,
     onRedraw,
     onSetWinner,
@@ -54,6 +56,13 @@ export function IconMenu(props: Props) {
           icon={<BanCircle />}
           text={t("songAction.ban")}
           onClick={onVeto}
+        />
+      )}
+      {onVetoSet && (
+        <PlayerList
+          icon={<BanCircle />}
+          text={t("songAction.banSet")}
+          onClick={onVetoSet}
         />
       )}
       {onSetWinner && (

@@ -78,6 +78,7 @@
     "songAction": {
       "lock": "Protect",
       "ban": "Veto",
+      "banSet": "Veto Set",
       "pocketPick": "Pocket Pick",
       "reset": "Reset",
       "cancel": "Cancel",

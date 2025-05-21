@@ -28,6 +28,7 @@ type PlayerIdx = number;
 
 interface IconCallbacks {
   onVeto: (p: PlayerIdx) => void;
+  onVetoSet: (p: PlayerIdx) => void;
   onProtect: (p: PlayerIdx) => void;
   onReplace: (p: PlayerIdx, chart: EligibleChart) => void;
   onRedraw: () => void;
@@ -39,6 +40,7 @@ interface Props {
   onClick?: () => void;
   chart: DrawnChart | EligibleChart | PlayerPickPlaceholder;
   vetoedBy?: PlayerIdx;
+  setVetoedBy?: PlayerIdx;
   protectedBy?: PlayerIdx;
   replacedBy?: PlayerIdx;
   winner?: PlayerIdx | null;
@@ -54,7 +56,7 @@ function useIconCallbacksForChart(chartId: string): IconCallbacks {
 
   const handleBanPickPocket = useCallback(
     (
-      type: "ban" | "protect" | "pocket",
+      type: "ban" | "protect" | "pocket" | "banSet",
       player: number,
       pick?: EligibleChart,
     ) => dispatch(createPickBanPocket(drawingId, chartId, type, player, pick)),
@@ -64,6 +66,7 @@ function useIconCallbacksForChart(chartId: string): IconCallbacks {
   return useMemo(
     () => ({
       onVeto: handleBanPickPocket.bind(undefined, "ban"),
+      onVetoSet: handleBanPickPocket.bind(undefined, "banSet"),
       onProtect: handleBanPickPocket.bind(undefined, "protect"),
       onReplace: handleBanPickPocket.bind(undefined, "pocket"),
       onRedraw: () => {
@@ -95,6 +98,7 @@ export function SongCard(props: Props) {
   const {
     chart,
     vetoedBy,
+    setVetoedBy,
     protectedBy,
     replacedBy,
     replacedWith,
@@ -164,6 +168,7 @@ export function SongCard(props: Props) {
           onProtect={iconCallbacks.onProtect}
           onStartPocketPick={setPocketPickPendingForPlayer}
           onVeto={iconCallbacks.onVeto}
+          onVetoSet={iconCallbacks.onVetoSet}
           onRedraw={iconCallbacks.onRedraw}
           onSetWinner={iconCallbacks.onSetWinner}
           onCopy={handleCopy}
@@ -177,7 +182,7 @@ export function SongCard(props: Props) {
   }
 
   const rootClassname = classNames(styles.chart, {
-    [styles.vetoed]: vetoedBy !== undefined,
+    [styles.vetoed]: vetoedBy !== undefined || setVetoedBy !== undefined,
     [styles.protected]: protectedBy !== undefined,
     [styles.replaced]: replacedBy !== undefined && !baseChartIsPlaceholder,
     [styles.picked]: replacedBy !== undefined && baseChartIsPlaceholder,

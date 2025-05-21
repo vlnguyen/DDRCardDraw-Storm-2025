@@ -10,12 +10,16 @@ import { drawingsSlice } from "../state/drawings.slice";
 import { getAllPlayers } from "../models/Drawing";
 import { CountingSet } from "../utils/counting-set";
 import { SetActions } from "./set-actions";
+import { CardLabel, LabelType } from "../song-card/card-label";
 
 export function SetLabels() {
+  const dispatch = useAppDispatch()
   const showLabels = useAtomValue(showPlayerAndRoundLabels);
   const playerDisplayOrder = useDrawing((d) => d.playerDisplayOrder);
   const meta = useDrawing((d) => d.meta);
 
+  const drawingId = useDrawing((d) => d.id)
+  const setBannedBy = useDrawing((d) => d.setBannedBy)
   const setNumber = useDrawing((d) => d.setNumber)
   const totalSets = useDrawing((d) => d.totalSets)
 
@@ -49,6 +53,21 @@ export function SetLabels() {
         </div>
         <SetActions />
       </div>
+      {setBannedBy !== undefined && (
+        <CardLabel
+          playerIdx={setBannedBy}
+          type={LabelType.Ban}
+          onRemove={() => {
+            dispatch(
+              drawingsSlice.actions.setSetBannedBy({
+                drawingId: drawingId,
+                setBannedBy: undefined,
+              })
+            )
+          }}
+          ignoreDefaultStyles
+        />
+      )}
 
       <div className={styles.players}>
         {allPlayers.map((name, idx) => {

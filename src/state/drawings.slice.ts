@@ -101,7 +101,7 @@ export const drawingsSlice = createSlice({
     banProtectReplace(
       state,
       action: PlayerActionOnChartPayload<
-        { type: "ban" | "protect" } | { type: "pocket"; pick: EligibleChart }
+        { type: "ban" | "protect" | "banSet" } | { type: "pocket"; pick: EligibleChart }
       >,
     ) {
       const { chartId, drawingId, player, reorder } = action.payload;
@@ -115,6 +115,8 @@ export const drawingsSlice = createSlice({
           moveChartInArray(drawing, chartId, "end");
         }
         drawing.bans[chartId] = playerAction;
+      } else if (action.payload.type === 'banSet') {
+        drawing.setBannedBy = action.payload.player
       } else if (action.payload.type === "protect") {
         if (reorder) {
           moveChartInArray(drawing, chartId, "start");
@@ -130,6 +132,14 @@ export const drawingsSlice = createSlice({
           pick: action.payload.pick,
         };
       }
+    },
+    setSetBannedBy(state, action: PayloadAction<{ drawingId: string, setBannedBy?: number }>) {
+      const { drawingId } = action.payload
+      const drawing = state.entities[drawingId]
+      if (!drawing) {
+        return
+      }
+      drawing.setBannedBy = action.payload.setBannedBy
     },
     setWinner(state, action: ActionOnSingleChart<{ player: number | null }>) {
       const winners = state.entities[action.payload.drawingId].winners;

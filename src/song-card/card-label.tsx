@@ -16,6 +16,7 @@ export enum LabelType {
 interface Props {
   playerIdx: number;
   type: LabelType;
+  ignoreDefaultStyles?: boolean;
   onRemove?: () => void;
 }
 
@@ -49,10 +50,11 @@ function getIcon(type: LabelType) {
   }
 }
 
-export function CardLabel({ playerIdx, type, onRemove }: Props) {
+export function CardLabel({ playerIdx, type, onRemove, ignoreDefaultStyles }: Props) {
   const label = usePlayerLabelForIndex(playerIdx);
 
-  const rootClassname = classNames(styles.cardLabel, {
+  const rootClassname = classNames({
+    [styles.cardLabel]: !ignoreDefaultStyles,
     [styles.winner]: type === LabelType.Winner,
   });
 
