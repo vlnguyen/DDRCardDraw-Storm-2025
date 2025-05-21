@@ -65,18 +65,21 @@ function ChartFromContext({ chartId }: { chartId: string }) {
   const protect = useDrawing((d) => d.protects[chartId]);
   const pocketPick = useDrawing((d) => d.pocketPicks[chartId]);
   const winner = useDrawing((d) => d.winners[chartId]);
+  const setBannedBy = useDrawing((d) => d.setBannedBy);
+
   if (!chart) {
     return null;
   }
   return (
     <SongCard
       vetoedBy={veto?.player}
+      setVetoedBy={setBannedBy}
       protectedBy={protect?.player}
       replacedBy={pocketPick?.player}
       replacedWith={pocketPick?.pick}
       winner={winner}
       chart={chart}
-      actionsEnabled
+      actionsEnabled={setBannedBy === undefined}
     />
   );
 }

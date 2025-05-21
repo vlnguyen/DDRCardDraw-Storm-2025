@@ -1,16 +1,16 @@
-import { useCallback, Fragment, useMemo } from "react";
+import { useCallback, Fragment } from "react";
 import { useDrawing } from "../drawing-context";
 import styles from "./drawing-labels.css";
-import { Button, Icon, Menu, MenuItem, Popover, Tooltip } from "@blueprintjs/core";
-import { CaretLeft, CaretRight, CubeAdd, Trash } from "@blueprintjs/icons";
+import { Icon } from "@blueprintjs/core";
+import { CaretLeft, CaretRight } from "@blueprintjs/icons";
 import { useAtomValue } from "jotai";
 import { showPlayerAndRoundLabels } from "../config-state";
-import { useAppDispatch, useAppState } from "../state/store";
-import { drawingsSlice, getSetSelector } from "../state/drawings.slice";
+import { useAppDispatch } from "../state/store";
+import { drawingsSlice } from "../state/drawings.slice";
 import { getAllPlayers } from "../models/Drawing";
 import { CountingSet } from "../utils/counting-set";
-import { EventModeGated } from "../common-components/app-mode";
-import { eventSlice } from "../state/event.slice";
+import { SetActions } from "./set-actions";
+import { CardLabel, LabelType } from "../song-card/card-label";
 
 export function SetLabels() {
   const dispatch = useAppDispatch()
@@ -18,15 +18,10 @@ export function SetLabels() {
   const playerDisplayOrder = useDrawing((d) => d.playerDisplayOrder);
   const meta = useDrawing((d) => d.meta);
 
-  const cabs = useAppState(eventSlice.selectors.allCabs);
+  const drawingId = useDrawing((d) => d.id)
+  const setBannedBy = useDrawing((d) => d.setBannedBy)
   const setNumber = useDrawing((d) => d.setNumber)
   const totalSets = useDrawing((d) => d.totalSets)
-  const setId = useDrawing((d) => d.setId)
-
-  const setSelector = useMemo(() => {
-    return getSetSelector(setId)
-  }, [setId]);
-  const drawings = useAppState(setSelector)
 
   const winners = useDrawing((d) => d.winners);
   if (!showLabels) {
@@ -47,16 +42,6 @@ export function SetLabels() {
 
   const allPlayers = getAllPlayers({ meta, playerDisplayOrder });
 
-  const handleDeleteSet = useCallback(() => {
-    if (!drawings) {
-      return
-    }
-    const drawingIds = drawings.map(d => d.id)
-    for (const drawingId of drawingIds) {
-      dispatch(drawingsSlice.actions.removeOne(drawingId))
-    }
-  }, [drawings])
-
   return (
     <div className={styles.headers}>
       <div className={styles.drawHeader}>
@@ -66,53 +51,23 @@ export function SetLabels() {
             : meta.title
           }
         </div>
-        {setId && setNumber === 1 && (
-          <>
-            <div>
-              <Tooltip content="Delete this set">
-                <Button
-                  variant="minimal"
-                  icon={<Trash />}
-                  onClick={() =>
-                    confirm(
-                      "This set will be permanently removed and cannot be recovered!",
-                    ) && handleDeleteSet()
-                  }
-                />
-              </Tooltip>
-              <EventModeGated>
-                {!!cabs.length && (
-                  <Tooltip content="Assign Set to Cab">
-                    <Popover
-                      placement="bottom"
-                      content={
-                        <Menu>
-                          {cabs.map((cab) => (
-                            <MenuItem
-                              key={cab.id}
-                              text={cab.name}
-                              onClick={() =>
-                                dispatch(
-                                  eventSlice.actions.assignSetToCab({
-                                    cabId: cab.id,
-                                    setId: setId ?? null,
-                                  }),
-                                )
-                              }
-                            />
-                          ))}
-                        </Menu>
-                      }
-                    >
-                      <Button variant="minimal" icon={<CubeAdd />} />
-                    </Popover>
-                  </Tooltip>
-                )}
-              </EventModeGated>
-            </div>
-          </>
-        )}
+        <SetActions />
       </div>
+      {setBannedBy !== undefined && (
+        <CardLabel
+          playerIdx={setBannedBy}
+          type={LabelType.Ban}
+          onRemove={() => {
+            dispatch(
+              drawingsSlice.actions.setSetBannedBy({
+                drawingId: drawingId,
+                setBannedBy: undefined,
+              })
+            )
+          }}
+          ignoreDefaultStyles
+        />
+      )}
 
       <div className={styles.players}>
         {allPlayers.map((name, idx) => {

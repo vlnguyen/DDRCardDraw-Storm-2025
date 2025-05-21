@@ -91,20 +91,25 @@ interface IconRowProps {
 }
 
 function PlayerList({ icon, text, onClick }: IconRowProps) {
+  return (
+    <MenuItem icon={icon} text={text}>
+      <PlayerListMenuItems onClick={onClick} />
+    </MenuItem>
+  );
+}
+
+export function PlayerListMenuItems({ onClick }: Pick<IconRowProps, 'onClick'>) {
   const drawingMeta = useDrawing((d) => d.meta);
   const players = useDrawing((d) => d.playerDisplayOrder).map(
     (pIdx) => [playerNameByIndex(drawingMeta, pIdx), pIdx] as const,
   );
-  return (
-    <MenuItem icon={icon} text={text}>
-      {players.map(([playerName, pIdx]) => (
-        <MenuItem
-          key={pIdx}
-          text={playerName}
-          onClick={() => onClick(pIdx)}
-          icon={<Person />}
-        />
-      ))}
-    </MenuItem>
-  );
+
+  return players.map(([playerName, pIdx]) => (
+    <MenuItem
+      key={pIdx}
+      text={playerName}
+      onClick={() => onClick(pIdx)}
+      icon={<Person />}
+    />
+  ))
 }

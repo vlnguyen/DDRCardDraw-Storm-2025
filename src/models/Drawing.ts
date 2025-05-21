@@ -120,6 +120,7 @@ export interface Drawing {
   /** map of song ID to player index */
   winners: Record<string, number | null>;
   charts: Array<DrawnChart | PlayerPickPlaceholder>;
+  setBannedBy?: number;
   bans: Record<string, PlayerActionOnChart | null>;
   protects: Record<string, PlayerActionOnChart | null>;
   pocketPicks: Record<string, PocketPick | null>;

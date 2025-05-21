@@ -16,6 +16,9 @@ export enum LabelType {
 interface Props {
   playerIdx: number;
   type: LabelType;
+  ignoreDefaultStyles?: boolean;
+  labelOverride?: string,
+  component?: 'div' | 'span',
   onRemove?: () => void;
 }
 
@@ -49,17 +52,26 @@ function getIcon(type: LabelType) {
   }
 }
 
-export function CardLabel({ playerIdx, type, onRemove }: Props) {
-  const label = usePlayerLabelForIndex(playerIdx);
+export function CardLabel({
+  playerIdx,
+  type,
+  onRemove,
+  ignoreDefaultStyles,
+  labelOverride,
+  component = 'div',
+}: Props) {
+  const label = labelOverride ?? usePlayerLabelForIndex(playerIdx);
 
-  const rootClassname = classNames(styles.cardLabel, {
+  const rootClassname = classNames({
+    [styles.cardLabel]: !ignoreDefaultStyles,
     [styles.winner]: type === LabelType.Winner,
   });
 
   const LabelIcon = getIcon(type);
+  const Component = component
 
   return (
-    <div className={rootClassname}>
+    <Component className={rootClassname}>
       <Tag
         intent={getIntent(type)}
         icon={<LabelIcon size={20} />}
@@ -68,6 +80,6 @@ export function CardLabel({ playerIdx, type, onRemove }: Props) {
       >
         {label}
       </Tag>
-    </div>
+    </Component>
   );
 }

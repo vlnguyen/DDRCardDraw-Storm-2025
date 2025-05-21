@@ -5,6 +5,7 @@ import { useAppState } from "../state/store";
 import styles from "./cards.css";
 import { getSetSelector } from "../state/drawings.slice";
 import { useMemo } from "react";
+import { CardLabel, LabelType } from "../song-card/card-label";
 
 export function CabCards() {
   const params = useParams<"roomName" | "cabId">();
@@ -29,14 +30,39 @@ export function CabSet() {
   return (
     <div className={styles.cardsBracketContainer}>
       <div className={styles.cardsBracketDrawsContainer}>
-        {draws.map((drawing) => (
-          <div key={drawing.id}>
-            <h1 className={styles.title}>
-              {drawing.meta.title} [Set {drawing.setNumber}/{drawing.totalSets}]
-            </h1>
-            <ChartsOnly key={drawing.id} drawingId={drawing.id} />
-          </div>
-        ))}
+        {draws.map((drawing) => {
+          const setBannedByLabel = ((): string | undefined => {
+            const { setBannedBy, meta } = drawing
+            if (setBannedBy === undefined) {
+              return undefined
+            }
+            switch (meta.type) {
+              case "simple":
+                return meta.players[setBannedBy] || undefined;
+              case "startgg":
+                return meta.entrants[setBannedBy].name || undefined;
+            }
+          })()
+
+          return (
+            <div key={drawing.id}>
+              <h1 className={styles.title}>
+                {drawing.meta.title} [Set {drawing.setNumber}/{drawing.totalSets}]
+                {" "}
+                {drawing.setBannedBy !== undefined && (
+                  <CardLabel
+                    playerIdx={drawing.setBannedBy}
+                    labelOverride={setBannedByLabel}
+                    type={LabelType.Ban}
+                    component="span"
+                    ignoreDefaultStyles
+                  />
+                )}
+              </h1>
+              <ChartsOnly key={drawing.id} drawingId={drawing.id} />
+            </div>
+          )
+        })}
       </div>
     </div>
   );

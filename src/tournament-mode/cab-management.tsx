@@ -271,7 +271,7 @@ function CurrentSet(props: { cab: CabInfo }) {
   }, [props.cab.activeSet])
   const drawings = useAppState(setSelector);
 
-  if (!drawings) {
+  if (!drawings || drawings.length === 0) {
     return <p>No set</p>;
   }
 

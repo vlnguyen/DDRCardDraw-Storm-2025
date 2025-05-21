@@ -131,6 +131,14 @@ export const drawingsSlice = createSlice({
         };
       }
     },
+    setSetBannedBy(state, action: PayloadAction<{ drawingId: string, setBannedBy?: number }>) {
+      const { drawingId } = action.payload
+      const drawing = state.entities[drawingId]
+      if (!drawing) {
+        return
+      }
+      drawing.setBannedBy = action.payload.setBannedBy
+    },
     setWinner(state, action: ActionOnSingleChart<{ player: number | null }>) {
       const winners = state.entities[action.payload.drawingId].winners;
       if (action.payload.player === null) {

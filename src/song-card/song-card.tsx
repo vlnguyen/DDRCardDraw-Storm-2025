@@ -39,6 +39,7 @@ interface Props {
   onClick?: () => void;
   chart: DrawnChart | EligibleChart | PlayerPickPlaceholder;
   vetoedBy?: PlayerIdx;
+  setVetoedBy?: PlayerIdx;
   protectedBy?: PlayerIdx;
   replacedBy?: PlayerIdx;
   winner?: PlayerIdx | null;
@@ -95,6 +96,7 @@ export function SongCard(props: Props) {
   const {
     chart,
     vetoedBy,
+    setVetoedBy,
     protectedBy,
     replacedBy,
     replacedWith,
@@ -177,7 +179,7 @@ export function SongCard(props: Props) {
   }
 
   const rootClassname = classNames(styles.chart, {
-    [styles.vetoed]: vetoedBy !== undefined,
+    [styles.vetoed]: vetoedBy !== undefined || setVetoedBy !== undefined,
     [styles.protected]: protectedBy !== undefined,
     [styles.replaced]: replacedBy !== undefined && !baseChartIsPlaceholder,
     [styles.picked]: replacedBy !== undefined && baseChartIsPlaceholder,
