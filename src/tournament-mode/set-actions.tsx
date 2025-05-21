@@ -1,5 +1,5 @@
 import { Button, Menu, MenuItem, Popover, Tooltip } from "@blueprintjs/core";
-import { CubeAdd, Trash } from "@blueprintjs/icons";
+import { BanCircle, CubeAdd, Trash } from "@blueprintjs/icons";
 
 import { EventModeGated } from "../common-components/app-mode";
 import { eventSlice } from "../state/event.slice";
@@ -7,15 +7,18 @@ import { useDrawing } from "../drawing-context";
 import { useCallback, useMemo } from "react";
 import { drawingsSlice, getSetSelector } from "../state/drawings.slice";
 import { useAppDispatch, useAppState } from "../state/store";
+import { PlayerListMenuItems } from "../song-card/icon-menu";
 
 export function SetActions() {
   const dispatch = useAppDispatch()
+  const drawingId = useDrawing(d => d.id);
   const cabs = useAppState(eventSlice.selectors.allCabs);
-  const setId = useDrawing(d => d.setId)
-  const setNumber = useDrawing(d => d.setNumber)
+  const setId = useDrawing(d => d.setId);
+  const setNumber = useDrawing(d => d.setNumber);
+  const setBannedBy = useDrawing(d => d.setBannedBy);
 
   const setSelector = useMemo(() => {
-    return getSetSelector(setId)
+    return getSetSelector(setId);
   }, [setId]);
   const drawings = useAppState(setSelector)
 
@@ -31,11 +34,34 @@ export function SetActions() {
 
   return (
     <div>
+      {setBannedBy === undefined && (
+        <Tooltip content="Veto this set" position="top">
+          <Popover
+            position="bottom"
+            content={
+              <Menu>
+                <PlayerListMenuItems
+                  onClick={(playerIdx) => {
+                    dispatch(drawingsSlice.actions.setSetBannedBy({
+                      drawingId: drawingId,
+                      setBannedBy: playerIdx,
+                    }));
+                  }}
+                />
+              </Menu>
+            }>
+            <Button
+              variant="minimal"
+              icon={<BanCircle />}
+            />
+          </Popover>
+        </Tooltip>
+      )}
       {setId && setNumber === 1 && (
         <>
           <EventModeGated>
             {!!cabs.length && (
-              <Tooltip content="Assign Set to Cab">
+              <Tooltip content="Assign Set to Cab" position="top">
                 <Popover
                   placement="bottom"
                   content={
@@ -62,7 +88,7 @@ export function SetActions() {
               </Tooltip>
             )}
           </EventModeGated>
-          <Tooltip content="Delete this set">
+          <Tooltip content="Delete this set" position="top">
             <Button
               variant="minimal"
               icon={<Trash />}

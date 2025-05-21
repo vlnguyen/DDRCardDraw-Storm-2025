@@ -15,7 +15,6 @@ import { playerNameByIndex } from "../models/Drawing";
 interface Props {
   onStartPocketPick?: (p: number) => void;
   onVeto?: (p: number) => void;
-  onVetoSet?: (p: number) => void;
   onProtect?: (p: number) => void;
   onRedraw?: () => void;
   onSetWinner?: (p: number | null) => void;
@@ -26,7 +25,6 @@ export function IconMenu(props: Props) {
   const {
     onStartPocketPick,
     onVeto,
-    onVetoSet,
     onProtect,
     onRedraw,
     onSetWinner,
@@ -56,13 +54,6 @@ export function IconMenu(props: Props) {
           icon={<BanCircle />}
           text={t("songAction.ban")}
           onClick={onVeto}
-        />
-      )}
-      {onVetoSet && (
-        <PlayerList
-          icon={<BanCircle />}
-          text={t("songAction.banSet")}
-          onClick={onVetoSet}
         />
       )}
       {onSetWinner && (
@@ -100,20 +91,25 @@ interface IconRowProps {
 }
 
 function PlayerList({ icon, text, onClick }: IconRowProps) {
+  return (
+    <MenuItem icon={icon} text={text}>
+      <PlayerListMenuItems onClick={onClick} />
+    </MenuItem>
+  );
+}
+
+export function PlayerListMenuItems({ onClick }: Pick<IconRowProps, 'onClick'>) {
   const drawingMeta = useDrawing((d) => d.meta);
   const players = useDrawing((d) => d.playerDisplayOrder).map(
     (pIdx) => [playerNameByIndex(drawingMeta, pIdx), pIdx] as const,
   );
-  return (
-    <MenuItem icon={icon} text={text}>
-      {players.map(([playerName, pIdx]) => (
-        <MenuItem
-          key={pIdx}
-          text={playerName}
-          onClick={() => onClick(pIdx)}
-          icon={<Person />}
-        />
-      ))}
-    </MenuItem>
-  );
+
+  return players.map(([playerName, pIdx]) => (
+    <MenuItem
+      key={pIdx}
+      text={playerName}
+      onClick={() => onClick(pIdx)}
+      icon={<Person />}
+    />
+  ))
 }
