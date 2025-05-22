@@ -1,11 +1,12 @@
 import { useCallback, useState } from "react";
-import { Add, BanCircle } from "@blueprintjs/icons";
+import { Add, BanCircle, ArrowUp, ArrowDown, Duplicate } from "@blueprintjs/icons";
 import { OverlayToaster } from "@blueprintjs/core";
 
 import { eventSlice, PoolPlayer } from "../state/event.slice";
 import { useAppDispatch, useAppState } from "../state/store";
 
 import styles from "./pools-scores.css"
+import { copyPlainTextToClipboard } from "../utils/share";
 
 export function PoolsScores() {
   const poolPlayersState = useAppState(state => state.event.streamDashboard.poolPlayers)
@@ -117,9 +118,54 @@ export function PoolsScores() {
     }
   }, [])
 
+  const handleMovePlayer = useCallback((poolPlayerIndex: number, direction: "up" | "down") => {
+    const newPoolPlayerIndex = poolPlayerIndex + (direction === "up" ? -1 : 1)
+    return () => {
+      setPoolPlayers(prevPoolPlayers => {
+        const newPoolPlayers = [...prevPoolPlayers]
+        newPoolPlayers.splice(newPoolPlayerIndex, 0, newPoolPlayers.splice(poolPlayerIndex, 1)[0])
+        return newPoolPlayers
+      })
+    }
+  }, [])
+
+  const handleCopyPlayerNameSource = useCallback((poolPlayerIndex: number) => {
+    return async () => {
+      const sourcePath = `${window.location.pathname}/source/pools-player-name/${poolPlayerIndex}`
+      const sourceUrl = new URL(sourcePath, window.location.href)
+      copyPlainTextToClipboard(sourceUrl.href)
+
+      const toaster = await OverlayToaster.createAsync({ position: 'top' })
+      toaster.show({
+        message: 'Pool player name source copied to clipboard.',
+        intent: 'success',
+        timeout: 5000,
+      })
+    }
+  }, [])
+
+  const handleCopyPoolsScoresSource = useCallback(async () => {
+    const sourcePath = `${window.location.pathname}/source/pools-scores`
+    const sourceUrl = new URL(sourcePath, window.location.href)
+    copyPlainTextToClipboard(sourceUrl.href)
+
+    const toaster = await OverlayToaster.createAsync({ position: 'top' })
+    toaster.show({
+      message: 'Pools scores source copied to clipboard.',
+      intent: 'success',
+      timeout: 5000,
+    })
+  }, [])
+
   return (
     <form onSubmit={handleSubmit}>
-      <h1>Pools Scores</h1>
+      <h1>
+        Pools Scores
+        {" "}
+        <button type="button" onClick={handleCopyPoolsScoresSource}>
+          <Duplicate />
+        </button>
+      </h1>
       <table className={styles.poolsScoresTable}>
         <colgroup>
           <col />
@@ -153,12 +199,42 @@ export function PoolsScores() {
         <tbody>
           {poolPlayers.map(({ playerName, scores, isEliminated }, playerIndex) => (
             <tr key={playerIndex}>
-              <td>
+              <td className={styles.buttonContainer}>
                 {poolPlayers.length > 1 && (
-                  <button type="button" onClick={handleRemovePlayer(playerIndex)}><BanCircle /></button>
+                  <>
+                    <button
+                      type="button"
+                      onClick={handleCopyPlayerNameSource(playerIndex)}
+                    >
+                      <Duplicate />
+                    </button>
+                    {" "}
+                    <button
+                      type="button"
+                      onClick={handleRemovePlayer(playerIndex)}
+                    >
+                      <BanCircle />
+                    </button>
+                    {" "}
+                    <button
+                      type="button"
+                      onClick={handleMovePlayer(playerIndex, "down")}
+                      disabled={playerIndex === poolPlayers.length - 1}
+                    >
+                      <ArrowDown />
+                    </button>
+                    {" "}
+                    <button
+                      type="button"
+                      onClick={handleMovePlayer(playerIndex, "up")}
+                      disabled={playerIndex === 0}
+                    >
+                      <ArrowUp />
+                    </button>
+                  </>
                 )}
               </td>
-              <td style={{ display: 'flex', flexGrow: 1 }}>
+              <td className={styles.nameContainer}>
                 <input
                   value={playerName}
                   onChange={handleNameChange(playerIndex)}

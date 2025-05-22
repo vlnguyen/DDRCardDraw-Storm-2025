@@ -85,7 +85,7 @@ const router = createBrowserRouter([
     }),
   },
   {
-    path: "e/:roomName/source",
+    path: "e/:roomName/stream-dashboard/source",
     element: <ObsSource />,
     children: [
       {
@@ -93,6 +93,13 @@ const router = createBrowserRouter([
         lazy: async () => {
           const { PoolsScoresSource } = await import("./obs-sources/pools");
           return { Component: PoolsScoresSource };
+        },
+      },
+      {
+        path: "pools-player-name/:poolPlayerIndex",
+        lazy: async () => {
+          const { PoolPlayerName } = await import("./obs-sources/text");
+          return { Component: PoolPlayerName };
         },
       },
     ]
