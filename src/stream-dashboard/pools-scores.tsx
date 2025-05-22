@@ -1,5 +1,5 @@
 import { useCallback, useState } from "react";
-import { Add, BanCircle } from "@blueprintjs/icons";
+import { Add, BanCircle, ArrowUp, ArrowDown } from "@blueprintjs/icons";
 import { OverlayToaster } from "@blueprintjs/core";
 
 import { eventSlice, PoolPlayer } from "../state/event.slice";
@@ -117,6 +117,17 @@ export function PoolsScores() {
     }
   }, [])
 
+  const handleMovePlayer = useCallback((poolPlayerIndex: number, direction: "up" | "down") => {
+    const newPoolPlayerIndex = poolPlayerIndex + (direction === "up" ? -1 : 1)
+    return () => {
+      setPoolPlayers(prevPoolPlayers => {
+        const newPoolPlayers = [...prevPoolPlayers]
+        newPoolPlayers.splice(newPoolPlayerIndex, 0, newPoolPlayers.splice(poolPlayerIndex, 1)[0])
+        return newPoolPlayers
+      })
+    }
+  }, [])
+
   return (
     <form onSubmit={handleSubmit}>
       <h1>Pools Scores</h1>
@@ -153,12 +164,35 @@ export function PoolsScores() {
         <tbody>
           {poolPlayers.map(({ playerName, scores, isEliminated }, playerIndex) => (
             <tr key={playerIndex}>
-              <td>
+              <td className={styles.buttonContainer}>
                 {poolPlayers.length > 1 && (
-                  <button type="button" onClick={handleRemovePlayer(playerIndex)}><BanCircle /></button>
+                  <>
+                    <button
+                      type="button"
+                      onClick={handleRemovePlayer(playerIndex)}
+                    >
+                      <BanCircle />
+                    </button>
+                    {" "}
+                    <button
+                      type="button"
+                      onClick={handleMovePlayer(playerIndex, "down")}
+                      disabled={playerIndex === poolPlayers.length - 1}
+                    >
+                      <ArrowDown />
+                    </button>
+                    {" "}
+                    <button
+                      type="button"
+                      onClick={handleMovePlayer(playerIndex, "up")}
+                      disabled={playerIndex === 0}
+                    >
+                      <ArrowUp />
+                    </button>
+                  </>
                 )}
               </td>
-              <td style={{ display: 'flex', flexGrow: 1 }}>
+              <td className={styles.nameContainer}>
                 <input
                   value={playerName}
                   onChange={handleNameChange(playerIndex)}
