@@ -3,6 +3,9 @@ import { drawingSelectors } from "../state/drawings.slice";
 import { useAppState } from "../state/store";
 import { getAllPlayers, playerNameByIndex } from "../models/Drawing";
 
+import classNames from "classnames";
+import styles from './text.css'
+
 export function CabTitle() {
   const params = useParams<"roomName" | "cabId">();
   const text = useAppState((s) => {
@@ -71,7 +74,17 @@ export function PoolPlayerName() {
     return null
   }
 
+  const playerNameColor = classNames([
+    styles[`poolPlayer${poolPlayerIndex}`],
+    {
+      [styles.poolPlayerEven]: poolPlayerIndex > 3 && poolPlayerIndex % 2 === 0,
+      [styles.poolPlayerOdd]: poolPlayerIndex > 3 && poolPlayerIndex % 2 === 1,
+    },
+  ])
+
   return (
-    <h1>{poolPlayers[poolPlayerIndex].playerName}</h1>
+    <h1 className={playerNameColor}>
+      {poolPlayers[poolPlayerIndex].playerName}
+    </h1>
   )
 }
