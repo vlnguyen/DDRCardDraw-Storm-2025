@@ -7,6 +7,8 @@ import { PartySocketManager } from "../party/client";
 import { urqlClient } from "../startgg-gql";
 import { store } from "../state/store";
 import { PoolsScores } from "./pools-scores";
+import { CurrentTime } from "./current-time";
+
 import styles from './stream-dashboard.css';
 
 function DashboardItem(props: { children: ReactNode }) {
@@ -42,6 +44,11 @@ export function StreamDashboard() {
             <DashboardItem>
               <PoolsScores />
             </DashboardItem>
+            <div style={{ display: 'flex', gap: 8 }}>
+              <DashboardItem>
+                <CurrentTime />
+              </DashboardItem>
+            </div>
           </div>
         </UrqlProvider>
       </PartySocketManager>
