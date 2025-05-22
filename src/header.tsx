@@ -65,7 +65,6 @@ export function Header() {
         href="https://github.com/noahm/DDRCardDraw/blob/main/docs/readme.md"
         text={t("help")}
       />
-      <ThemeToggle />
       <LastUpdate />
     </Menu>
   );

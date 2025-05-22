@@ -5,6 +5,7 @@ import { getAllPlayers, playerNameByIndex } from "../models/Drawing";
 
 import classNames from "classnames";
 import styles from './text.css'
+import { useCurrentTime } from "../hooks/useCurrentTime";
 
 export function CabTitle() {
   const params = useParams<"roomName" | "cabId">();
@@ -87,4 +88,14 @@ export function PoolPlayerName() {
       {poolPlayers[poolPlayerIndex].playerName}
     </h1>
   )
+}
+
+export function CurrentTime() {
+  const [time] = useCurrentTime()
+  return <h1>{time}</h1>
+}
+
+export function UpNext() {
+  const upNextText = useAppState(state => state.event.streamDashboard.upNextText)
+  return <h1>{upNextText}</h1>
 }
