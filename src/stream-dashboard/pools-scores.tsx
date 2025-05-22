@@ -144,9 +144,28 @@ export function PoolsScores() {
     }
   }, [])
 
+  const handleCopyPoolsScoresSource = useCallback(async () => {
+    const sourcePath = `${window.location.pathname}/source/pools-scores`
+    const sourceUrl = new URL(sourcePath, window.location.href)
+    copyPlainTextToClipboard(sourceUrl.href)
+
+    const toaster = await OverlayToaster.createAsync({ position: 'top' })
+    toaster.show({
+      message: 'Pools scores source copied to clipboard.',
+      intent: 'success',
+      timeout: 5000,
+    })
+  }, [])
+
   return (
     <form onSubmit={handleSubmit}>
-      <h1>Pools Scores</h1>
+      <h1>
+        Pools Scores
+        {" "}
+        <button type="button" onClick={handleCopyPoolsScoresSource}>
+          <Duplicate />
+        </button>
+      </h1>
       <table className={styles.poolsScoresTable}>
         <colgroup>
           <col />
