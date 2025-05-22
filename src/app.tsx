@@ -102,6 +102,13 @@ const router = createBrowserRouter([
           return { Component: PoolPlayerName };
         },
       },
+      {
+        path: "current-time",
+        lazy: async () => {
+          const { CurrentTime } = await import("./obs-sources/text")
+          return { Component: CurrentTime }
+        },
+      }
     ]
   },
   {
