@@ -13,6 +13,7 @@ export interface CabInfo {
 export interface PoolPlayer {
   playerName: string;
   scores: number[];
+  isEliminated: boolean;
 }
 
 interface StreamDashboard {
@@ -40,10 +41,12 @@ const initialState: EventState = {
       {
         playerName: "VincentITG",
         scores: [9975, 9684, 9789, 9854],
+        isEliminated: false,
       },
       {
         playerName: "BlizzrdBall",
         scores: [9674, 9739, 9485, 9769],
+        isEliminated: false,
       }
     ]
   },

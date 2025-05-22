@@ -93,8 +93,12 @@ export function PoolsScoresSource() {
         </tr>
       </thead>
       <tbody>
-        {poolPlayersResults.map(({ playerName, scores, wins, rank, averageEx }, poolPlayerResultIndex) => {
+        {poolPlayersResults.map(({ playerName, scores, wins, rank, averageEx, isEliminated }, poolPlayerResultIndex) => {
           const medal = ((): string | null => {
+            if (isEliminated) {
+              return '💀'
+            }
+
             switch (rank) {
               case 1:
                 return '🥇'
