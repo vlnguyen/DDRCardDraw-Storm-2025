@@ -94,3 +94,8 @@ export function CurrentTime() {
   const [time] = useCurrentTime()
   return <h1>{time}</h1>
 }
+
+export function UpNext() {
+  const upNextText = useAppState(state => state.event.streamDashboard.upNextText)
+  return <h1>{upNextText}</h1>
+}
