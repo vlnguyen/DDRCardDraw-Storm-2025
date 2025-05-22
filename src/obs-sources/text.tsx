@@ -62,3 +62,16 @@ export function CabPlayer(props: {
   });
   return <h1>{text}</h1>;
 }
+
+export function PoolPlayerName() {
+  const poolPlayers = useAppState((s) => s.event.streamDashboard.poolPlayers);
+  const params = useParams<"poolPlayerIndex">()
+  const poolPlayerIndex = parseInt(params.poolPlayerIndex ?? '')
+  if (Number.isNaN(poolPlayerIndex)) {
+    return null
+  }
+
+  return (
+    <h1>{poolPlayers[poolPlayerIndex].playerName}</h1>
+  )
+}

@@ -95,6 +95,13 @@ const router = createBrowserRouter([
           return { Component: PoolsScoresSource };
         },
       },
+      {
+        path: "pools-player-name/:poolPlayerIndex",
+        lazy: async () => {
+          const { PoolPlayerName } = await import("./obs-sources/text");
+          return { Component: PoolPlayerName };
+        },
+      },
     ]
   },
   {
