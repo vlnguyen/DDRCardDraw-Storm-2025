@@ -85,7 +85,7 @@ const router = createBrowserRouter([
     }),
   },
   {
-    path: "e/:roomName/source",
+    path: "e/:roomName/stream-dashboard/source",
     element: <ObsSource />,
     children: [
       {

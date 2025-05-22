@@ -1,11 +1,12 @@
 import { useCallback, useState } from "react";
-import { Add, BanCircle, ArrowUp, ArrowDown } from "@blueprintjs/icons";
+import { Add, BanCircle, ArrowUp, ArrowDown, Duplicate } from "@blueprintjs/icons";
 import { OverlayToaster } from "@blueprintjs/core";
 
 import { eventSlice, PoolPlayer } from "../state/event.slice";
 import { useAppDispatch, useAppState } from "../state/store";
 
 import styles from "./pools-scores.css"
+import { copyPlainTextToClipboard } from "../utils/share";
 
 export function PoolsScores() {
   const poolPlayersState = useAppState(state => state.event.streamDashboard.poolPlayers)
@@ -128,6 +129,21 @@ export function PoolsScores() {
     }
   }, [])
 
+  const handleCopyPlayerNameSource = useCallback((poolPlayerIndex: number) => {
+    return async () => {
+      const sourcePath = `${window.location.pathname}/source/pools-player-name/${poolPlayerIndex}`
+      const sourceUrl = new URL(sourcePath, window.location.href)
+      copyPlainTextToClipboard(sourceUrl.href)
+
+      const toaster = await OverlayToaster.createAsync({ position: 'top' })
+      toaster.show({
+        message: 'Pool player name source copied to clipboard.',
+        intent: 'success',
+        timeout: 5000,
+      })
+    }
+  }, [])
+
   return (
     <form onSubmit={handleSubmit}>
       <h1>Pools Scores</h1>
@@ -167,6 +183,13 @@ export function PoolsScores() {
               <td className={styles.buttonContainer}>
                 {poolPlayers.length > 1 && (
                   <>
+                    <button
+                      type="button"
+                      onClick={handleCopyPlayerNameSource(playerIndex)}
+                    >
+                      <Duplicate />
+                    </button>
+                    {" "}
                     <button
                       type="button"
                       onClick={handleRemovePlayer(playerIndex)}
