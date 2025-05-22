@@ -32,6 +32,19 @@ body:global(.obs-layer) {
   width: 100%;
 }
 
+@font-face {
+  font-family: "FOT-Chiaro Std B";
+  src: url('https://files.catbox.moe/8x7sai.otf') format("opentype");
+}
+
+.obsSource {
+  display: flex;
+  flex-direction: column;
+  min-height: 100%;
+  width: 100%;
+  font-family: "FOT-Chiaro Std B";
+}
+
 @media (min-width: 1025px) {
   .scrollable {
     overflow: auto;
