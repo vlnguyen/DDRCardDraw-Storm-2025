@@ -151,7 +151,7 @@ export function PoolsScores() {
           </tr>
         </thead>
         <tbody>
-          {poolPlayers.map(({ playerName, scores }, playerIndex) => (
+          {poolPlayers.map(({ playerName, scores, isEliminated }, playerIndex) => (
             <tr key={playerIndex}>
               <td>
                 {poolPlayers.length > 1 && (
@@ -167,6 +167,7 @@ export function PoolsScores() {
               <td>
                 <input
                   type="checkbox"
+                  checked={isEliminated}
                   onChange={handleEliminatedChange(playerIndex)}
                 />
               </td>
