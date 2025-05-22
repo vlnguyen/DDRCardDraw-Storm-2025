@@ -29,10 +29,11 @@ function getPoolPlayersResults(poolPlayers: PoolPlayer[]): PoolPlayerResult[] {
     }, [] as number[])
 
     for (let playerIndex = 0; playerIndex < poolPlayersResults.length; playerIndex++) {
-      const wins = allSongScores
-        .filter(songScore => poolPlayersResults[playerIndex].scores[songIndex] > songScore)
-        .length
-      poolPlayersResults[playerIndex].wins += wins
+      // ties are broken by giving players points for each player they tied with (highest points)
+      poolPlayersResults[playerIndex].wins += allSongScores
+        .filter(songScore => poolPlayersResults[playerIndex].scores[songIndex] >= songScore)
+        // exclude oneself from their win count
+        .length - 1
     }
   }
 

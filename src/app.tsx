@@ -25,6 +25,7 @@ import {
 } from "react-router-dom";
 import { nanoid } from "nanoid";
 import { ClassicModeShell } from "./classic-mode";
+import styles from './app.css'
 
 const router = createBrowserRouter([
   {
@@ -183,7 +184,9 @@ function ObsSource() {
     <Provider store={store}>
       <PartySocketManager roomName={params.roomName}>
         <IntlProvider>
-          <Outlet />
+          <div className={styles.obsSource}>
+            <Outlet />
+          </div>
         </IntlProvider>
       </PartySocketManager>
     </Provider>
