@@ -89,6 +89,7 @@ export function PoolsScores() {
         {
           playerName: 'Player',
           scores: Array(numSongs).fill(0),
+          isEliminated: false,
         }
       ]
     })
@@ -102,11 +103,26 @@ export function PoolsScores() {
     }
   }, [])
 
+  const handleEliminatedChange = useCallback((poolPlayerIndex: number) => {
+    return () => {
+      setPoolPlayers(prevPoolPlayers => prevPoolPlayers.map((prevPlayer, prevPlayerIndex) => {
+        if (prevPlayerIndex === poolPlayerIndex) {
+          return {
+            ...prevPlayer,
+            isEliminated: !prevPlayer.isEliminated
+          }
+        }
+        return prevPlayer
+      }))
+    }
+  }, [])
+
   return (
     <form onSubmit={handleSubmit}>
       <h1>Pools Scores</h1>
       <table className={styles.poolsScoresTable}>
         <colgroup>
+          <col />
           <col />
           <col />
           {Array.from({ length: numSongs }).map((_, scoreIndex) => (
@@ -118,6 +134,7 @@ export function PoolsScores() {
           <tr>
             <th></th>
             <th className={styles.playerNameColumn}>Player</th>
+            <th>💀</th>
             {Array.from({ length: numSongs }).map((_, index) => (
               <th key={index}>
                 Score {index + 1}
@@ -141,10 +158,16 @@ export function PoolsScores() {
                   <button type="button" onClick={handleRemovePlayer(playerIndex)}><BanCircle /></button>
                 )}
               </td>
-              <td>
+              <td style={{ display: 'flex', flexGrow: 1 }}>
                 <input
                   value={playerName}
                   onChange={handleNameChange(playerIndex)}
+                />
+              </td>
+              <td>
+                <input
+                  type="checkbox"
+                  onChange={handleEliminatedChange(playerIndex)}
                 />
               </td>
               {scores.map((score, scoreIndex) => (
