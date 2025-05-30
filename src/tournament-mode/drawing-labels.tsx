@@ -13,15 +13,15 @@ import { SetActions } from "./set-actions";
 import { CardLabel, LabelType } from "../song-card/card-label";
 
 export function SetLabels() {
-  const dispatch = useAppDispatch()
+  const dispatch = useAppDispatch();
   const showLabels = useAtomValue(showPlayerAndRoundLabels);
   const playerDisplayOrder = useDrawing((d) => d.playerDisplayOrder);
   const meta = useDrawing((d) => d.meta);
 
-  const drawingId = useDrawing((d) => d.id)
-  const setBannedBy = useDrawing((d) => d.setBannedBy)
-  const setNumber = useDrawing((d) => d.setNumber)
-  const totalSets = useDrawing((d) => d.totalSets)
+  const drawingId = useDrawing((d) => d.id);
+  const setBannedBy = useDrawing((d) => d.setBannedBy);
+  const setNumber = useDrawing((d) => d.setNumber);
+  const totalSets = useDrawing((d) => d.totalSets);
 
   const winners = useDrawing((d) => d.winners);
   if (!showLabels) {
@@ -48,8 +48,7 @@ export function SetLabels() {
         <div className={styles.title}>
           {setNumber && totalSets
             ? `${meta.title} [Set ${setNumber}/${totalSets}]`
-            : meta.title
-          }
+            : meta.title}
         </div>
         {setNumber && <SetActions />}
       </div>
@@ -62,8 +61,8 @@ export function SetLabels() {
               drawingsSlice.actions.setSetBannedBy({
                 drawingId: drawingId,
                 setBannedBy: undefined,
-              })
-            )
+              }),
+            );
           }}
           ignoreDefaultStyles
         />

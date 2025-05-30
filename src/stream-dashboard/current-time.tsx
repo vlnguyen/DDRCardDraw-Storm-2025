@@ -7,68 +7,80 @@ import { OverlayToaster } from "@blueprintjs/core";
 import { copyPlainTextToClipboard } from "../utils/share";
 
 export function UpNext() {
-  const dispatch = useAppDispatch()
-  const upNextTextState = useAppState((s) => s.event.streamDashboard.upNextText);
-  const [upNextText, setUpNextText] = useState(upNextTextState)
+  const dispatch = useAppDispatch();
+  const upNextTextState = useAppState(
+    (s) => s.event.streamDashboard.upNextText,
+  );
+  const [upNextText, setUpNextText] = useState(upNextTextState);
 
-  const [time, timezone] = useCurrentTime()
+  const [time, timezone] = useCurrentTime();
 
-  const handleSubmit = useCallback(async (e: React.FormEvent<HTMLFormElement>) => {
-    e.preventDefault()
-    dispatch(eventSlice.actions.updateUpNextText({ upNextText }))
+  const handleSubmit = useCallback(
+    async (e: React.FormEvent<HTMLFormElement>) => {
+      e.preventDefault();
+      dispatch(eventSlice.actions.updateUpNextText({ upNextText }));
 
-    const toaster = await OverlayToaster.createAsync({ position: 'top' })
-    toaster.show({
-      message: '"Up Next" text updated.',
-      intent: 'success',
-      timeout: 5000,
-    })
-  }, [upNextText])
+      const toaster = await OverlayToaster.createAsync({ position: "top" });
+      toaster.show({
+        message: '"Up Next" text updated.',
+        intent: "success",
+        timeout: 5000,
+      });
+    },
+    [upNextText, dispatch],
+  );
 
-  const handleUpNextTextChange = useCallback((e: React.ChangeEvent<HTMLInputElement>) => {
-    setUpNextText(e.target.value)
-  }, [])
+  const handleUpNextTextChange = useCallback(
+    (e: React.ChangeEvent<HTMLInputElement>) => {
+      setUpNextText(e.target.value);
+    },
+    [],
+  );
 
   const handleCopyCurrentTimeSource = useCallback(async () => {
-    const sourcePath = `${window.location.pathname}/source/current-time`
-    const sourceUrl = new URL(sourcePath, window.location.href)
-    copyPlainTextToClipboard(sourceUrl.href)
+    const sourcePath = `${window.location.pathname}/source/current-time`;
+    const sourceUrl = new URL(sourcePath, window.location.href);
+    copyPlainTextToClipboard(sourceUrl.href);
 
-    const toaster = await OverlayToaster.createAsync({ position: 'top' })
+    const toaster = await OverlayToaster.createAsync({ position: "top" });
     toaster.show({
-      message: 'Current time source copied to clipboard.',
-      intent: 'success',
+      message: "Current time source copied to clipboard.",
+      intent: "success",
       timeout: 5000,
-    })
-  }, [])
+    });
+  }, []);
 
   const handleCopyUpNextSource = useCallback(async () => {
-    const sourcePath = `${window.location.pathname}/source/up-next`
-    const sourceUrl = new URL(sourcePath, window.location.href)
-    copyPlainTextToClipboard(sourceUrl.href)
+    const sourcePath = `${window.location.pathname}/source/up-next`;
+    const sourceUrl = new URL(sourcePath, window.location.href);
+    copyPlainTextToClipboard(sourceUrl.href);
 
-    const toaster = await OverlayToaster.createAsync({ position: 'top' })
+    const toaster = await OverlayToaster.createAsync({ position: "top" });
     toaster.show({
       message: '"Up Next" source copied to clipboard.',
-      intent: 'success',
+      intent: "success",
       timeout: 5000,
-    })
-  }, [])
+    });
+  }, []);
 
   return (
     <form onSubmit={handleSubmit} style={{ minWidth: 500 }}>
       <h1>Up Next</h1>
-      <div style={{ display: 'flex', flexDirection: 'column', gap: 8 }}>
-        <div style={{ display: 'flex', gap: 8, alignItems: 'center' }}>
-          <button type='button' onClick={handleCopyCurrentTimeSource}><Duplicate /></button>
-          <div>{time} ({timezone})</div>
+      <div style={{ display: "flex", flexDirection: "column", gap: 8 }}>
+        <div style={{ display: "flex", gap: 8, alignItems: "center" }}>
+          <button type="button" onClick={handleCopyCurrentTimeSource}>
+            <Duplicate />
+          </button>
+          <div>
+            {time} ({timezone})
+          </div>
         </div>
-        <div style={{ display: 'flex', gap: 8 }}>
-          <button type='button' onClick={handleCopyUpNextSource}>
+        <div style={{ display: "flex", gap: 8 }}>
+          <button type="button" onClick={handleCopyUpNextSource}>
             <Duplicate />
           </button>
           <input
-            style={{ display: 'inline-block' }}
+            style={{ display: "inline-block" }}
             type="text"
             value={upNextText}
             onChange={handleUpNextTextChange}
@@ -78,6 +90,6 @@ export function UpNext() {
           <button>Save</button>
         </div>
       </div>
-    </form >
-  )
+    </form>
+  );
 }

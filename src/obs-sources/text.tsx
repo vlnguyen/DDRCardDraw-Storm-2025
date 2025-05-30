@@ -4,7 +4,7 @@ import { useAppState } from "../state/store";
 import { getAllPlayers, playerNameByIndex } from "../models/Drawing";
 
 import classNames from "classnames";
-import styles from './text.css'
+import styles from "./text.css";
 import { useCurrentTime } from "../hooks/useCurrentTime";
 
 export function CabTitle() {
@@ -69,10 +69,10 @@ export function CabPlayer(props: {
 
 export function PoolPlayerName() {
   const poolPlayers = useAppState((s) => s.event.streamDashboard.poolPlayers);
-  const params = useParams<"poolPlayerIndex">()
-  const poolPlayerIndex = parseInt(params.poolPlayerIndex ?? '')
+  const params = useParams<"poolPlayerIndex">();
+  const poolPlayerIndex = parseInt(params.poolPlayerIndex ?? "");
   if (Number.isNaN(poolPlayerIndex)) {
-    return null
+    return null;
   }
 
   const playerNameColor = classNames([
@@ -81,21 +81,23 @@ export function PoolPlayerName() {
       [styles.poolPlayerEven]: poolPlayerIndex > 3 && poolPlayerIndex % 2 === 0,
       [styles.poolPlayerOdd]: poolPlayerIndex > 3 && poolPlayerIndex % 2 === 1,
     },
-  ])
+  ]);
 
   return (
     <h1 className={playerNameColor}>
       {poolPlayers[poolPlayerIndex].playerName}
     </h1>
-  )
+  );
 }
 
 export function CurrentTime() {
-  const [time] = useCurrentTime()
-  return <h1>{time}</h1>
+  const [time] = useCurrentTime();
+  return <h1>{time}</h1>;
 }
 
 export function UpNext() {
-  const upNextText = useAppState(state => state.event.streamDashboard.upNextText)
-  return <h1>{upNextText}</h1>
+  const upNextText = useAppState(
+    (state) => state.event.streamDashboard.upNextText,
+  );
+  return <h1>{upNextText}</h1>;
 }

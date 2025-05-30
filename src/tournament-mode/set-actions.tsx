@@ -10,27 +10,27 @@ import { useAppDispatch, useAppState } from "../state/store";
 import { PlayerListMenuItems } from "../song-card/icon-menu";
 
 export function SetActions() {
-  const dispatch = useAppDispatch()
-  const drawingId = useDrawing(d => d.id);
+  const dispatch = useAppDispatch();
+  const drawingId = useDrawing((d) => d.id);
   const cabs = useAppState(eventSlice.selectors.allCabs);
-  const setId = useDrawing(d => d.setId);
-  const setNumber = useDrawing(d => d.setNumber);
-  const setBannedBy = useDrawing(d => d.setBannedBy);
+  const setId = useDrawing((d) => d.setId);
+  const setNumber = useDrawing((d) => d.setNumber);
+  const setBannedBy = useDrawing((d) => d.setBannedBy);
 
   const setSelector = useMemo(() => {
     return getSetSelector(setId);
   }, [setId]);
-  const drawings = useAppState(setSelector)
+  const drawings = useAppState(setSelector);
 
   const handleDeleteSet = useCallback(() => {
     if (!drawings) {
-      return
+      return;
     }
-    const drawingIds = drawings.map(d => d.id)
+    const drawingIds = drawings.map((d) => d.id);
     for (const drawingId of drawingIds) {
-      dispatch(drawingsSlice.actions.removeOne(drawingId))
+      dispatch(drawingsSlice.actions.removeOne(drawingId));
     }
-  }, [drawings, dispatch])
+  }, [drawings, dispatch]);
 
   return (
     <div>
@@ -42,18 +42,18 @@ export function SetActions() {
               <Menu>
                 <PlayerListMenuItems
                   onClick={(playerIdx) => {
-                    dispatch(drawingsSlice.actions.setSetBannedBy({
-                      drawingId: drawingId,
-                      setBannedBy: playerIdx,
-                    }));
+                    dispatch(
+                      drawingsSlice.actions.setSetBannedBy({
+                        drawingId: drawingId,
+                        setBannedBy: playerIdx,
+                      }),
+                    );
                   }}
                 />
               </Menu>
-            }>
-            <Button
-              variant="minimal"
-              icon={<BanCircle />}
-            />
+            }
+          >
+            <Button variant="minimal" icon={<BanCircle />} />
           </Popover>
         </Tooltip>
       )}
@@ -102,5 +102,5 @@ export function SetActions() {
         </>
       )}
     </div>
-  )
+  );
 }

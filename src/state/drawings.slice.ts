@@ -131,13 +131,16 @@ export const drawingsSlice = createSlice({
         };
       }
     },
-    setSetBannedBy(state, action: PayloadAction<{ drawingId: string, setBannedBy?: number }>) {
-      const { drawingId } = action.payload
-      const drawing = state.entities[drawingId]
+    setSetBannedBy(
+      state,
+      action: PayloadAction<{ drawingId: string; setBannedBy?: number }>,
+    ) {
+      const { drawingId } = action.payload;
+      const drawing = state.entities[drawingId];
       if (!drawing) {
-        return
+        return;
       }
-      drawing.setBannedBy = action.payload.setBannedBy
+      drawing.setBannedBy = action.payload.setBannedBy;
     },
     setWinner(state, action: ActionOnSingleChart<{ player: number | null }>) {
       const winners = state.entities[action.payload.drawingId].winners;
@@ -177,9 +180,12 @@ export const drawingsSlice = createSlice({
     haveDrawings(state) {
       return !!state.ids.length;
     },
-    getAllDrawings: createSelector([(state: EntityState<Drawing, string>) => state.entities], (entities: Record<string, Drawing>) => {
-      return Object.values(entities)
-    })
+    getAllDrawings: createSelector(
+      [(state: EntityState<Drawing, string>) => state.entities],
+      (entities: Record<string, Drawing>) => {
+        return Object.values(entities);
+      },
+    ),
   },
 });
 
@@ -192,12 +198,12 @@ export const getSetSelector = (setId?: string) => {
     [drawingsSlice.selectors.getAllDrawings],
     (drawings) => {
       if (setId === undefined) {
-        return null
+        return null;
       }
-      return drawings.filter(d => setId && d.setId === setId).toReversed()
-    }
-  )
-}
+      return drawings.filter((d) => setId && d.setId === setId).toReversed();
+    },
+  );
+};
 
 function moveChartInArray(
   drawing: Drawing,

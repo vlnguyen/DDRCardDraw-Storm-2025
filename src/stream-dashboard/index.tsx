@@ -9,14 +9,10 @@ import { store } from "../state/store";
 import { PoolsScores } from "./pools-scores";
 import { UpNext } from "./current-time";
 
-import styles from './stream-dashboard.css';
+import styles from "./stream-dashboard.css";
 
 function DashboardItem(props: { children: ReactNode }) {
-  return (
-    <div className={styles.dashboardItem}>
-      {props.children}
-    </div>
-  )
+  return <div className={styles.dashboardItem}>{props.children}</div>;
 }
 
 export function StreamDashboard() {
@@ -44,7 +40,7 @@ export function StreamDashboard() {
             <DashboardItem>
               <PoolsScores />
             </DashboardItem>
-            <div style={{ display: 'flex', gap: 8 }}>
+            <div style={{ display: "flex", gap: 8 }}>
               <DashboardItem>
                 <UpNext />
               </DashboardItem>

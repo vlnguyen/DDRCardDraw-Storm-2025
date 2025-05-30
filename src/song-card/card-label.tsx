@@ -17,8 +17,8 @@ interface Props {
   playerIdx: number;
   type: LabelType;
   ignoreDefaultStyles?: boolean;
-  labelOverride?: string,
-  component?: 'div' | 'span',
+  labelOverride?: string;
+  component?: "div" | "span";
   onRemove?: () => void;
 }
 
@@ -58,7 +58,7 @@ export function CardLabel({
   onRemove,
   ignoreDefaultStyles,
   labelOverride,
-  component = 'div',
+  component = "div",
 }: Props) {
   const label = usePlayerLabelForIndex(playerIdx, labelOverride);
 
@@ -68,7 +68,7 @@ export function CardLabel({
   });
 
   const LabelIcon = getIcon(type);
-  const Component = component
+  const Component = component;
 
   return (
     <Component className={rootClassname}>

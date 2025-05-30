@@ -7,13 +7,19 @@ import {
   Navbar,
   Popover,
 } from "@blueprintjs/core";
-import { Trash, InfoSign, Menu as MenuIcon, Help, Layers, Control } from "@blueprintjs/icons";
+import {
+  Trash,
+  InfoSign,
+  Menu as MenuIcon,
+  Help,
+  Layers,
+  Control,
+} from "@blueprintjs/icons";
 import { useCallback, useState } from "react";
 import { About } from "./about";
 import { HeaderControls } from "./controls";
 import { useIntl } from "./hooks/useIntl";
 import { LastUpdate } from "./last-update";
-import { ThemeToggle } from "./theme-toggle";
 import { useAppDispatch, useAppState } from "./state/store";
 import { drawingsSlice } from "./state/drawings.slice";
 import { EventModeGated } from "./common-components/app-mode";
@@ -29,7 +35,7 @@ export function Header() {
   );
   const haveDrawings = useAppState(drawingsSlice.selectors.haveDrawings);
   const { t } = useIntl();
-  const isStreamDashboard = !!useMatch('/e/:roomName/stream-dashboard')
+  const isStreamDashboard = !!useMatch("/e/:roomName/stream-dashboard");
 
   const menu = (
     <Menu>
@@ -96,9 +102,7 @@ export function Header() {
         </Navbar.Heading>
       </Navbar.Group>
       <Navbar.Group align={Alignment.RIGHT}>
-        {!isStreamDashboard && (
-          <HeaderControls />
-        )}
+        {!isStreamDashboard && <HeaderControls />}
       </Navbar.Group>
     </Navbar>
   );

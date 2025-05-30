@@ -1,167 +1,201 @@
 import { useCallback, useState } from "react";
-import { Add, BanCircle, ArrowUp, ArrowDown, Duplicate } from "@blueprintjs/icons";
+import {
+  Add,
+  BanCircle,
+  ArrowUp,
+  ArrowDown,
+  Duplicate,
+} from "@blueprintjs/icons";
 import { OverlayToaster } from "@blueprintjs/core";
 
 import { eventSlice, PoolPlayer } from "../state/event.slice";
 import { useAppDispatch, useAppState } from "../state/store";
 
-import styles from "./pools-scores.css"
+import styles from "./pools-scores.css";
 import { copyPlainTextToClipboard } from "../utils/share";
 
 export function PoolsScores() {
-  const poolPlayersState = useAppState(state => state.event.streamDashboard.poolPlayers)
-  const dispatch = useAppDispatch()
+  const poolPlayersState = useAppState(
+    (state) => state.event.streamDashboard.poolPlayers,
+  );
+  const dispatch = useAppDispatch();
 
-  const [poolPlayers, setPoolPlayers] = useState<PoolPlayer[]>(poolPlayersState)
+  const [poolPlayers, setPoolPlayers] =
+    useState<PoolPlayer[]>(poolPlayersState);
   // List of players and scores are both guaranteed to be non-empty
-  const numSongs = poolPlayers[0].scores.length
+  const numSongs = poolPlayers[0].scores.length;
 
-  const handleSubmit = useCallback(async (e: React.FormEvent<HTMLFormElement>) => {
-    e.preventDefault()
-    dispatch(eventSlice.actions.updatePoolPlayers(poolPlayers))
+  const handleSubmit = useCallback(
+    async (e: React.FormEvent<HTMLFormElement>) => {
+      e.preventDefault();
+      dispatch(eventSlice.actions.updatePoolPlayers(poolPlayers));
 
-    const toaster = await OverlayToaster.createAsync({ position: 'top' })
-    toaster.show({
-      message: 'Pools scores updated.',
-      intent: 'success',
-      timeout: 5000,
-    })
-  }, [dispatch, poolPlayers])
+      const toaster = await OverlayToaster.createAsync({ position: "top" });
+      toaster.show({
+        message: "Pools scores updated.",
+        intent: "success",
+        timeout: 5000,
+      });
+    },
+    [dispatch, poolPlayers],
+  );
 
   const handleNameChange = useCallback((poolPlayerIndex: number) => {
     return (e: React.ChangeEvent<HTMLInputElement>) => {
-      setPoolPlayers(prevPoolPlayers => prevPoolPlayers.map((prevPlayer, prevPlayerIndex) => {
-        if (prevPlayerIndex === poolPlayerIndex) {
-          return {
-            ...prevPlayer,
-            playerName: e.target.value
+      setPoolPlayers((prevPoolPlayers) =>
+        prevPoolPlayers.map((prevPlayer, prevPlayerIndex) => {
+          if (prevPlayerIndex === poolPlayerIndex) {
+            return {
+              ...prevPlayer,
+              playerName: e.target.value,
+            };
           }
-        }
-        return prevPlayer
-      }))
-    }
-  }, [])
+          return prevPlayer;
+        }),
+      );
+    };
+  }, []);
 
-  const handleScoreChange = useCallback((poolPlayerIndex: number, scoreIndex: number) => {
-    return (e: React.ChangeEvent<HTMLInputElement>) => {
-      setPoolPlayers(prevPoolPlayers => prevPoolPlayers.map((prevPlayer, prevPlayerIndex) => {
-        if (prevPlayerIndex === poolPlayerIndex) {
-          return {
-            ...prevPlayer,
-            scores: prevPlayer.scores.map((prevScore, prevScoreIndex) => {
-              if (prevScoreIndex === scoreIndex) {
-                return parseInt(e.target.value, 10)
-              }
-              return prevScore
-            })
-          }
-        }
-        return prevPlayer
-      }))
-    }
-  }, [])
+  const handleScoreChange = useCallback(
+    (poolPlayerIndex: number, scoreIndex: number) => {
+      return (e: React.ChangeEvent<HTMLInputElement>) => {
+        setPoolPlayers((prevPoolPlayers) =>
+          prevPoolPlayers.map((prevPlayer, prevPlayerIndex) => {
+            if (prevPlayerIndex === poolPlayerIndex) {
+              return {
+                ...prevPlayer,
+                scores: prevPlayer.scores.map((prevScore, prevScoreIndex) => {
+                  if (prevScoreIndex === scoreIndex) {
+                    return parseInt(e.target.value, 10);
+                  }
+                  return prevScore;
+                }),
+              };
+            }
+            return prevPlayer;
+          }),
+        );
+      };
+    },
+    [],
+  );
 
   const handleAddScore = useCallback(() => {
-    setPoolPlayers(prevPoolPlayers => prevPoolPlayers.map(prevPlayer => {
-      return {
-        ...prevPlayer,
-        scores: [...prevPlayer.scores, 0],
-      }
-    }))
-  }, [])
+    setPoolPlayers((prevPoolPlayers) =>
+      prevPoolPlayers.map((prevPlayer) => {
+        return {
+          ...prevPlayer,
+          scores: [...prevPlayer.scores, 0],
+        };
+      }),
+    );
+  }, []);
 
   const handleRemoveScore = useCallback((scoreIndex: number) => {
     return () => {
-      setPoolPlayers(prevPoolPlayers => {
-        return prevPoolPlayers.map(prevPlayer => {
+      setPoolPlayers((prevPoolPlayers) => {
+        return prevPoolPlayers.map((prevPlayer) => {
           return {
             ...prevPlayer,
-            scores: prevPlayer.scores.filter((_, prevScoreIndex) => prevScoreIndex !== scoreIndex)
-          }
-        })
-      })
-    }
-  }, [])
+            scores: prevPlayer.scores.filter(
+              (_, prevScoreIndex) => prevScoreIndex !== scoreIndex,
+            ),
+          };
+        });
+      });
+    };
+  }, []);
 
   const handleAddPlayer = useCallback(() => {
-    setPoolPlayers(prevPoolPlayers => {
+    setPoolPlayers((prevPoolPlayers) => {
       return [
         ...prevPoolPlayers,
         {
-          playerName: 'Player',
+          playerName: "Player",
           scores: Array(numSongs).fill(0),
           isEliminated: false,
-        }
-      ]
-    })
-  }, [numSongs])
+        },
+      ];
+    });
+  }, [numSongs]);
 
   const handleRemovePlayer = useCallback((playerIndex: number) => {
     return () => {
-      setPoolPlayers(prevPoolPlayers => {
-        return prevPoolPlayers.filter((_, prevPlayerIndex) => prevPlayerIndex !== playerIndex)
-      })
-    }
-  }, [])
+      setPoolPlayers((prevPoolPlayers) => {
+        return prevPoolPlayers.filter(
+          (_, prevPlayerIndex) => prevPlayerIndex !== playerIndex,
+        );
+      });
+    };
+  }, []);
 
   const handleEliminatedChange = useCallback((poolPlayerIndex: number) => {
     return () => {
-      setPoolPlayers(prevPoolPlayers => prevPoolPlayers.map((prevPlayer, prevPlayerIndex) => {
-        if (prevPlayerIndex === poolPlayerIndex) {
-          return {
-            ...prevPlayer,
-            isEliminated: !prevPlayer.isEliminated
+      setPoolPlayers((prevPoolPlayers) =>
+        prevPoolPlayers.map((prevPlayer, prevPlayerIndex) => {
+          if (prevPlayerIndex === poolPlayerIndex) {
+            return {
+              ...prevPlayer,
+              isEliminated: !prevPlayer.isEliminated,
+            };
           }
-        }
-        return prevPlayer
-      }))
-    }
-  }, [])
+          return prevPlayer;
+        }),
+      );
+    };
+  }, []);
 
-  const handleMovePlayer = useCallback((poolPlayerIndex: number, direction: "up" | "down") => {
-    const newPoolPlayerIndex = poolPlayerIndex + (direction === "up" ? -1 : 1)
-    return () => {
-      setPoolPlayers(prevPoolPlayers => {
-        const newPoolPlayers = [...prevPoolPlayers]
-        newPoolPlayers.splice(newPoolPlayerIndex, 0, newPoolPlayers.splice(poolPlayerIndex, 1)[0])
-        return newPoolPlayers
-      })
-    }
-  }, [])
+  const handleMovePlayer = useCallback(
+    (poolPlayerIndex: number, direction: "up" | "down") => {
+      const newPoolPlayerIndex =
+        poolPlayerIndex + (direction === "up" ? -1 : 1);
+      return () => {
+        setPoolPlayers((prevPoolPlayers) => {
+          const newPoolPlayers = [...prevPoolPlayers];
+          newPoolPlayers.splice(
+            newPoolPlayerIndex,
+            0,
+            newPoolPlayers.splice(poolPlayerIndex, 1)[0],
+          );
+          return newPoolPlayers;
+        });
+      };
+    },
+    [],
+  );
 
   const handleCopyPlayerNameSource = useCallback((poolPlayerIndex: number) => {
     return async () => {
-      const sourcePath = `${window.location.pathname}/source/pools-player-name/${poolPlayerIndex}`
-      const sourceUrl = new URL(sourcePath, window.location.href)
-      copyPlainTextToClipboard(sourceUrl.href)
+      const sourcePath = `${window.location.pathname}/source/pools-player-name/${poolPlayerIndex}`;
+      const sourceUrl = new URL(sourcePath, window.location.href);
+      copyPlainTextToClipboard(sourceUrl.href);
 
-      const toaster = await OverlayToaster.createAsync({ position: 'top' })
+      const toaster = await OverlayToaster.createAsync({ position: "top" });
       toaster.show({
-        message: 'Pool player name source copied to clipboard.',
-        intent: 'success',
+        message: "Pool player name source copied to clipboard.",
+        intent: "success",
         timeout: 5000,
-      })
-    }
-  }, [])
+      });
+    };
+  }, []);
 
   const handleCopyPoolsScoresSource = useCallback(async () => {
-    const sourcePath = `${window.location.pathname}/source/pools-scores`
-    const sourceUrl = new URL(sourcePath, window.location.href)
-    copyPlainTextToClipboard(sourceUrl.href)
+    const sourcePath = `${window.location.pathname}/source/pools-scores`;
+    const sourceUrl = new URL(sourcePath, window.location.href);
+    copyPlainTextToClipboard(sourceUrl.href);
 
-    const toaster = await OverlayToaster.createAsync({ position: 'top' })
+    const toaster = await OverlayToaster.createAsync({ position: "top" });
     toaster.show({
-      message: 'Pools scores source copied to clipboard.',
-      intent: 'success',
+      message: "Pools scores source copied to clipboard.",
+      intent: "success",
       timeout: 5000,
-    })
-  }, [])
+    });
+  }, []);
 
   return (
     <form onSubmit={handleSubmit}>
       <h1>
-        Pools Scores
-        {" "}
+        Pools Scores{" "}
         <button type="button" onClick={handleCopyPoolsScoresSource}>
           <Duplicate />
         </button>
@@ -186,86 +220,96 @@ export function PoolsScores() {
                 Score {index + 1}
                 {numSongs > 1 && (
                   <>
-                    {' '}<button type="button" onClick={handleRemoveScore(index)}><BanCircle /></button>
+                    {" "}
+                    <button type="button" onClick={handleRemoveScore(index)}>
+                      <BanCircle />
+                    </button>
                   </>
                 )}
               </th>
             ))}
             <th>
-              Add Score <button type="button" onClick={handleAddScore}><Add /></button>
+              Add Score{" "}
+              <button type="button" onClick={handleAddScore}>
+                <Add />
+              </button>
             </th>
           </tr>
         </thead>
         <tbody>
-          {poolPlayers.map(({ playerName, scores, isEliminated }, playerIndex) => (
-            <tr key={playerIndex}>
-              <td className={styles.buttonContainer}>
-                {poolPlayers.length > 1 && (
-                  <>
-                    <button
-                      type="button"
-                      onClick={handleCopyPlayerNameSource(playerIndex)}
-                    >
-                      <Duplicate />
-                    </button>
-                    {" "}
-                    <button
-                      type="button"
-                      onClick={handleRemovePlayer(playerIndex)}
-                    >
-                      <BanCircle />
-                    </button>
-                    {" "}
-                    <button
-                      type="button"
-                      onClick={handleMovePlayer(playerIndex, "down")}
-                      disabled={playerIndex === poolPlayers.length - 1}
-                    >
-                      <ArrowDown />
-                    </button>
-                    {" "}
-                    <button
-                      type="button"
-                      onClick={handleMovePlayer(playerIndex, "up")}
-                      disabled={playerIndex === 0}
-                    >
-                      <ArrowUp />
-                    </button>
-                  </>
-                )}
-              </td>
-              <td className={styles.nameContainer}>
-                <input
-                  value={playerName}
-                  onChange={handleNameChange(playerIndex)}
-                />
-              </td>
-              <td>
-                <input
-                  type="checkbox"
-                  checked={isEliminated}
-                  onChange={handleEliminatedChange(playerIndex)}
-                />
-              </td>
-              {scores.map((score, scoreIndex) => (
-                <td key={scoreIndex}>
+          {poolPlayers.map(
+            ({ playerName, scores, isEliminated }, playerIndex) => (
+              <tr key={playerIndex}>
+                <td className={styles.buttonContainer}>
+                  {poolPlayers.length > 1 && (
+                    <>
+                      <button
+                        type="button"
+                        onClick={handleCopyPlayerNameSource(playerIndex)}
+                      >
+                        <Duplicate />
+                      </button>{" "}
+                      <button
+                        type="button"
+                        onClick={handleRemovePlayer(playerIndex)}
+                      >
+                        <BanCircle />
+                      </button>{" "}
+                      <button
+                        type="button"
+                        onClick={handleMovePlayer(playerIndex, "down")}
+                        disabled={playerIndex === poolPlayers.length - 1}
+                      >
+                        <ArrowDown />
+                      </button>{" "}
+                      <button
+                        type="button"
+                        onClick={handleMovePlayer(playerIndex, "up")}
+                        disabled={playerIndex === 0}
+                      >
+                        <ArrowUp />
+                      </button>
+                    </>
+                  )}
+                </td>
+                <td className={styles.nameContainer}>
                   <input
-                    type="number"
-                    value={score}
-                    onChange={handleScoreChange(playerIndex, scoreIndex)}
+                    value={playerName}
+                    onChange={handleNameChange(playerIndex)}
                   />
                 </td>
-              ))}
-            </tr>
-          ))}
+                <td>
+                  <input
+                    type="checkbox"
+                    checked={isEliminated}
+                    onChange={handleEliminatedChange(playerIndex)}
+                  />
+                </td>
+                {scores.map((score, scoreIndex) => (
+                  <td key={scoreIndex}>
+                    <input
+                      type="number"
+                      value={score}
+                      onChange={handleScoreChange(playerIndex, scoreIndex)}
+                    />
+                  </td>
+                ))}
+              </tr>
+            ),
+          )}
         </tbody>
       </table>
       <div>
-        <b>Add Player <button type="button" onClick={handleAddPlayer}><Add /></button></b>
+        <b>
+          Add Player{" "}
+          <button type="button" onClick={handleAddPlayer}>
+            <Add />
+          </button>
+        </b>
       </div>
       <div>
         <button>Save</button>
       </div>
     </form>
-  )
+  );
 }
