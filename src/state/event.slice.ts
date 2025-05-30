@@ -17,7 +17,7 @@ export interface PoolPlayer {
 }
 
 interface StreamDashboard {
-  poolPlayers: PoolPlayer[]
+  poolPlayers: PoolPlayer[];
   upNextText: string;
 }
 
@@ -48,9 +48,9 @@ const initialState: EventState = {
         playerName: "BlizzrdBall",
         scores: [9674, 9739, 9485, 9769],
         isEliminated: false,
-      }
+      },
     ],
-    upNextText: 'Wave 5B - VincentITG, TommyDoesntMiss, VivaLaMoo, Twix',
+    upNextText: "Wave 5B - VincentITG, TommyDoesntMiss, VivaLaMoo, Twix",
   },
 };
 
@@ -88,11 +88,11 @@ export const eventSlice = createSlice({
       cab.activeSet = action.payload.setId;
     },
     updatePoolPlayers(state, action: PayloadAction<PoolPlayer[]>) {
-      state.streamDashboard.poolPlayers = action.payload
+      state.streamDashboard.poolPlayers = action.payload;
     },
     updateUpNextText(state, action: PayloadAction<{ upNextText: string }>) {
-      state.streamDashboard.upNextText = action.payload.upNextText
-    }
+      state.streamDashboard.upNextText = action.payload.upNextText;
+    },
   },
   selectors: {
     allCabs: createSelector([(state: EventState) => state.cabs], (cabs) => {

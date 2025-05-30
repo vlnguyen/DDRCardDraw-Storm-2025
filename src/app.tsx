@@ -25,7 +25,7 @@ import {
 } from "react-router-dom";
 import { nanoid } from "nanoid";
 import { ClassicModeShell } from "./classic-mode";
-import styles from './app.css'
+import styles from "./app.css";
 
 const router = createBrowserRouter([
   {
@@ -105,18 +105,18 @@ const router = createBrowserRouter([
       {
         path: "current-time",
         lazy: async () => {
-          const { CurrentTime } = await import("./obs-sources/text")
-          return { Component: CurrentTime }
+          const { CurrentTime } = await import("./obs-sources/text");
+          return { Component: CurrentTime };
         },
       },
       {
         path: "up-next",
         lazy: async () => {
-          const { UpNext } = await import("./obs-sources/text")
-          return { Component: UpNext }
+          const { UpNext } = await import("./obs-sources/text");
+          return { Component: UpNext };
         },
-      }
-    ]
+      },
+    ],
   },
   {
     path: "e/:roomName/cab/:cabId/source",

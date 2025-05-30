@@ -98,7 +98,9 @@ function PlayerList({ icon, text, onClick }: IconRowProps) {
   );
 }
 
-export function PlayerListMenuItems({ onClick }: Pick<IconRowProps, 'onClick'>) {
+export function PlayerListMenuItems({
+  onClick,
+}: Pick<IconRowProps, "onClick">) {
   const drawingMeta = useDrawing((d) => d.meta);
   const players = useDrawing((d) => d.playerDisplayOrder).map(
     (pIdx) => [playerNameByIndex(drawingMeta, pIdx), pIdx] as const,
@@ -111,5 +113,5 @@ export function PlayerListMenuItems({ onClick }: Pick<IconRowProps, 'onClick'>) 
       onClick={() => onClick(pIdx)}
       icon={<Person />}
     />
-  ))
+  ));
 }

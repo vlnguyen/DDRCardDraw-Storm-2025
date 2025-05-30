@@ -226,15 +226,10 @@ function CurrentMatch(props: { cab: CabInfo }) {
   const filledPlayers = drawing.playerDisplayOrder.map((pIdx, idx) =>
     playerNameByIndex(drawing.meta, pIdx, `Player ${idx + 1}`),
   );
-  const isMultiSetDraw = drawing.setId !== undefined
+  const isMultiSetDraw = drawing.setId !== undefined;
 
   return (
-    <Card
-      elevation={2}
-      style={{ position: "relative" }}
-      compact
-      interactive
-    >
+    <Card elevation={2} style={{ position: "relative" }} compact interactive>
       <Button
         minimal
         small
@@ -245,8 +240,7 @@ function CurrentMatch(props: { cab: CabInfo }) {
       <h3>
         {isMultiSetDraw
           ? `${drawing.meta.title} [Set ${drawing.setNumber}/${drawing.totalSets}]`
-          : drawing.meta.title
-        }
+          : drawing.meta.title}
       </h3>
       <p>{listFormatter.format(filledPlayers)}</p>
     </Card>
@@ -267,8 +261,8 @@ function CurrentSet(props: { cab: CabInfo }) {
   );
 
   const setSelector = useMemo(() => {
-    return getSetSelector(props.cab.activeSet ?? undefined)
-  }, [props.cab.activeSet])
+    return getSetSelector(props.cab.activeSet ?? undefined);
+  }, [props.cab.activeSet]);
   const drawings = useAppState(setSelector);
 
   if (!drawings || drawings.length === 0) {
@@ -280,12 +274,7 @@ function CurrentSet(props: { cab: CabInfo }) {
   );
 
   return (
-    <Card
-      elevation={2}
-      style={{ position: "relative" }}
-      compact
-      interactive
-    >
+    <Card elevation={2} style={{ position: "relative" }} compact interactive>
       <Button
         variant="minimal"
         size="small"

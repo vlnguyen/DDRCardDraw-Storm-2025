@@ -18,9 +18,9 @@ export function CabCards() {
 
 export function CabSet() {
   const params = useParams<"roomName" | "cabId">();
-  const activeSetId = useAppState(s => s.event.cabs[params.cabId!].activeSet);
+  const activeSetId = useAppState((s) => s.event.cabs[params.cabId!].activeSet);
   const setSelector = useMemo(() => {
-    return getSetSelector(activeSetId ?? undefined)
+    return getSetSelector(activeSetId ?? undefined);
   }, [activeSetId]);
   const draws = useAppState(setSelector);
   if (!draws) {
@@ -32,9 +32,9 @@ export function CabSet() {
       <div className={styles.cardsBracketDrawsContainer}>
         {draws.map((drawing) => {
           const setBannedByLabel = ((): string | undefined => {
-            const { setBannedBy, meta } = drawing
+            const { setBannedBy, meta } = drawing;
             if (setBannedBy === undefined) {
-              return undefined
+              return undefined;
             }
             switch (meta.type) {
               case "simple":
@@ -42,13 +42,13 @@ export function CabSet() {
               case "startgg":
                 return meta.entrants[setBannedBy].name || undefined;
             }
-          })()
+          })();
 
           return (
             <div key={drawing.id}>
               <h1 className={styles.title}>
-                {drawing.meta.title} [Set {drawing.setNumber}/{drawing.totalSets}]
-                {" "}
+                {drawing.meta.title} [Set {drawing.setNumber}/
+                {drawing.totalSets}]{" "}
                 {drawing.setBannedBy !== undefined && (
                   <CardLabel
                     playerIdx={drawing.setBannedBy}
@@ -61,7 +61,7 @@ export function CabSet() {
               </h1>
               <ChartsOnly key={drawing.id} drawingId={drawing.id} />
             </div>
-          )
+          );
         })}
       </div>
     </div>
