@@ -3,13 +3,14 @@ import { useAppDispatch, useAppState } from "../state/store";
 import { eventSlice, StringSlug } from "../state/event.slice";
 
 import styles from "./strings.css";
-import { Add, BanCircle, Edit } from "@blueprintjs/icons";
+import { Add, BanCircle, Duplicate, Edit } from "@blueprintjs/icons";
 import {
   Dialog,
   DialogBody,
   DialogFooter,
   OverlayToaster,
 } from "@blueprintjs/core";
+import { copyPlainTextToClipboard } from "../utils/share";
 
 export function Strings() {
   const stringsState = useAppState((s) => s.event.streamDashboard.strings);
@@ -145,6 +146,29 @@ export function Strings() {
     };
   }, []);
 
+  const handleCopyStreamStringSource = useCallback(
+    (stringIndex: number) => {
+      return async () => {
+        const slug = strings[stringIndex].slug;
+        if (!slug) {
+          return;
+        }
+
+        const sourcePath = `${window.location.pathname}/source/string/${slug}`;
+        const sourceUrl = new URL(sourcePath, window.location.href);
+        copyPlainTextToClipboard(sourceUrl.href);
+
+        const toaster = await OverlayToaster.createAsync({ position: "top" });
+        toaster.show({
+          message: `String "${slug}" copied to clipboard.`,
+          intent: "success",
+          timeout: 5000,
+        });
+      };
+    },
+    [strings],
+  );
+
   return (
     <>
       <form style={{ minWidth: 800 }} onSubmit={handleSubmit}>
@@ -156,10 +180,10 @@ export function Strings() {
                 {slug}{" "}
                 <button
                   type="button"
-                  onClick={() => setEditedSlug({ slug, index })}
+                  onClick={handleCopyStreamStringSource(index)}
                   tabIndex={-1}
                 >
-                  <Edit />
+                  <Duplicate />
                 </button>{" "}
                 <button
                   type="button"
@@ -167,6 +191,13 @@ export function Strings() {
                   tabIndex={-1}
                 >
                   <BanCircle />
+                </button>{" "}
+                <button
+                  type="button"
+                  onClick={() => setEditedSlug({ slug, index })}
+                  tabIndex={-1}
+                >
+                  <Edit />
                 </button>
               </div>
               <input value={value} onChange={handleValueChange(index)} />

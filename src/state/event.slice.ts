@@ -55,7 +55,6 @@ const initialState: EventState = {
         isEliminated: false,
       },
     ],
-
     strings: [
       {
         slug: "up-next",
@@ -68,6 +67,10 @@ const initialState: EventState = {
       {
         slug: "commentator-2",
         value: "Mr3Dimensional",
+      },
+      {
+        slug: "intermission",
+        value: "We'll be right back!",
       },
     ],
   },
