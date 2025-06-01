@@ -18,7 +18,7 @@ export function Strings() {
     (stringSlug) => stringSlug.slug,
   );
 
-  const [strings, setStrings] = useState<StringSlug[]>(stringsState);
+  const [strings, setStrings] = useState<StringSlug[]>(stringsState ?? []);
   const [editedSlug, setEditedSlug] = useState<{
     slug: string;
     index: number;
