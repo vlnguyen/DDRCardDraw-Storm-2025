@@ -116,6 +116,13 @@ const router = createBrowserRouter([
           return { Component: UpNext };
         },
       },
+      {
+        path: "string/:slug",
+        lazy: async () => {
+          const { StreamString } = await import("./obs-sources/text");
+          return { Component: StreamString };
+        },
+      },
     ],
   },
   {

@@ -1,0 +1,11 @@
+.strings {
+  display: grid;
+  grid-template-columns: 1fr 2fr;
+  align-items: center;
+  gap: 8px 8px;
+  padding-bottom: 8px;
+}
+
+.slug {
+  text-align: right;
+}
