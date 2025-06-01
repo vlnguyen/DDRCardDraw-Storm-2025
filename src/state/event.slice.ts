@@ -58,7 +58,7 @@ const initialState: EventState = {
 
     strings: [
       {
-        slug: "up-next-text",
+        slug: "up-next",
         value: "Wave 5B - VincentITG, TommyDoesntMiss, VivaLaMoo, Twix",
       },
       {
