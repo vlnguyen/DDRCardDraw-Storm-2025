@@ -13,6 +13,9 @@ import {
 import { copyPlainTextToClipboard } from "../utils/share";
 
 export function Strings() {
+  const appState = useAppState((s) => s);
+  console.log({ appState });
+
   const stringsState = useAppState((s) => s.event.streamDashboard.strings);
   console.log({ stringsState });
 
