@@ -16,9 +16,14 @@ export interface PoolPlayer {
   isEliminated: boolean;
 }
 
+export interface StringSlug {
+  slug: string;
+  value: string;
+}
+
 interface StreamDashboard {
   poolPlayers: PoolPlayer[];
-  upNextText: string;
+  strings: StringSlug[];
 }
 
 interface EventState {
@@ -50,7 +55,24 @@ const initialState: EventState = {
         isEliminated: false,
       },
     ],
-    upNextText: "Wave 5B - VincentITG, TommyDoesntMiss, VivaLaMoo, Twix",
+    strings: [
+      {
+        slug: "up-next",
+        value: "Wave 5B - VincentITG, TommyDoesntMiss, VivaLaMoo, Twix",
+      },
+      {
+        slug: "commentator-1",
+        value: "Kenji",
+      },
+      {
+        slug: "commentator-2",
+        value: "Mr3Dimensional",
+      },
+      {
+        slug: "intermission",
+        value: "We'll be right back!",
+      },
+    ],
   },
 };
 
@@ -90,8 +112,8 @@ export const eventSlice = createSlice({
     updatePoolPlayers(state, action: PayloadAction<PoolPlayer[]>) {
       state.streamDashboard.poolPlayers = action.payload;
     },
-    updateUpNextText(state, action: PayloadAction<{ upNextText: string }>) {
-      state.streamDashboard.upNextText = action.payload.upNextText;
+    updateStrings(state, action: PayloadAction<StringSlug[]>) {
+      state.streamDashboard.strings = action.payload;
     },
   },
   selectors: {

@@ -8,6 +8,7 @@ import { urqlClient } from "../startgg-gql";
 import { store } from "../state/store";
 import { PoolsScores } from "./pools-scores";
 import { UpNext } from "./current-time";
+import { Strings } from "./strings";
 
 import styles from "./stream-dashboard.css";
 
@@ -40,6 +41,11 @@ export function StreamDashboard() {
             <DashboardItem>
               <PoolsScores />
             </DashboardItem>
+            <div style={{ display: "flex", gap: 8 }}>
+              <DashboardItem>
+                <Strings />
+              </DashboardItem>
+            </div>
             <div style={{ display: "flex", gap: 8 }}>
               <DashboardItem>
                 <UpNext />

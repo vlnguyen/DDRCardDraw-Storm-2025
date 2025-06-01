@@ -95,9 +95,18 @@ export function CurrentTime() {
   return <h1>{time}</h1>;
 }
 
-export function UpNext() {
-  const upNextText = useAppState(
-    (state) => state.event.streamDashboard.upNextText,
-  );
-  return <h1>{upNextText}</h1>;
+export function StreamString() {
+  const params = useParams<{ slug: string }>();
+  const strings = useAppState((s) => s.event.streamDashboard.strings);
+
+  if (!params.slug) {
+    return null;
+  }
+
+  const currentString = strings.find((string) => string.slug === params.slug);
+  if (!currentString) {
+    return null;
+  }
+
+  return <h1>{currentString.value}</h1>;
 }

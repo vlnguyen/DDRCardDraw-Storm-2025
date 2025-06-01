@@ -192,11 +192,17 @@ export function PoolsScores() {
     });
   }, []);
 
+  const numPlayers = poolPlayers.length;
+
   return (
     <form onSubmit={handleSubmit}>
       <h1>
         Pools Scores{" "}
-        <button type="button" onClick={handleCopyPoolsScoresSource}>
+        <button
+          type="button"
+          onClick={handleCopyPoolsScoresSource}
+          tabIndex={-1}
+        >
           <Duplicate />
         </button>
       </h1>
@@ -221,7 +227,11 @@ export function PoolsScores() {
                 {numSongs > 1 && (
                   <>
                     {" "}
-                    <button type="button" onClick={handleRemoveScore(index)}>
+                    <button
+                      type="button"
+                      onClick={handleRemoveScore(index)}
+                      tabIndex={-1}
+                    >
                       <BanCircle />
                     </button>
                   </>
@@ -230,7 +240,7 @@ export function PoolsScores() {
             ))}
             <th>
               Add Score{" "}
-              <button type="button" onClick={handleAddScore}>
+              <button type="button" onClick={handleAddScore} tabIndex={-1}>
                 <Add />
               </button>
             </th>
@@ -241,24 +251,27 @@ export function PoolsScores() {
             ({ playerName, scores, isEliminated }, playerIndex) => (
               <tr key={playerIndex}>
                 <td className={styles.buttonContainer}>
-                  {poolPlayers.length > 1 && (
+                  {numPlayers > 1 && (
                     <>
                       <button
                         type="button"
                         onClick={handleCopyPlayerNameSource(playerIndex)}
+                        tabIndex={-1}
                       >
                         <Duplicate />
                       </button>{" "}
                       <button
                         type="button"
                         onClick={handleRemovePlayer(playerIndex)}
+                        tabIndex={-1}
                       >
                         <BanCircle />
                       </button>{" "}
                       <button
                         type="button"
                         onClick={handleMovePlayer(playerIndex, "down")}
-                        disabled={playerIndex === poolPlayers.length - 1}
+                        disabled={playerIndex === numPlayers - 1}
+                        tabIndex={-1}
                       >
                         <ArrowDown />
                       </button>{" "}
@@ -266,6 +279,7 @@ export function PoolsScores() {
                         type="button"
                         onClick={handleMovePlayer(playerIndex, "up")}
                         disabled={playerIndex === 0}
+                        tabIndex={-1}
                       >
                         <ArrowUp />
                       </button>
@@ -276,6 +290,7 @@ export function PoolsScores() {
                   <input
                     value={playerName}
                     onChange={handleNameChange(playerIndex)}
+                    tabIndex={0 * numPlayers + playerIndex + 1}
                   />
                 </td>
                 <td>
@@ -283,6 +298,7 @@ export function PoolsScores() {
                     type="checkbox"
                     checked={isEliminated}
                     onChange={handleEliminatedChange(playerIndex)}
+                    tabIndex={-1}
                   />
                 </td>
                 {scores.map((score, scoreIndex) => (
@@ -291,6 +307,7 @@ export function PoolsScores() {
                       type="number"
                       value={score}
                       onChange={handleScoreChange(playerIndex, scoreIndex)}
+                      tabIndex={(scoreIndex + 1) * numPlayers + playerIndex + 1}
                     />
                   </td>
                 ))}
@@ -302,7 +319,7 @@ export function PoolsScores() {
       <div>
         <b>
           Add Player{" "}
-          <button type="button" onClick={handleAddPlayer}>
+          <button type="button" onClick={handleAddPlayer} tabIndex={-1}>
             <Add />
           </button>
         </b>

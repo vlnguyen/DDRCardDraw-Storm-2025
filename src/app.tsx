@@ -110,10 +110,10 @@ const router = createBrowserRouter([
         },
       },
       {
-        path: "up-next",
+        path: "string/:slug",
         lazy: async () => {
-          const { UpNext } = await import("./obs-sources/text");
-          return { Component: UpNext };
+          const { StreamString } = await import("./obs-sources/text");
+          return { Component: StreamString };
         },
       },
     ],

@@ -1,6 +1,7 @@
 .poolsScoresTable {
   table-layout: fixed;
   text-align: left;
+  padding-bottom: 8px;
 }
 
 .scoreCol {
