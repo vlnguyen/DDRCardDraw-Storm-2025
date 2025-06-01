@@ -14,10 +14,13 @@ import { copyPlainTextToClipboard } from "../utils/share";
 
 export function Strings() {
   const stringsState = useAppState((s) => s.event.streamDashboard.strings);
+  console.log({ stringsState });
+
   const existingSlugs = stringsState.map((stringSlug) => stringSlug.slug);
+  console.log({ existingSlugs });
 
   const [strings, setStrings] = useState<StringSlug[]>(stringsState);
-  console.log({ stringsState, existingSlugs, strings });
+  console.log({ strings });
 
   const [editedSlug, setEditedSlug] = useState<{
     slug: string;
