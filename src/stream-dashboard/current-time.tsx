@@ -68,7 +68,11 @@ export function UpNext() {
       <h1>Up Next</h1>
       <div style={{ display: "flex", flexDirection: "column", gap: 8 }}>
         <div style={{ display: "flex", gap: 8, alignItems: "center" }}>
-          <button type="button" onClick={handleCopyCurrentTimeSource}>
+          <button
+            type="button"
+            onClick={handleCopyCurrentTimeSource}
+            tabIndex={-1}
+          >
             <Duplicate />
           </button>
           <div>
@@ -76,7 +80,7 @@ export function UpNext() {
           </div>
         </div>
         <div style={{ display: "flex", gap: 8 }}>
-          <button type="button" onClick={handleCopyUpNextSource}>
+          <button type="button" onClick={handleCopyUpNextSource} tabIndex={-1}>
             <Duplicate />
           </button>
           <input
@@ -87,7 +91,7 @@ export function UpNext() {
           />
         </div>
         <div>
-          <button>Save</button>
+          <button tabIndex={-1}>Save</button>
         </div>
       </div>
     </form>

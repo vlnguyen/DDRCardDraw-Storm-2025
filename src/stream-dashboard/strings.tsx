@@ -176,13 +176,13 @@ export function Strings() {
         <div>
           <b>
             Add Slug{" "}
-            <button type="button" onClick={handleAddSlug}>
+            <button type="button" onClick={handleAddSlug} tabIndex={-1}>
               <Add />
             </button>
           </b>
         </div>
         <div>
-          <button>Save</button>
+          <button tabIndex={-1}>Save</button>
         </div>
       </form>
       <Dialog
@@ -206,7 +206,11 @@ export function Strings() {
           </DialogBody>
           <DialogFooter
             minimal
-            actions={<button type="submit">Submit</button>}
+            actions={
+              <button type="submit" tabIndex={-1}>
+                Submit
+              </button>
+            }
           />
         </form>
       </Dialog>
