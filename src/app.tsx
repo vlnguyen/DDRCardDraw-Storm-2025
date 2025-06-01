@@ -110,13 +110,6 @@ const router = createBrowserRouter([
         },
       },
       {
-        path: "up-next",
-        lazy: async () => {
-          const { UpNext } = await import("./obs-sources/text");
-          return { Component: UpNext };
-        },
-      },
-      {
         path: "string/:slug",
         lazy: async () => {
           const { StreamString } = await import("./obs-sources/text");

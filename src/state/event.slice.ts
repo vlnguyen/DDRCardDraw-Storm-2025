@@ -23,7 +23,6 @@ export interface StringSlug {
 
 interface StreamDashboard {
   poolPlayers: PoolPlayer[];
-  upNextText: string;
   strings: StringSlug[];
 }
 
@@ -56,8 +55,12 @@ const initialState: EventState = {
         isEliminated: false,
       },
     ],
-    upNextText: "Wave 5B - VincentITG, TommyDoesntMiss, VivaLaMoo, Twix",
+
     strings: [
+      {
+        slug: "up-next-text",
+        value: "Wave 5B - VincentITG, TommyDoesntMiss, VivaLaMoo, Twix",
+      },
       {
         slug: "commentator-1",
         value: "Kenji",
@@ -105,9 +108,6 @@ export const eventSlice = createSlice({
     },
     updatePoolPlayers(state, action: PayloadAction<PoolPlayer[]>) {
       state.streamDashboard.poolPlayers = action.payload;
-    },
-    updateUpNextText(state, action: PayloadAction<{ upNextText: string }>) {
-      state.streamDashboard.upNextText = action.payload.upNextText;
     },
     updateStrings(state, action: PayloadAction<StringSlug[]>) {
       state.streamDashboard.strings = action.payload;
