@@ -118,66 +118,82 @@ function CabSummary({ cab }: { cab: CabInfo }) {
   const sourcesMenu = (
     <Menu>
       <MenuItem icon={<MobileVideo />} text="OBS Sources">
-        <MenuItem
-          icon={<Layers />}
-          text="Cards (Match)"
-          onClick={copySource}
-          data-source="cards"
-        />
-        <MenuItem
-          icon={<Layers />}
-          text="Cards (Set)"
-          onClick={copySource}
-          data-source="cards-set"
-        />
-        <MenuItem
-          icon={<Font />}
-          text="Title"
-          onClick={copySource}
-          data-source="title"
-        />
-        <MenuItem
-          icon={<People />}
-          text="All Players"
-          onClick={copySource}
-          data-source="players"
-        />
-        <MenuItem
-          icon={<Person />}
-          text="Player 1"
-          onClick={copySource}
-          data-source="p1"
-        />
-        <MenuItem
-          icon={<Person />}
-          text="Player 1 Name"
-          onClick={copySource}
-          data-source="p1-name"
-        />
-        <MenuItem
-          icon={<Person />}
-          text="Player 1 Score"
-          onClick={copySource}
-          data-source="p1-score"
-        />
-        <MenuItem
-          icon={<Person />}
-          text="Player 2"
-          onClick={copySource}
-          data-source="p2"
-        />
-        <MenuItem
-          icon={<Person />}
-          text="Player 2 Name"
-          onClick={copySource}
-          data-source="p2-name"
-        />
-        <MenuItem
-          icon={<Person />}
-          text="Player 2 Score"
-          onClick={copySource}
-          data-source="p2-score"
-        />
+        <MenuItem icon={<MobileVideo />} text="Match">
+          <MenuItem
+            icon={<Layers />}
+            text="Cards"
+            onClick={copySource}
+            data-source="cards"
+          />
+          <MenuItem
+            icon={<Font />}
+            text="Title"
+            onClick={copySource}
+            data-source="title"
+          />
+          <MenuItem
+            icon={<People />}
+            text="All Players"
+            onClick={copySource}
+            data-source="players"
+          />
+          <MenuItem
+            icon={<Person />}
+            text="Player 1"
+            onClick={copySource}
+            data-source="p1"
+          />
+          <MenuItem
+            icon={<Person />}
+            text="Player 1 Name"
+            onClick={copySource}
+            data-source="p1-name"
+          />
+          <MenuItem
+            icon={<Person />}
+            text="Player 1 Score"
+            onClick={copySource}
+            data-source="p1-score"
+          />
+          <MenuItem
+            icon={<Person />}
+            text="Player 2"
+            onClick={copySource}
+            data-source="p2"
+          />
+          <MenuItem
+            icon={<Person />}
+            text="Player 2 Name"
+            onClick={copySource}
+            data-source="p2-name"
+          />
+          <MenuItem
+            icon={<Person />}
+            text="Player 2 Score"
+            onClick={copySource}
+            data-source="p2-score"
+          />
+        </MenuItem>
+        <MenuItem icon={<MobileVideo />} text="Set">
+          <MenuItem
+            icon={<Layers />}
+            text="Cards"
+            onClick={copySource}
+            data-source="cards-set"
+          />
+          <MenuItem
+            icon={<Font />}
+            text="Title"
+            onClick={copySource}
+            data-source="title-set"
+          />
+          <MenuItem
+            icon={<People />}
+            text="All Players"
+            onClick={copySource}
+            data-source="players-set"
+          />
+        </MenuItem>
       </MenuItem>
 
       <MenuItem icon={<Remove />} text="Remove Cab" onClick={removeCab} />
