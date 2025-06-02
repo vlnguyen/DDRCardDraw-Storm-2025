@@ -112,6 +112,11 @@ export function PoolPlayerName() {
     return null;
   }
 
+  const poolPlayer = poolPlayers[poolPlayerIndex];
+  if (!poolPlayer || poolPlayer.isDisabled) {
+    return null;
+  }
+
   const playerNameColor = classNames([
     styles[`poolPlayer${poolPlayerIndex}`],
     {
@@ -120,11 +125,7 @@ export function PoolPlayerName() {
     },
   ]);
 
-  return (
-    <h1 className={playerNameColor}>
-      {poolPlayers[poolPlayerIndex].playerName}
-    </h1>
-  );
+  return <h1 className={playerNameColor}>{poolPlayer.playerName}</h1>;
 }
 
 export function CurrentTime() {
