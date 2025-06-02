@@ -14,6 +14,7 @@ export interface PoolPlayer {
   playerName: string;
   scores: number[];
   isEliminated: boolean;
+  isDisabled: boolean;
 }
 
 export interface StringSlug {
@@ -45,14 +46,28 @@ const initialState: EventState = {
   streamDashboard: {
     poolPlayers: [
       {
-        playerName: "VincentITG",
-        scores: [9975, 9684, 9789, 9854],
+        playerName: "VivaLaMoo",
+        scores: [9987, 9867, 9748, 10000],
         isEliminated: false,
+        isDisabled: false,
       },
       {
-        playerName: "BlizzrdBall",
-        scores: [9674, 9739, 9485, 9769],
+        playerName: "Twix",
+        scores: [9964, 9834, 9820, 9995],
         isEliminated: false,
+        isDisabled: false,
+      },
+      {
+        playerName: "VincentITG",
+        scores: [9856, 9615, 9534, 9910],
+        isEliminated: false,
+        isDisabled: false,
+      },
+      {
+        playerName: "TommyDoesntMiss",
+        scores: [9829, 9614, 9587, 9943],
+        isEliminated: false,
+        isDisabled: false,
       },
     ],
     strings: [
