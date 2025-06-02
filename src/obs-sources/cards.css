@@ -11,6 +11,7 @@
 
 .cardsBracketDrawsContainer {
   padding: 16px 8px;
+  background-color: rgba(0, 0, 0, 50);
 }
 
 .title {
