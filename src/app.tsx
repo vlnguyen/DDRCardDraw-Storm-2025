@@ -144,10 +144,24 @@ const router = createBrowserRouter([
         },
       },
       {
+        path: "title-set",
+        lazy: async () => {
+          const { CabTitle } = await import("./obs-sources/text");
+          return { Component: () => <CabTitle type="set" /> };
+        },
+      },
+      {
         path: "players",
         lazy: async () => {
           const { CabPlayers } = await import("./obs-sources/text");
           return { Component: CabPlayers };
+        },
+      },
+      {
+        path: "players-set",
+        lazy: async () => {
+          const { CabPlayers } = await import("./obs-sources/text");
+          return { Component: () => <CabPlayers type="set" /> };
         },
       },
       {

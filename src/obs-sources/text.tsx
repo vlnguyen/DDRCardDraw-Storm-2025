@@ -1,5 +1,5 @@
 import { useParams } from "react-router-dom";
-import { drawingSelectors } from "../state/drawings.slice";
+import { drawingSelectors, getSetSelector } from "../state/drawings.slice";
 import { useAppState } from "../state/store";
 import { getAllPlayers, playerNameByIndex } from "../models/Drawing";
 
@@ -7,27 +7,64 @@ import classNames from "classnames";
 import styles from "./text.css";
 import { useCurrentTime } from "../hooks/useCurrentTime";
 
-export function CabTitle() {
+export function CabTitle({ type = "match" }: { type?: "set" | "match" }) {
   const params = useParams<"roomName" | "cabId">();
   const text = useAppState((s) => {
-    const drawingId = s.event.cabs[params.cabId!].activeMatch;
-    if (!drawingId) return null;
-    const drawing = drawingSelectors.selectById(s, drawingId);
-    if (!drawing) return null;
-    return drawing.meta.title;
+    if (type === "match") {
+      const drawingId = s.event.cabs[params.cabId!].activeMatch;
+      if (!drawingId) return null;
+      const drawing = drawingSelectors.selectById(s, drawingId);
+      if (!drawing) return null;
+      return drawing.meta.title;
+    }
+
+    if (type === "set") {
+      const setId = s.event.cabs[params.cabId!].activeSet;
+      if (!setId) {
+        return null;
+      }
+
+      const drawings = getSetSelector(setId)(s);
+      if (!drawings || drawings.length === 0) {
+        return null;
+      }
+
+      return drawings[0].meta.title;
+    }
   });
   return <h1>{text}</h1>;
 }
 
-export function CabPlayers() {
+export function CabPlayers({ type = "match" }: { type?: "set" | "match" }) {
   const params = useParams<"roomName" | "cabId">();
   const text = useAppState((s) => {
-    const drawingId = s.event.cabs[params.cabId!].activeMatch;
-    if (!drawingId) return null;
-    const drawing = drawingSelectors.selectById(s, drawingId);
-    if (!drawing) return null;
-    return getAllPlayers(drawing).join(", ");
+    if (type === "match") {
+      const drawingId = s.event.cabs[params.cabId!].activeMatch;
+      if (!drawingId) return null;
+      const drawing = drawingSelectors.selectById(s, drawingId);
+      if (!drawing) return null;
+      return getAllPlayers(drawing).join(", ");
+    }
+
+    if (type === "set") {
+      const setId = s.event.cabs[params.cabId!].activeSet;
+      if (!setId) {
+        return null;
+      }
+
+      const drawings = getSetSelector(setId)(s);
+      if (!drawings) {
+        return null;
+      }
+
+      const players = getAllPlayers(drawings[0]);
+      if (players.length === 2) {
+        return `${players[0]} vs. ${players[1]}`;
+      }
+      return players.join(", ");
+    }
   });
+
   return <h1>{text}</h1>;
 }
 

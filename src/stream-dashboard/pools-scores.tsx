@@ -111,9 +111,10 @@ export function PoolsScores() {
       return [
         ...prevPoolPlayers,
         {
-          playerName: "Player",
+          playerName: `Player ${prevPoolPlayers.length + 1}`,
           scores: Array(numSongs).fill(0),
           isEliminated: false,
+          isDisabled: false,
         },
       ];
     });
@@ -137,6 +138,22 @@ export function PoolsScores() {
             return {
               ...prevPlayer,
               isEliminated: !prevPlayer.isEliminated,
+            };
+          }
+          return prevPlayer;
+        }),
+      );
+    };
+  }, []);
+
+  const handleDisabledChange = useCallback((poolPlayerIndex: number) => {
+    return () => {
+      setPoolPlayers((prevPoolPlayers) =>
+        prevPoolPlayers.map((prevPlayer, prevPlayerIndex) => {
+          if (prevPlayerIndex === poolPlayerIndex) {
+            return {
+              ...prevPlayer,
+              isDisabled: !prevPlayer.isDisabled,
             };
           }
           return prevPlayer;
@@ -211,6 +228,7 @@ export function PoolsScores() {
           <col />
           <col />
           <col />
+          <col />
           {Array.from({ length: numSongs }).map((_, scoreIndex) => (
             <col key={scoreIndex} className={styles.scoreCol} />
           ))}
@@ -221,6 +239,7 @@ export function PoolsScores() {
             <th></th>
             <th className={styles.playerNameColumn}>Player</th>
             <th>💀</th>
+            <th>🚫</th>
             {Array.from({ length: numSongs }).map((_, index) => (
               <th key={index}>
                 Score {index + 1}
@@ -248,7 +267,7 @@ export function PoolsScores() {
         </thead>
         <tbody>
           {poolPlayers.map(
-            ({ playerName, scores, isEliminated }, playerIndex) => (
+            ({ playerName, scores, isEliminated, isDisabled }, playerIndex) => (
               <tr key={playerIndex}>
                 <td className={styles.buttonContainer}>
                   {numPlayers > 1 && (
@@ -298,6 +317,14 @@ export function PoolsScores() {
                     type="checkbox"
                     checked={isEliminated}
                     onChange={handleEliminatedChange(playerIndex)}
+                    tabIndex={-1}
+                  />
+                </td>
+                <td>
+                  <input
+                    type="checkbox"
+                    checked={isDisabled}
+                    onChange={handleDisabledChange(playerIndex)}
                     tabIndex={-1}
                   />
                 </td>

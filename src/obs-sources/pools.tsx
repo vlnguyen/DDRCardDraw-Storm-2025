@@ -12,8 +12,9 @@ interface PoolPlayerResult extends PoolPlayer {
 
 function getPoolPlayersResults(poolPlayers: PoolPlayer[]): PoolPlayerResult[] {
   const numSongs = poolPlayers[0].scores.length;
-  const poolPlayersResults: PoolPlayerResult[] = poolPlayers.map(
-    (poolPlayer) => {
+  const poolPlayersResults: PoolPlayerResult[] = poolPlayers
+    .filter((poolPlayer) => !poolPlayer.isDisabled)
+    .map((poolPlayer) => {
       const scoresSum = poolPlayer.scores.reduce(
         (sum, score) => sum + score,
         0,
@@ -24,8 +25,7 @@ function getPoolPlayersResults(poolPlayers: PoolPlayer[]): PoolPlayerResult[] {
         wins: 0,
         rank: 0,
       };
-    },
-  );
+    });
 
   for (let songIndex = 0; songIndex < numSongs; songIndex++) {
     poolPlayersResults.sort(
