@@ -40,6 +40,17 @@ export function PoolsScores() {
     [dispatch, poolPlayers],
   );
 
+  const handleReset = useCallback(() => {
+    setPoolPlayers((prevPoolPlayers) =>
+      prevPoolPlayers.map((_, poolPlayerIndex) => ({
+        playerName: `Player ${poolPlayerIndex + 1}`,
+        scores: Array(numSongs).fill(0),
+        isEliminated: false,
+        isDisabled: false,
+      })),
+    );
+  }, [numSongs]);
+
   const handleNameChange = useCallback((poolPlayerIndex: number) => {
     return (e: React.ChangeEvent<HTMLInputElement>) => {
       setPoolPlayers((prevPoolPlayers) =>
@@ -351,8 +362,13 @@ export function PoolsScores() {
           </button>
         </b>
       </div>
-      <div>
+      <div
+        style={{ display: "flex", flexDirection: "row", gap: 8, paddingTop: 8 }}
+      >
         <button>Save</button>
+        <button type="button" onClick={handleReset}>
+          Reset
+        </button>
       </div>
     </form>
   );
