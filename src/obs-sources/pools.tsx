@@ -5,9 +5,13 @@ import { useAppState } from "../state/store";
 import styles from "./pools.css";
 
 interface PoolPlayerResult extends PoolPlayer {
-  wins: number;
+  wins: number[];
   rank: number;
   averageEx: number;
+}
+
+function sum(prevSum: number, currentValue: number): number {
+  return prevSum + currentValue;
 }
 
 function getPoolPlayersResults(poolPlayers: PoolPlayer[]): PoolPlayerResult[] {
@@ -22,7 +26,7 @@ function getPoolPlayersResults(poolPlayers: PoolPlayer[]): PoolPlayerResult[] {
       return {
         ...poolPlayer,
         averageEx: scoresSum / poolPlayer.scores.length,
-        wins: 0,
+        wins: [],
         rank: 0,
       };
     });
@@ -44,16 +48,19 @@ function getPoolPlayersResults(poolPlayers: PoolPlayer[]): PoolPlayerResult[] {
       playerIndex++
     ) {
       // ties are broken by giving players points for each player they tied with (highest points)
-      poolPlayersResults[playerIndex].wins +=
-        // exclude oneself from their win count
+      const wins =
         allSongScores.filter(
           (songScore) =>
             poolPlayersResults[playerIndex].scores[songIndex] >= songScore,
+          // exclude oneself from their win count
         ).length - 1;
+      poolPlayersResults[playerIndex].wins.push(wins);
     }
   }
 
-  poolPlayersResults.sort((a, b) => b.wins - a.wins);
+  poolPlayersResults.sort(
+    (a, b) => b.wins.reduce(sum, 0) - a.wins.reduce(sum, 0),
+  );
 
   let currentWinTarget: number | null = null;
   for (
@@ -66,19 +73,19 @@ function getPoolPlayersResults(poolPlayers: PoolPlayer[]): PoolPlayerResult[] {
 
     if (currentWinTarget === null) {
       poolPlayerResult.rank = expectedRank;
-      currentWinTarget = poolPlayerResult.wins;
-    } else if (currentWinTarget === poolPlayerResult.wins) {
+      currentWinTarget = poolPlayerResult.wins.reduce(sum, 0);
+    } else if (currentWinTarget === poolPlayerResult.wins.reduce(sum, 0)) {
       const prevPoolPlayerResult =
         poolPlayersResults[poolPlayerResultIndex - 1];
       poolPlayerResult.rank = prevPoolPlayerResult.rank;
     } else {
       poolPlayerResult.rank = expectedRank;
-      currentWinTarget = poolPlayerResult.wins;
+      currentWinTarget = poolPlayerResult.wins.reduce(sum, 0);
     }
   }
 
   poolPlayersResults.sort((a, b) => {
-    const sortByWins = b.wins - a.wins;
+    const sortByWins = b.wins.reduce(sum, 0) - a.wins.reduce(sum, 0);
     if (sortByWins !== 0) {
       return sortByWins;
     }
@@ -141,10 +148,14 @@ export function PoolsScoresSource() {
                   </b>
                 </td>
                 {scores.map((score, scoreIndex) => (
-                  <td key={scoreIndex}>{getDisplayScore(score)}</td>
+                  <td key={scoreIndex}>
+                    {getDisplayScore(score)}
+                    {wins[scoreIndex] > 0 && ` (+${wins[scoreIndex]})`}
+                  </td>
                 ))}
                 <td>
-                  <b>{wins} wins</b> (<i>Avg. {getDisplayScore(averageEx)}</i>)
+                  <b>{wins.reduce(sum, 0)} wins</b> (
+                  <i>Avg. {getDisplayScore(averageEx)}</i>)
                 </td>
               </tr>
             );
