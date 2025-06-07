@@ -189,6 +189,29 @@ export const drawingsSlice = createSlice({
         .filter((d) => d.setId === drawing.setId || d.id === drawingId)
         .forEach((d) => (d.meta.title = title));
     },
+    setPlayerName(
+      state,
+      action: PayloadAction<{ drawingId: string; pIdx: number; name: string }>,
+    ) {
+      const { drawingId, pIdx, name } = action.payload;
+      const drawing = state.entities[drawingId];
+      if (!drawing) {
+        return;
+      }
+
+      Object.values(state.entities)
+        .filter((d) => d.setId === drawing.setId || d.id === drawingId)
+        .forEach((d) => {
+          switch (d.meta.type) {
+            case "simple":
+              d.meta.players[pIdx] = name;
+              break;
+            case "startgg":
+              d.meta.entrants[pIdx].name = name;
+              break;
+          }
+        });
+    },
   },
   selectors: {
     haveDrawings(state) {
