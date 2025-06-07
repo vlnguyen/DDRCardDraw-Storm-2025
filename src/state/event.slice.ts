@@ -20,6 +20,7 @@ export interface PoolPlayer {
 export interface StringSlug {
   slug: string;
   value: string;
+  stretch?: "title" | "dialog";
 }
 
 interface StreamDashboard {

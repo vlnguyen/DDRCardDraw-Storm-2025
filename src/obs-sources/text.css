@@ -21,3 +21,14 @@
 .poolPlayerOdd {
   color: #16045d;
 }
+
+.stretchTitle {
+  transform: scaleX(1.1) scaleY(0.9);
+  transform-origin: left;
+}
+
+.stretchDialog {
+  transform: scaleY(0.9);
+  transform-origin: left;
+  letter-spacing: -50;
+}

@@ -138,9 +138,10 @@ function AddCardButton() {
       <Button
         minimal
         icon={<NewLayer />}
-        onClick={() => {
-          dispatch(createPlusOneChart(drawingId));
-        }}
+        onClick={() =>
+          confirm("Are you sure you want to draw one more chart?") &&
+          dispatch(createPlusOneChart(drawingId))
+        }
       />
     </Tooltip>
   );

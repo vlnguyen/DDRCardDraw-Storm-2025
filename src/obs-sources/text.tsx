@@ -1,11 +1,12 @@
 import { useParams } from "react-router-dom";
+import classNames from "classnames";
+
 import { drawingSelectors, getSetSelector } from "../state/drawings.slice";
 import { useAppState } from "../state/store";
 import { getAllPlayers, playerNameByIndex } from "../models/Drawing";
-
-import classNames from "classnames";
-import styles from "./text.css";
 import { useCurrentTime } from "../hooks/useCurrentTime";
+
+import styles from "./text.css";
 
 export function CabTitle({ type = "match" }: { type?: "set" | "match" }) {
   const params = useParams<"roomName" | "cabId">();
@@ -146,5 +147,14 @@ export function StreamString() {
     return null;
   }
 
-  return <h1>{currentString.value}</h1>;
+  return (
+    <h1
+      className={classNames({
+        [styles.stretchDialog]: currentString.stretch === "dialog",
+        [styles.stretchTitle]: currentString.stretch === "title",
+      })}
+    >
+      {currentString.value}
+    </h1>
+  );
 }

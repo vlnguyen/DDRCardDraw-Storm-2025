@@ -1,8 +1,8 @@
 import { useCallback, Fragment } from "react";
 import { useDrawing } from "../drawing-context";
 import styles from "./drawing-labels.css";
-import { Icon } from "@blueprintjs/core";
-import { CaretLeft, CaretRight } from "@blueprintjs/icons";
+import { Button, Icon } from "@blueprintjs/core";
+import { CaretLeft, CaretRight, Edit } from "@blueprintjs/icons";
 import { useAtomValue } from "jotai";
 import { showPlayerAndRoundLabels } from "../config-state";
 import { useAppDispatch } from "../state/store";
@@ -11,10 +11,13 @@ import { getAllPlayers } from "../models/Drawing";
 import { CountingSet } from "../utils/counting-set";
 import { SetActions } from "./set-actions";
 import { CardLabel, LabelType } from "../song-card/card-label";
+import { useTextEdit } from "../hooks/useTextEdit";
 
 export function SetLabels() {
   const dispatch = useAppDispatch();
   const showLabels = useAtomValue(showPlayerAndRoundLabels);
+  const [editDialog, openEditDialog] = useTextEdit();
+
   const playerDisplayOrder = useDrawing((d) => d.playerDisplayOrder);
   const meta = useDrawing((d) => d.meta);
 
@@ -50,7 +53,7 @@ export function SetLabels() {
             ? `${meta.title} [Set ${setNumber}/${totalSets}]`
             : meta.title}
         </div>
-        {setNumber && <SetActions />}
+        <SetActions />
       </div>
       {setBannedBy !== undefined && (
         <CardLabel
@@ -69,19 +72,42 @@ export function SetLabels() {
       )}
 
       <div className={styles.players}>
-        {allPlayers.map((name, idx) => {
+        {allPlayers.map((name, pIdx) => {
           const winCount = winsPerPlayer ? (
-            <> ({winsPerPlayer.get(playerDisplayOrder[idx])})</>
+            <> ({winsPerPlayer.get(playerDisplayOrder[pIdx])})</>
           ) : null;
           const ret = (
-            <span key={idx}>
+            <span key={pIdx}>
               {name}
               {winCount}
+              {(!setNumber || setNumber === 1) && (
+                <>
+                  {" "}
+                  <Button
+                    variant="minimal"
+                    icon={<Edit />}
+                    onClick={() =>
+                      openEditDialog({
+                        title: "Rename player",
+                        initialValue: name,
+                        onConfirm: (name) =>
+                          dispatch(
+                            drawingsSlice.actions.setPlayerName({
+                              drawingId,
+                              pIdx,
+                              name,
+                            }),
+                          ),
+                      })
+                    }
+                  />
+                </>
+              )}
             </span>
           );
-          if (allPlayers.length === 2 && idx === 0) {
+          if (allPlayers.length === 2 && pIdx === 0) {
             return (
-              <Fragment key={idx}>
+              <Fragment key={pIdx}>
                 {ret}
                 <Versus />
               </Fragment>
@@ -90,6 +116,7 @@ export function SetLabels() {
           return ret;
         })}
       </div>
+      {editDialog}
     </div>
   );
 }
