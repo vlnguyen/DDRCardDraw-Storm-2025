@@ -175,6 +175,20 @@ export const drawingsSlice = createSlice({
       }
       drawing.meta.scoresByEntrant[playerId][chartId] = score;
     },
+    setMetaTitle(
+      state,
+      action: PayloadAction<{ drawingId: string; title: string }>,
+    ) {
+      const { drawingId, title } = action.payload;
+      const drawing = state.entities[drawingId];
+      if (!drawing) {
+        return;
+      }
+
+      Object.values(state.entities)
+        .filter((d) => d.setId === drawing.setId || d.id === drawingId)
+        .forEach((d) => (d.meta.title = title));
+    },
   },
   selectors: {
     haveDrawings(state) {

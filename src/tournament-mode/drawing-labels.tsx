@@ -50,7 +50,7 @@ export function SetLabels() {
             ? `${meta.title} [Set ${setNumber}/${totalSets}]`
             : meta.title}
         </div>
-        {setNumber && <SetActions />}
+        <SetActions />
       </div>
       {setBannedBy !== undefined && (
         <CardLabel
