@@ -1,24 +1,26 @@
 import React, { useCallback, useState } from "react";
-import { useAppDispatch, useAppState } from "../state/store";
-import { eventSlice, StringSlug } from "../state/event.slice";
-
-import styles from "./strings.css";
 import { Add, BanCircle, Duplicate, Edit } from "@blueprintjs/icons";
 import {
+  Button,
   Dialog,
   DialogBody,
   DialogFooter,
+  HTMLSelect,
   OverlayToaster,
 } from "@blueprintjs/core";
+
+import { useAppDispatch, useAppState } from "../state/store";
+import { eventSlice, StringSlug } from "../state/event.slice";
 import { copyPlainTextToClipboard } from "../utils/share";
+
+import styles from "./strings.css";
 
 export function Strings() {
   const stringsState = useAppState((s) => s.event.streamDashboard.strings);
-  const existingSlugs = stringsState.map((stringSlug) => stringSlug.slug);
 
   const [strings, setStrings] = useState<StringSlug[]>(stringsState);
   const [editedSlug, setEditedSlug] = useState<{
-    slug: string;
+    value: StringSlug;
     index: number;
   }>();
 
@@ -43,10 +45,13 @@ export function Strings() {
         return;
       }
 
-      if (existingSlugs.includes(editedSlug.slug)) {
+      const existingSlugs = stringsState
+        .filter((_, i) => i !== editedSlug.index)
+        .map((stringSlug) => stringSlug.slug);
+      if (existingSlugs.includes(editedSlug.value.slug)) {
         const toaster = await OverlayToaster.createAsync({ position: "top" });
         toaster.show({
-          message: `Error: Duplicate slug "${editedSlug.slug}"`,
+          message: `Error: Duplicate slug "${editedSlug.value.slug}"`,
           intent: "danger",
           timeout: 5000,
         });
@@ -55,10 +60,7 @@ export function Strings() {
 
       const newStrings = strings.map((prevString, prevStringIndex) => {
         if (prevStringIndex === editedSlug.index) {
-          return {
-            ...prevString,
-            slug: editedSlug.slug,
-          };
+          return editedSlug.value;
         }
         return prevString;
       });
@@ -74,7 +76,7 @@ export function Strings() {
 
       setEditedSlug(undefined);
     },
-    [dispatch, editedSlug, existingSlugs, strings],
+    [dispatch, editedSlug, strings, stringsState],
   );
 
   const handleAddSlug = useCallback(async () => {
@@ -124,7 +126,27 @@ export function Strings() {
       }
       return {
         ...prevEditedSlug,
-        slug: alphanumericValue,
+        value: {
+          ...prevEditedSlug.value,
+          slug: alphanumericValue,
+        },
+      };
+    });
+  };
+
+  const handleStretchEdited = (e: React.ChangeEvent<HTMLSelectElement>) => {
+    setEditedSlug((prevEditedSlug) => {
+      const selectValue = e.target.value as "none" | "dialog" | "title";
+      if (prevEditedSlug === undefined) {
+        return undefined;
+      }
+
+      return {
+        ...prevEditedSlug,
+        value: {
+          ...prevEditedSlug.value,
+          stretch: selectValue === "none" ? undefined : selectValue,
+        },
       };
     });
   };
@@ -173,46 +195,51 @@ export function Strings() {
       <form style={{ minWidth: 800 }} onSubmit={handleSubmit}>
         <h1>Strings</h1>
         <div className={styles.strings}>
-          {strings.map(({ slug, value }, index) => (
+          {strings.map((currentStringSlug, index) => (
             <React.Fragment key={index}>
               <div className={styles.slug}>
-                {slug}{" "}
-                <button
+                {currentStringSlug.slug}{" "}
+                <Button
                   type="button"
                   onClick={handleCopyStreamStringSource(index)}
                   tabIndex={-1}
                 >
                   <Duplicate />
-                </button>{" "}
-                <button
+                </Button>{" "}
+                <Button
                   type="button"
                   onClick={handleDeleteSlug(index)}
                   tabIndex={-1}
                 >
                   <BanCircle />
-                </button>{" "}
-                <button
+                </Button>{" "}
+                <Button
                   type="button"
-                  onClick={() => setEditedSlug({ slug, index })}
+                  onClick={() =>
+                    setEditedSlug({ value: currentStringSlug, index })
+                  }
                   tabIndex={-1}
                 >
                   <Edit />
-                </button>
+                </Button>
               </div>
-              <input value={value} onChange={handleValueChange(index)} />
+              <input
+                value={currentStringSlug.value}
+                onChange={handleValueChange(index)}
+              />
             </React.Fragment>
           ))}
         </div>
         <div>
           <b>
             Add Slug{" "}
-            <button type="button" onClick={handleAddSlug} tabIndex={-1}>
+            <Button type="button" onClick={handleAddSlug} tabIndex={-1}>
               <Add />
-            </button>
+            </Button>
           </b>
         </div>
         <div>
-          <button tabIndex={-1}>Save</button>
+          <Button tabIndex={-1}>Save</Button>
         </div>
       </form>
       <Dialog
@@ -229,17 +256,32 @@ export function Strings() {
               URL slugs may only contain alphanumeric characters and dashes.
             </p>
             <input
-              value={editedSlug?.slug}
+              value={editedSlug?.value.slug}
               onChange={handleSlugEdited}
               autoFocus
             />
+            <p>Text stretching:</p>
+            <HTMLSelect
+              value={editedSlug?.value.stretch}
+              onChange={handleStretchEdited}
+            >
+              <option key="none" value="none">
+                None
+              </option>
+              <option key="dialog" value="dialog">
+                Dialog
+              </option>
+              <option key="title" value="title">
+                Title
+              </option>
+            </HTMLSelect>
           </DialogBody>
           <DialogFooter
             minimal
             actions={
-              <button type="submit" tabIndex={-1}>
+              <Button type="submit" tabIndex={-1}>
                 Submit
-              </button>
+              </Button>
             }
           />
         </form>

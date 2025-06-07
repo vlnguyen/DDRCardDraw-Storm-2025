@@ -9,3 +9,7 @@
 .slug {
   text-align: right;
 }
+
+p {
+  padding-top: 12px;
+}
