@@ -1,4 +1,4 @@
-import { Dialog, DialogBody, DialogFooter } from "@blueprintjs/core";
+import { Button, Dialog, DialogBody, DialogFooter } from "@blueprintjs/core";
 import { useRef, useState } from "react";
 
 export function useTextEdit() {
@@ -45,9 +45,9 @@ export function useTextEdit() {
         <DialogFooter
           minimal
           actions={
-            <button type="submit" tabIndex={-1}>
+            <Button type="submit" tabIndex={-1}>
               Submit
-            </button>
+            </Button>
           }
         />
       </form>

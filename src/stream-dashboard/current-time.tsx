@@ -1,7 +1,7 @@
 import { Duplicate } from "@blueprintjs/icons";
 import { useCurrentTime } from "../hooks/useCurrentTime";
 import { useCallback } from "react";
-import { OverlayToaster } from "@blueprintjs/core";
+import { Button, OverlayToaster } from "@blueprintjs/core";
 import { copyPlainTextToClipboard } from "../utils/share";
 
 export function UpNext() {
@@ -25,13 +25,13 @@ export function UpNext() {
       <h1>Current Time</h1>
       <div style={{ display: "flex", flexDirection: "column", gap: 8 }}>
         <div style={{ display: "flex", gap: 8, alignItems: "center" }}>
-          <button
+          <Button
             type="button"
             onClick={handleCopyCurrentTimeSource}
             tabIndex={-1}
           >
             <Duplicate />
-          </button>
+          </Button>
           <div>
             {time} ({timezone})
           </div>

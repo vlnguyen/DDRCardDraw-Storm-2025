@@ -6,7 +6,7 @@ import {
   ArrowDown,
   Duplicate,
 } from "@blueprintjs/icons";
-import { OverlayToaster } from "@blueprintjs/core";
+import { Button, OverlayToaster } from "@blueprintjs/core";
 
 import { eventSlice, PoolPlayer } from "../state/event.slice";
 import { useAppDispatch, useAppState } from "../state/store";
@@ -226,13 +226,13 @@ export function PoolsScores() {
     <form onSubmit={handleSubmit}>
       <h1>
         Pools Scores{" "}
-        <button
+        <Button
           type="button"
           onClick={handleCopyPoolsScoresSource}
           tabIndex={-1}
         >
           <Duplicate />
-        </button>
+        </Button>
       </h1>
       <table className={styles.poolsScoresTable}>
         <colgroup>
@@ -257,22 +257,22 @@ export function PoolsScores() {
                 {numSongs > 1 && (
                   <>
                     {" "}
-                    <button
+                    <Button
                       type="button"
                       onClick={handleRemoveScore(index)}
                       tabIndex={-1}
                     >
                       <BanCircle />
-                    </button>
+                    </Button>
                   </>
                 )}
               </th>
             ))}
             <th>
               Add Score{" "}
-              <button type="button" onClick={handleAddScore} tabIndex={-1}>
+              <Button type="button" onClick={handleAddScore} tabIndex={-1}>
                 <Add />
-              </button>
+              </Button>
             </th>
           </tr>
         </thead>
@@ -283,36 +283,36 @@ export function PoolsScores() {
                 <td className={styles.buttonContainer}>
                   {numPlayers > 1 && (
                     <>
-                      <button
+                      <Button
                         type="button"
                         onClick={handleCopyPlayerNameSource(playerIndex)}
                         tabIndex={-1}
                       >
                         <Duplicate />
-                      </button>{" "}
-                      <button
+                      </Button>{" "}
+                      <Button
                         type="button"
                         onClick={handleRemovePlayer(playerIndex)}
                         tabIndex={-1}
                       >
                         <BanCircle />
-                      </button>{" "}
-                      <button
+                      </Button>{" "}
+                      <Button
                         type="button"
                         onClick={handleMovePlayer(playerIndex, "down")}
                         disabled={playerIndex === numPlayers - 1}
                         tabIndex={-1}
                       >
                         <ArrowDown />
-                      </button>{" "}
-                      <button
+                      </Button>{" "}
+                      <Button
                         type="button"
                         onClick={handleMovePlayer(playerIndex, "up")}
                         disabled={playerIndex === 0}
                         tabIndex={-1}
                       >
                         <ArrowUp />
-                      </button>
+                      </Button>
                     </>
                   )}
                 </td>
@@ -357,18 +357,18 @@ export function PoolsScores() {
       <div>
         <b>
           Add Player{" "}
-          <button type="button" onClick={handleAddPlayer} tabIndex={-1}>
+          <Button type="button" onClick={handleAddPlayer} tabIndex={-1}>
             <Add />
-          </button>
+          </Button>
         </b>
       </div>
       <div
         style={{ display: "flex", flexDirection: "row", gap: 8, paddingTop: 8 }}
       >
-        <button>Save</button>
-        <button type="button" onClick={handleReset}>
+        <Button>Save</Button>
+        <Button type="button" onClick={handleReset}>
           Reset
-        </button>
+        </Button>
       </div>
     </form>
   );
