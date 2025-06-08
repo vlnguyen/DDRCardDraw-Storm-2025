@@ -1,12 +1,14 @@
 import React, { useCallback, useMemo, useState } from "react";
+import Papa from "papaparse";
 import { Button, HTMLSelect, OverlayToaster } from "@blueprintjs/core";
 
 import { useAppDispatch, useAppState } from "../state/store";
-import { useTextEdit } from "../hooks/useTextEdit";
 import { eventSlice, WavesData } from "../state/event.slice";
 import { format } from "date-fns";
 import { copyPlainTextToClipboard } from "../utils/share";
 import { Duplicate } from "@blueprintjs/icons";
+
+const DATE_FORMAT = "yyyy-MM-dd (hh:mm a)";
 
 interface WavePlayer {
   playerName: string;
@@ -39,7 +41,8 @@ function parseWavesDataText(wavesDataText?: string): WavePlayer[] {
 
 export function Waves() {
   const dispatch = useAppDispatch();
-  const [editDialog, openEditDialog] = useTextEdit();
+  const [isFetching, setIsFetching] = useState(false);
+  const [lastFetched, setLastFetched] = useState<Date>();
   const wavesDataState = useAppState((s) => s.event.streamDashboard.wavesData);
   const [wavesData, setWavesData] = useState<WavesData>(wavesDataState);
 
@@ -52,10 +55,11 @@ export function Waves() {
         .join(", "),
       Rows: wavesData.players.length,
       "Last Updated": wavesDataState.lastUpdated
-        ? format(new Date(wavesDataState.lastUpdated), "yyyy-MM-dd (hh:mm a)")
+        ? format(new Date(wavesDataState.lastUpdated), DATE_FORMAT)
         : "-",
+      "Last Fetched": lastFetched ? format(lastFetched, DATE_FORMAT) : "-",
     };
-  }, [wavesData, wavesDataState]);
+  }, [wavesData, wavesDataState, lastFetched]);
 
   const handleSubmit = useCallback(
     async (e: React.FormEvent<HTMLFormElement>) => {
@@ -76,6 +80,36 @@ export function Waves() {
     },
     [dispatch, wavesData],
   );
+
+  const fetchWavesData = useCallback(async () => {
+    try {
+      setIsFetching(true);
+      const spreadsheetId = "1bBmSzHpBUQXdCXUJGADTOLjV9AwkztwRm-imC2a2x7s";
+      const groupId = "1369706305";
+      const url = `https://docs.google.com/spreadsheets/d/${spreadsheetId}/export?format=csv&gid=${groupId}`;
+
+      const response = await (await fetch(url)).text();
+      const jsonString = Papa.parse<string[]>(response, {
+        header: false,
+        delimiter: ",",
+      }).data[0][0];
+
+      setWavesData((prev) => ({
+        ...prev,
+        players: parseWavesDataText(jsonString).toSorted((a, b) => {
+          if (a.didPlayerAdvance === b.didPlayerAdvance) {
+            return 0;
+          }
+          return a.didPlayerAdvance ? -1 : 1;
+        }),
+      }));
+      setLastFetched(new Date());
+    } catch (e) {
+      console.error(e);
+    } finally {
+      setIsFetching(false);
+    }
+  }, []);
 
   const handleCopyWavesSource = useCallback(async () => {
     const sourcePath = `${window.location.pathname}/source/waves`;
@@ -129,33 +163,15 @@ export function Waves() {
             ))}
           </HTMLSelect>
           <div>
-            <Button tabIndex={-1} type="submit">
+            <Button tabIndex={-1} type="submit" disabled={isFetching}>
               Save
             </Button>{" "}
-            <Button
-              tabIndex={-1}
-              onClick={() =>
-                openEditDialog({
-                  title: "Paste waves data from Google Sheets",
-                  onConfirm: (value: string) =>
-                    setWavesData((prev) => ({
-                      ...prev,
-                      players: parseWavesDataText(value).toSorted((a, b) => {
-                        if (a.didPlayerAdvance === b.didPlayerAdvance) {
-                          return 0;
-                        }
-                        return a.didPlayerAdvance ? -1 : 1;
-                      }),
-                    })),
-                })
-              }
-            >
-              Edit
+            <Button tabIndex={-1} onClick={fetchWavesData} loading={isFetching}>
+              Fetch
             </Button>
           </div>
         </div>
       </form>
-      {editDialog}
     </>
   );
 }
