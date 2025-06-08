@@ -365,7 +365,7 @@ export function PoolsScores() {
       <div
         style={{ display: "flex", flexDirection: "row", gap: 8, paddingTop: 8 }}
       >
-        <Button>Save</Button>
+        <Button type="submit">Save</Button>
         <Button type="button" onClick={handleReset}>
           Reset
         </Button>

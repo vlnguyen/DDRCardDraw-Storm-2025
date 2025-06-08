@@ -239,7 +239,9 @@ export function Strings() {
           </b>
         </div>
         <div>
-          <Button tabIndex={-1}>Save</Button>
+          <Button type="submit" tabIndex={-1}>
+            Save
+          </Button>
         </div>
       </form>
       <Dialog
