@@ -5,6 +5,8 @@ import { useAppDispatch, useAppState } from "../state/store";
 import { useTextEdit } from "../hooks/useTextEdit";
 import { eventSlice, WavesData } from "../state/event.slice";
 import { format } from "date-fns";
+import { copyPlainTextToClipboard } from "../utils/share";
+import { Duplicate } from "@blueprintjs/icons";
 
 interface WavePlayer {
   playerName: string;
@@ -75,10 +77,28 @@ export function Waves() {
     [dispatch, wavesData],
   );
 
+  const handleCopyWavesSource = useCallback(async () => {
+    const sourcePath = `${window.location.pathname}/source/waves`;
+    const sourceUrl = new URL(sourcePath, window.location.href);
+    copyPlainTextToClipboard(sourceUrl.href);
+
+    const toaster = await OverlayToaster.createAsync({ position: "top" });
+    toaster.show({
+      message: "Waves source copied to clipboard.",
+      intent: "success",
+      timeout: 5000,
+    });
+  }, []);
+
   return (
     <>
       <form onSubmit={handleSubmit} style={{ minWidth: 300 }}>
-        <h1>Waves</h1>
+        <h1>
+          Waves{" "}
+          <Button type="button" onClick={handleCopyWavesSource} tabIndex={-1}>
+            <Duplicate />
+          </Button>
+        </h1>
         <div style={{ display: "flex", flexDirection: "column", gap: 8 }}>
           {wavePlayersStats && (
             <ul>
