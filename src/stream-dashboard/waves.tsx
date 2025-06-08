@@ -1,5 +1,5 @@
 import React, { useCallback, useMemo, useState } from "react";
-import { Button, OverlayToaster } from "@blueprintjs/core";
+import { Button, HTMLSelect, OverlayToaster } from "@blueprintjs/core";
 
 import { useAppDispatch, useAppState } from "../state/store";
 import { useTextEdit } from "../hooks/useTextEdit";
@@ -49,19 +49,19 @@ export function Waves() {
         .sort()
         .join(", "),
       Rows: wavesData.players.length,
-      "Last Updated": wavesData.lastUpdated
-        ? format(wavesData.lastUpdated, "yyyy-mm-dd (hh:mm zz)")
+      "Last Updated": wavesDataState.lastUpdated
+        ? format(new Date(wavesDataState.lastUpdated), "yyyy-MM-dd (hh:mm a)")
         : "-",
     };
-  }, [wavesData]);
+  }, [wavesData, wavesDataState]);
 
   const handleSubmit = useCallback(
     async (e: React.FormEvent<HTMLFormElement>) => {
       e.preventDefault();
       dispatch(
         eventSlice.actions.updateWavesDate({
-          players: wavesData.players,
-          lastUpdated: new Date(),
+          ...wavesData,
+          lastUpdated: new Date().toISOString(),
         }),
       );
 
@@ -79,34 +79,55 @@ export function Waves() {
     <>
       <form onSubmit={handleSubmit}>
         <h1>Waves</h1>
-        {wavePlayersStats && (
-          <ul>
-            {Object.entries(wavePlayersStats).map(([label, value]) => (
-              <li key={label}>
-                {label}: {value}
-              </li>
-            ))}
-          </ul>
-        )}
-        <div>
-          <Button tabIndex={-1} type="submit">
-            Save
-          </Button>{" "}
-          <Button
-            tabIndex={-1}
-            onClick={() =>
-              openEditDialog({
-                title: "Paste waves data from Google Sheets",
-                onConfirm: (value: string) =>
-                  setWavesData((prev) => ({
-                    ...prev,
-                    players: parseWavesDataText(value),
-                  })),
-              })
-            }
+        <div style={{ display: "flex", flexDirection: "column", gap: 8 }}>
+          {wavePlayersStats && (
+            <ul>
+              {Object.entries(wavePlayersStats).map(([label, value]) => (
+                <li key={label}>
+                  {label}: {value}
+                </li>
+              ))}
+            </ul>
+          )}
+          <HTMLSelect
+            value={wavesData.selectedWave}
+            onChange={(e) => {
+              const selectedWave = parseInt(e.target.value);
+              setWavesData((prev) => ({
+                ...prev,
+                selectedWave:
+                  isNaN(selectedWave) || selectedWave === 0
+                    ? undefined
+                    : selectedWave,
+              }));
+            }}
           >
-            Edit
-          </Button>
+            {[0, 1, 2, 3, 4, 5, 6].map((waveNum) => (
+              <option key={waveNum} value={waveNum}>
+                {waveNum ? `Wave ${waveNum}` : "None"}
+              </option>
+            ))}
+          </HTMLSelect>
+          <div>
+            <Button tabIndex={-1} type="submit">
+              Save
+            </Button>{" "}
+            <Button
+              tabIndex={-1}
+              onClick={() =>
+                openEditDialog({
+                  title: "Paste waves data from Google Sheets",
+                  onConfirm: (value: string) =>
+                    setWavesData((prev) => ({
+                      ...prev,
+                      players: parseWavesDataText(value),
+                    })),
+                })
+              }
+            >
+              Edit
+            </Button>
+          </div>
         </div>
       </form>
       {editDialog}

@@ -32,7 +32,8 @@ interface WavePlayer {
 
 export interface WavesData {
   players: WavePlayer[];
-  lastUpdated?: Date;
+  lastUpdated?: string;
+  selectedWave?: number;
 }
 
 interface StreamDashboard {
@@ -105,6 +106,7 @@ const initialState: EventState = {
     wavesData: {
       players: [],
       lastUpdated: undefined,
+      selectedWave: undefined,
     },
   },
 };
