@@ -44,7 +44,7 @@ export function Header() {
           <MenuItem
             icon={<Control />}
             href={`/e/${params.roomName}/stream-dashboard`}
-            text={t("streamDashboard")}
+            text={t("hero.streamDashboard")}
           />
           <MenuItem
             icon={<Layers />}
@@ -56,7 +56,7 @@ export function Header() {
       <MenuItem
         icon={<Trash />}
         onClick={clearDrawings}
-        text={t("clearDrawings")}
+        text={t("hero.clearDrawings")}
         disabled={!haveDrawings}
       />
       <MenuItem
