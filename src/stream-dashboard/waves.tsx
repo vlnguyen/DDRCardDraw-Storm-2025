@@ -13,7 +13,7 @@ interface WavePlayer {
   didPlayerAdvance: boolean;
 }
 
-function unique<T>(value: T, index: number, array: T[]) {
+export function unique<T>(value: T, index: number, array: T[]) {
   return array.indexOf(value) === index;
 }
 
@@ -59,7 +59,7 @@ export function Waves() {
     async (e: React.FormEvent<HTMLFormElement>) => {
       e.preventDefault();
       dispatch(
-        eventSlice.actions.updateWavesDate({
+        eventSlice.actions.updateWavesData({
           ...wavesData,
           lastUpdated: new Date().toISOString(),
         }),
@@ -77,7 +77,7 @@ export function Waves() {
 
   return (
     <>
-      <form onSubmit={handleSubmit}>
+      <form onSubmit={handleSubmit} style={{ minWidth: 300 }}>
         <h1>Waves</h1>
         <div style={{ display: "flex", flexDirection: "column", gap: 8 }}>
           {wavePlayersStats && (
@@ -120,7 +120,12 @@ export function Waves() {
                   onConfirm: (value: string) =>
                     setWavesData((prev) => ({
                       ...prev,
-                      players: parseWavesDataText(value),
+                      players: parseWavesDataText(value).toSorted((a, b) => {
+                        if (a.didPlayerAdvance === b.didPlayerAdvance) {
+                          return 0;
+                        }
+                        return a.didPlayerAdvance ? -1 : 1;
+                      }),
                     })),
                 })
               }

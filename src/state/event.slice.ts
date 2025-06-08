@@ -23,7 +23,7 @@ export interface StringSlug {
   stretch?: "title" | "dialog";
 }
 
-interface WavePlayer {
+export interface WavePlayer {
   playerName: string;
   wave: number;
   pool: string;
@@ -150,7 +150,7 @@ export const eventSlice = createSlice({
     updateStrings(state, action: PayloadAction<StringSlug[]>) {
       state.streamDashboard.strings = action.payload;
     },
-    updateWavesDate(state, action: PayloadAction<WavesData>) {
+    updateWavesData(state, action: PayloadAction<WavesData>) {
       state.streamDashboard.wavesData = action.payload;
     },
   },
