@@ -269,6 +269,7 @@ export function SongCard(props: Props) {
         >
           {bpm ? <div className={styles.bpm}>{bpm} BPM</div> : <div />}
           {flags?.includes("shock") && <ShockBadge />}
+          {flags?.includes("noCmod") && "🚫"}
           <div className={styles.difficulty}>
             {diffAbbr} <ChartLevel chart={replacedWith || chart} />
           </div>
