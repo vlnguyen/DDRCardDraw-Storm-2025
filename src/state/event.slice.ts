@@ -23,9 +23,23 @@ export interface StringSlug {
   stretch?: "title" | "dialog";
 }
 
+export interface WavePlayer {
+  playerName: string;
+  wave: number;
+  pool: string;
+  didPlayerAdvance: boolean;
+}
+
+export interface WavesData {
+  players: WavePlayer[];
+  lastUpdated?: string;
+  selectedWave?: number;
+}
+
 interface StreamDashboard {
   poolPlayers: PoolPlayer[];
   strings: StringSlug[];
+  wavesData: WavesData;
 }
 
 interface EventState {
@@ -89,6 +103,11 @@ const initialState: EventState = {
         value: "We'll be right back!",
       },
     ],
+    wavesData: {
+      players: [],
+      lastUpdated: undefined,
+      selectedWave: undefined,
+    },
   },
 };
 
@@ -130,6 +149,9 @@ export const eventSlice = createSlice({
     },
     updateStrings(state, action: PayloadAction<StringSlug[]>) {
       state.streamDashboard.strings = action.payload;
+    },
+    updateWavesData(state, action: PayloadAction<WavesData>) {
+      state.streamDashboard.wavesData = action.payload;
     },
   },
   selectors: {

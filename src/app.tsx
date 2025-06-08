@@ -110,6 +110,13 @@ const router = createBrowserRouter([
         },
       },
       {
+        path: "waves",
+        lazy: async () => {
+          const { WavesSource } = await import("./obs-sources/waves");
+          return { Component: WavesSource };
+        },
+      },
+      {
         path: "string/:slug",
         lazy: async () => {
           const { StreamString } = await import("./obs-sources/text");
