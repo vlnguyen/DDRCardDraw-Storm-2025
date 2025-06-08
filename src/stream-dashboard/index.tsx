@@ -9,6 +9,7 @@ import { store } from "../state/store";
 import { PoolsScores } from "./pools-scores";
 import { UpNext } from "./current-time";
 import { Strings } from "./strings";
+import { Waves } from "./waves";
 
 import styles from "./stream-dashboard.css";
 
@@ -33,7 +34,6 @@ export function StreamDashboard() {
               flexDirection: "column",
               justifyContent: "stretch",
               flex: "1 1 0px",
-              overflow: "hidden",
               margin: 16,
               gap: 8,
             }}
@@ -44,6 +44,9 @@ export function StreamDashboard() {
             <div style={{ display: "flex", gap: 8 }}>
               <DashboardItem>
                 <Strings />
+              </DashboardItem>
+              <DashboardItem>
+                <Waves />
               </DashboardItem>
             </div>
             <div style={{ display: "flex", gap: 8 }}>
