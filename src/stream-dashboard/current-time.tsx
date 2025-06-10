@@ -4,7 +4,7 @@ import { useCallback } from "react";
 import { Button, OverlayToaster } from "@blueprintjs/core";
 import { copyPlainTextToClipboard } from "../utils/share";
 
-export function UpNext() {
+export function CurrentTime() {
   const [time, timezone] = useCurrentTime();
 
   const handleCopyCurrentTimeSource = useCallback(async () => {

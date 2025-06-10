@@ -7,9 +7,10 @@ import { PartySocketManager } from "../party/client";
 import { urqlClient } from "../startgg-gql";
 import { store } from "../state/store";
 import { PoolsScores } from "./pools-scores";
-import { UpNext } from "./current-time";
+import { CurrentTime } from "./current-time";
 import { Strings } from "./strings";
 import { Waves } from "./waves";
+import { Links } from "./links";
 
 import styles from "./stream-dashboard.css";
 
@@ -51,7 +52,10 @@ export function StreamDashboard() {
             </div>
             <div style={{ display: "flex", gap: 8 }}>
               <DashboardItem>
-                <UpNext />
+                <CurrentTime />
+              </DashboardItem>
+              <DashboardItem>
+                <Links />
               </DashboardItem>
             </div>
           </div>
