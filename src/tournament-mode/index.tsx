@@ -24,7 +24,7 @@ export function TournamentModeApp() {
               flexDirection: "row",
               justifyContent: "stretch",
               flex: "1 1 0px",
-              overflow: "hidden",
+              overflow: "auto",
             }}
           >
             <CabManagement />
