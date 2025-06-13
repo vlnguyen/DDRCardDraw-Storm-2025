@@ -14,7 +14,13 @@ const DrawnSet = lazy(() => import("./drawn-set"));
 const ScrollableDrawings = memo(() => {
   const drawingIds = useDeferredValue(useAppState((s) => s.drawings.ids));
   return (
-    <div style={{ height: "100%", flex: "1 1 auto", overflowY: "scroll" }}>
+    <div
+      style={{
+        flex: "1 1 auto",
+        overflowY: "scroll",
+        WebkitOverflowScrolling: "touch",
+      }}
+    >
       {drawingIds
         .map((did) => <DrawnSet key={did} drawingId={did} />)
         .reverse()}
