@@ -13,6 +13,10 @@ export function Links() {
             href: "https://docs.google.com/spreadsheets/d/1bBmSzHpBUQXdCXUJGADTOLjV9AwkztwRm-imC2a2x7s/edit?gid=1574773341",
           },
           {
+            label: "Commentary Schedule",
+            href: "https://docs.google.com/spreadsheets/d/1npUlsT_tOpiWWOP5Y39M9RWsrMkgv-NL97Ydm3kosSc/edit?usp=sharing",
+          },
+          {
             label: "start.gg (ITGmania)",
             href: "https://www.start.gg/tournament/ceo-2025-6/event/itgmania",
           },
