@@ -44,3 +44,7 @@ table tr th:first-child {
 table tr th:last-child {
   border-right: 0;
 }
+
+h3 {
+  font-weight: bold;
+}

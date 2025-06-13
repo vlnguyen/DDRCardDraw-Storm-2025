@@ -112,7 +112,9 @@ export function PoolsScoresSource() {
         <tr>
           <th></th>
           {Array.from({ length: numSongs }).map((_, index) => (
-            <th key={index}>Song {index + 1}</th>
+            <th key={index}>
+              <h3>Song {index + 1}</h3>
+            </th>
           ))}
           <th>Wins</th>
         </tr>
