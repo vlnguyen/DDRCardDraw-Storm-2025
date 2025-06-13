@@ -1,0 +1,953 @@
+{
+  "meta": {
+    "menuParent": "events",
+    "flags": ["noCmod"],
+    "lastUpdated": 1749796671898,
+    "usesDrawGroups": true,
+    "styles": ["single"],
+    "difficulties": [
+      {
+        "key": "challenge",
+        "color": "#0191F2"
+      }
+    ]
+  },
+  "defaults": {
+    "flags": ["noCmod"],
+    "lowerLvlBound": 1,
+    "difficulties": ["challenge"],
+    "upperLvlBound": 0,
+    "style": "single"
+  },
+  "i18n": {
+    "en": {
+      "name": "Storm 2025 WNB",
+      "single": "Single",
+      "double": "Double",
+      "beginner": "Beginner",
+      "basic": "Basic",
+      "difficult": "Difficult",
+      "expert": "Expert",
+      "challenge": "Challenge",
+      "edit": "Edit",
+      "noCmod": "No CMOD",
+      "$abbr": {
+        "beginner": "Beg",
+        "basic": "Bas",
+        "difficult": "Dif",
+        "expert": "Exp",
+        "challenge": "Cha",
+        "edit": "Edit"
+      }
+    }
+  },
+  "songs": [
+    {
+      "name": "[T01] Laid Back Journey (Hard)",
+      "name_translation": "",
+      "jacket": "itg/storm2025_wnb/[T01] ITL - [07] Laid Back Journey (SH) [Chief Skittles].jpg",
+      "bpm": "122",
+      "artist": "Kiminone",
+      "charts": [
+        {
+          "lvl": 7,
+          "style": "single",
+          "diffClass": "challenge",
+          "drawGroup": 1
+        }
+      ]
+    },
+    {
+      "name": "[T01] MADELINE (Medium)",
+      "name_translation": "",
+      "jacket": "itg/storm2025_wnb/[T01] ITL - [07] MADELINE (SM) [Feraligatr].jpg",
+      "bpm": "125",
+      "artist": "INJI",
+      "charts": [
+        {
+          "lvl": 7,
+          "style": "single",
+          "diffClass": "challenge",
+          "drawGroup": 1
+        }
+      ]
+    },
+    {
+      "name": "[T01] Something Comforting (Hard)",
+      "name_translation": "",
+      "jacket": "itg/storm2025_wnb/[T01] ITL - [07] Something Comforting (SH) [A. Astral].jpg",
+      "bpm": "144",
+      "artist": "Porter Robinson",
+      "charts": [
+        {
+          "lvl": 7,
+          "style": "single",
+          "diffClass": "challenge",
+          "drawGroup": 1
+        }
+      ]
+    },
+    {
+      "name": "[T01] Caramelldansen (Hard)",
+      "name_translation": "",
+      "jacket": "itg/storm2025_wnb/[T01] ITL - [08] Caramelldansen (SH) [M. Ruggiero].jpg",
+      "bpm": "164",
+      "artist": "Caramell",
+      "charts": [
+        {
+          "lvl": 8,
+          "style": "single",
+          "diffClass": "challenge",
+          "drawGroup": 1
+        }
+      ]
+    },
+    {
+      "name": "[T01] Checkpoint (Hard)",
+      "name_translation": "",
+      "jacket": "itg/storm2025_wnb/[T01] ITL - [08] Checkpoint (SH) [Benpai].jpg",
+      "bpm": "140",
+      "artist": "Nitro Fun X Hyper Potions",
+      "charts": [
+        {
+          "lvl": 8,
+          "style": "single",
+          "diffClass": "challenge",
+          "drawGroup": 1
+        }
+      ]
+    },
+    {
+      "name": "[T01] Fight It (Hard)",
+      "name_translation": "",
+      "jacket": "itg/storm2025_wnb/[T01] ITL - [08] Fight It (SH) [Benpai].jpg",
+      "bpm": "150",
+      "artist": "Wavedash",
+      "charts": [
+        {
+          "lvl": 8,
+          "style": "single",
+          "diffClass": "challenge",
+          "drawGroup": 1
+        }
+      ]
+    },
+    {
+      "name": "[T01] You Make Me Wanna Purr (Easy)",
+      "name_translation": "",
+      "jacket": "itg/storm2025_wnb/[T01] ITL - [08] You Make Me Wanna Purr (SE) [Feraligatr].jpg",
+      "bpm": "125",
+      "artist": "Mark Batson, Rob Bressler",
+      "charts": [
+        {
+          "lvl": 8,
+          "style": "single",
+          "diffClass": "challenge",
+          "drawGroup": 1
+        }
+      ]
+    },
+    {
+      "name": "[T01] Attention (Medium)",
+      "name_translation": "",
+      "jacket": "itg/storm2025_wnb/[T01] [07] Attention (SM).jpg",
+      "bpm": "135",
+      "artist": "Todrick Hall",
+      "charts": [
+        {
+          "lvl": 7,
+          "style": "single",
+          "diffClass": "challenge",
+          "drawGroup": 1
+        }
+      ]
+    },
+    {
+      "name": "[T01] Exquisite (Medium)",
+      "name_translation": "",
+      "jacket": "itg/storm2025_wnb/[T01] [07] Exquisite (SM).jpg",
+      "bpm": "140",
+      "artist": "MrKoolTrix",
+      "charts": [
+        {
+          "lvl": 7,
+          "style": "single",
+          "diffClass": "challenge",
+          "drawGroup": 1
+        }
+      ]
+    },
+    {
+      "name": "[T01] GALACTICAL (Medium) (NO CMOD)",
+      "name_translation": "",
+      "jacket": "itg/storm2025_wnb/[T01] [07] GALACTICAL (NO CMOD) (SM).jpg",
+      "bpm": "128",
+      "artist": "Tokyo Machine",
+      "charts": [
+        {
+          "lvl": 7,
+          "style": "single",
+          "diffClass": "challenge",
+          "drawGroup": 1,
+          "flags": ["noCmod"]
+        }
+      ]
+    },
+    {
+      "name": "[T01] Tetris - Theme A (Hard) (NO CMOD)",
+      "name_translation": "",
+      "jacket": "itg/storm2025_wnb/[T01] [08] Tetris Theme A (From Tetris) (NO CMOD) (SH).jpg",
+      "bpm": "140",
+      "artist": "Doctor P",
+      "charts": [
+        {
+          "lvl": 8,
+          "style": "single",
+          "diffClass": "challenge",
+          "drawGroup": 1,
+          "flags": ["noCmod"]
+        }
+      ]
+    },
+    {
+      "name": "[T01] True Blue (Medium)",
+      "name_translation": "",
+      "jacket": "itg/storm2025_wnb/[T01] [08] True Blue (SM).jpg",
+      "bpm": "164",
+      "artist": "dj TAKA",
+      "charts": [
+        {
+          "lvl": 8,
+          "style": "single",
+          "diffClass": "challenge",
+          "drawGroup": 1
+        }
+      ]
+    },
+    {
+      "name": "[T02] APT.",
+      "name_translation": "",
+      "jacket": "itg/storm2025_wnb/[T02] ITL - [08] APT. (SX) [teejusb].jpg",
+      "bpm": "149",
+      "artist": "ROSÉ & Bruno Mars",
+      "charts": [
+        {
+          "lvl": 8,
+          "style": "single",
+          "diffClass": "challenge",
+          "drawGroup": 2
+        }
+      ]
+    },
+    {
+      "name": "[T02] Beyond the Seven (Hard)",
+      "name_translation": "",
+      "jacket": "itg/storm2025_wnb/[T02] ITL - [09] Beyond the Seven (SH) [ITGAlex].jpg",
+      "bpm": "142",
+      "artist": "Nhato",
+      "charts": [
+        {
+          "lvl": 9,
+          "style": "single",
+          "diffClass": "challenge",
+          "drawGroup": 2
+        }
+      ]
+    },
+    {
+      "name": "[T02] Shady Business",
+      "name_translation": "",
+      "jacket": "itg/storm2025_wnb/[T02] ITL - [09] Shady Business (SX) [sudzi781].jpg",
+      "bpm": "64-128",
+      "artist": "Mr. Nagasaki",
+      "charts": [
+        {
+          "lvl": 9,
+          "style": "single",
+          "diffClass": "challenge",
+          "drawGroup": 2
+        }
+      ]
+    },
+    {
+      "name": "[T02] Under Arrest",
+      "name_translation": "",
+      "jacket": "itg/storm2025_wnb/[T02] ITL - [09] Under Arrest (SX) [mute].jpg",
+      "bpm": "128",
+      "artist": "Danzel",
+      "charts": [
+        {
+          "lvl": 9,
+          "style": "single",
+          "diffClass": "challenge",
+          "drawGroup": 2
+        }
+      ]
+    },
+    {
+      "name": "[T02] XENON II ~TOMOYUKIの野望~ (Hard)",
+      "name_translation": "[3315] [09] XENON II ~TOMOYUKI's Ambition~ (Hard)",
+      "jacket": "itg/storm2025_wnb/[T02] ITL - [09] XENON II ~TOMOYUKI's Ambition~ (SH) [ITGAlex].jpg",
+      "bpm": "160",
+      "artist": "Mr.T",
+      "charts": [
+        {
+          "lvl": 9,
+          "style": "single",
+          "diffClass": "challenge",
+          "drawGroup": 2
+        }
+      ]
+    },
+    {
+      "name": "[T02] Final Fantasy Mystic Quest - Boss Battle (Medium)",
+      "name_translation": "",
+      "jacket": "itg/storm2025_wnb/[T02] [08] Boss Battle (FFMQ) (SM).jpg",
+      "bpm": "130",
+      "artist": "Bryan EL",
+      "charts": [
+        {
+          "lvl": 8,
+          "style": "single",
+          "diffClass": "challenge",
+          "drawGroup": 2
+        }
+      ]
+    },
+    {
+      "name": "[T02] Button Masher (Medium)",
+      "name_translation": "",
+      "jacket": "itg/storm2025_wnb/[T02] [08] Button Masher (SM).jpg",
+      "bpm": "132",
+      "artist": "MDK",
+      "charts": [
+        {
+          "lvl": 8,
+          "style": "single",
+          "diffClass": "challenge",
+          "drawGroup": 2
+        }
+      ]
+    },
+    {
+      "name": "[T02] Crossing Delta (SM)",
+      "name_translation": "",
+      "jacket": "itg/storm2025_wnb/[T02] [08] CROSSING DELTA (SM).jpg",
+      "bpm": "180",
+      "artist": "ginkiha×Hommarju×t+pazolite",
+      "charts": [
+        {
+          "lvl": 8,
+          "style": "single",
+          "diffClass": "challenge",
+          "drawGroup": 2
+        }
+      ]
+    },
+    {
+      "name": "[T02] Megalovania (Medium)",
+      "name_translation": "",
+      "jacket": "itg/storm2025_wnb/[T02] [08] Megalovania (SM).jpg",
+      "bpm": "128",
+      "artist": "Chime",
+      "charts": [
+        {
+          "lvl": 8,
+          "style": "single",
+          "diffClass": "challenge",
+          "drawGroup": 2
+        }
+      ]
+    },
+    {
+      "name": "[T02] Roar",
+      "name_translation": "",
+      "jacket": "itg/storm2025_wnb/[T02] [08] Roar.jpg",
+      "bpm": "180",
+      "artist": "Katy Perry",
+      "charts": [
+        {
+          "lvl": 8,
+          "style": "single",
+          "diffClass": "challenge",
+          "drawGroup": 2
+        }
+      ]
+    },
+    {
+      "name": "[T02] Magnetic",
+      "name_translation": "",
+      "jacket": "itg/storm2025_wnb/[T02] [08] [NO CMOD] Magnetic [Talkion].jpg",
+      "bpm": "131",
+      "artist": "ILLIT",
+      "charts": [
+        {
+          "lvl": 8,
+          "style": "single",
+          "diffClass": "challenge",
+          "drawGroup": 2,
+          "flags": ["noCmod"]
+        }
+      ]
+    },
+    {
+      "name": "[T02] Born This Way",
+      "name_translation": "",
+      "jacket": "itg/storm2025_wnb/[T02] [09] Born this Way.jpg",
+      "bpm": "124",
+      "artist": "Lady Gaga",
+      "charts": [
+        {
+          "lvl": 9,
+          "style": "single",
+          "diffClass": "challenge",
+          "drawGroup": 2
+        }
+      ]
+    },
+    {
+      "name": "[T03] Earthquake (Hard)",
+      "name_translation": "",
+      "jacket": "itg/storm2025_wnb/[T03] ITL - [09] Earthquake (SH) [warpdrive].jpg",
+      "bpm": "103",
+      "artist": "Jorts",
+      "charts": [
+        {
+          "lvl": 9,
+          "style": "single",
+          "diffClass": "challenge",
+          "drawGroup": 3
+        }
+      ]
+    },
+    {
+      "name": "[T03] Worn Out Tapes (Hard)",
+      "name_translation": "",
+      "jacket": "itg/storm2025_wnb/[T03] ITL - [09] Worn Out Tapes (SH) [Valex].jpg",
+      "bpm": "149",
+      "artist": "Peak Divide feat. Rachel Lake",
+      "charts": [
+        {
+          "lvl": 9,
+          "style": "single",
+          "diffClass": "challenge",
+          "drawGroup": 3
+        }
+      ]
+    },
+    {
+      "name": "[T03] pudding (Hard)",
+      "name_translation": "",
+      "jacket": "itg/storm2025_wnb/[T03] ITL - [09] pudding (SH) [mdx].jpg",
+      "bpm": "128",
+      "artist": "ああああ",
+      "charts": [
+        {
+          "lvl": 9,
+          "style": "single",
+          "diffClass": "challenge",
+          "drawGroup": 3
+        }
+      ]
+    },
+    {
+      "name": "[T03] Blackout",
+      "name_translation": "",
+      "jacket": "itg/storm2025_wnb/[T03] ITL - [10] Blackout (SX) [mudkyp].jpg",
+      "bpm": "123",
+      "artist": "Breathe Carolina",
+      "charts": [
+        {
+          "lvl": 10,
+          "style": "single",
+          "diffClass": "challenge",
+          "drawGroup": 3
+        }
+      ]
+    },
+    {
+      "name": "[T03] Ire (Hard)",
+      "name_translation": "",
+      "jacket": "itg/storm2025_wnb/[T03] ITL - [10] Ire (SH) [RakkiiCB].jpg",
+      "bpm": "149",
+      "artist": "削除",
+      "charts": [
+        {
+          "lvl": 10,
+          "style": "single",
+          "diffClass": "challenge",
+          "drawGroup": 3
+        }
+      ]
+    },
+    {
+      "name": "[T03] Blue (Da Ba Dee)",
+      "name_translation": "",
+      "jacket": "itg/storm2025_wnb/[T03] [09] Blue (Da Ba Dee).jpg",
+      "bpm": "128",
+      "artist": "Eiffel 65",
+      "charts": [
+        {
+          "lvl": 9,
+          "style": "single",
+          "diffClass": "challenge",
+          "drawGroup": 3
+        }
+      ]
+    },
+    {
+      "name": "[T03] Boys of Summer",
+      "name_translation": "",
+      "jacket": "itg/storm2025_wnb/[T03] [09] Boys of Summer.jpg",
+      "bpm": "191",
+      "artist": "The Ataris",
+      "charts": [
+        {
+          "lvl": 9,
+          "style": "single",
+          "diffClass": "challenge",
+          "drawGroup": 3
+        }
+      ]
+    },
+    {
+      "name": "[T03] Bullet Waiting for Me (SH)",
+      "name_translation": "",
+      "jacket": "itg/storm2025_wnb/[T03] [09] Bullet Waiting for Me (SH).jpg",
+      "bpm": "107",
+      "artist": "Nikki Simmons",
+      "charts": [
+        {
+          "lvl": 9,
+          "style": "single",
+          "diffClass": "challenge",
+          "drawGroup": 3
+        }
+      ]
+    },
+    {
+      "name": "[T03] Bye Bye Bye",
+      "name_translation": "",
+      "jacket": "itg/storm2025_wnb/[T03] [09] Bye Bye Bye.jpg",
+      "bpm": "177",
+      "artist": "*NSYNC",
+      "charts": [
+        {
+          "lvl": 9,
+          "style": "single",
+          "diffClass": "challenge",
+          "drawGroup": 3
+        }
+      ]
+    },
+    {
+      "name": "[T03] Hot Issue (NO CMOD)",
+      "name_translation": "",
+      "jacket": "itg/storm2025_wnb/[T03] [09] Hot Issue (No CMOD).jpg",
+      "bpm": "128",
+      "artist": "4Minute",
+      "charts": [
+        {
+          "lvl": 9,
+          "style": "single",
+          "diffClass": "challenge",
+          "drawGroup": 3,
+          "flags": ["noCmod"]
+        }
+      ]
+    },
+    {
+      "name": "[T03] Shalala lala",
+      "name_translation": "",
+      "jacket": "itg/storm2025_wnb/[T03] [09] Shalala Lala.jpg",
+      "bpm": "124",
+      "artist": "Vengaboys",
+      "charts": [
+        {
+          "lvl": 9,
+          "style": "single",
+          "diffClass": "challenge",
+          "drawGroup": 3
+        }
+      ]
+    },
+    {
+      "name": "[T03] Telephone",
+      "name_translation": "",
+      "jacket": "itg/storm2025_wnb/[T03] [09] Telephone (NO CMOD).jpg",
+      "bpm": "126",
+      "artist": "Lady Gaga",
+      "charts": [
+        {
+          "lvl": 9,
+          "style": "single",
+          "diffClass": "challenge",
+          "drawGroup": 3,
+          "flags": ["noCmod"]
+        }
+      ]
+    },
+    {
+      "name": "[T03] Lost Woods (Hard)",
+      "name_translation": "",
+      "jacket": "itg/storm2025_wnb/[T03] [10] Lost Woods (From Legend of Zelda Ocarina of Time) (SH).jpg",
+      "bpm": "128",
+      "artist": "VGR",
+      "charts": [
+        {
+          "lvl": 10,
+          "style": "single",
+          "diffClass": "challenge",
+          "drawGroup": 3
+        }
+      ]
+    },
+    {
+      "name": "[T03] edamame (Hard)",
+      "name_translation": "",
+      "jacket": "itg/storm2025_wnb/[T03] [10] edamame (SH).jpg",
+      "bpm": "106",
+      "artist": "bbno$ & Rich Brian",
+      "charts": [
+        {
+          "lvl": 10,
+          "style": "single",
+          "diffClass": "challenge",
+          "drawGroup": 3
+        }
+      ]
+    },
+    {
+      "name": "[T04] Shotgun Senorita (Zardonic Remix)",
+      "name_translation": "",
+      "jacket": "itg/storm2025_wnb/[T04] ITL - [10] Shotgun Senorita (Zardonic Remix) (SX) [DDDAAA].jpg",
+      "bpm": "175",
+      "artist": "Blue Stahli",
+      "charts": [
+        {
+          "lvl": 10,
+          "style": "single",
+          "diffClass": "challenge",
+          "drawGroup": 4
+        }
+      ]
+    },
+    {
+      "name": "[T04] Cosmic Groove",
+      "name_translation": "",
+      "jacket": "itg/storm2025_wnb/[T04] ITL - [11] Cosmic Groove (SX) [tev].jpg",
+      "bpm": "140",
+      "artist": "Speechrezz",
+      "charts": [
+        {
+          "lvl": 11,
+          "style": "single",
+          "diffClass": "challenge",
+          "drawGroup": 4
+        }
+      ]
+    },
+    {
+      "name": "[T04] Precious!!!",
+      "name_translation": "",
+      "jacket": "itg/storm2025_wnb/[T04] ITL - [11] Precious!!! (SX) [BlindedVanguard573].jpg",
+      "bpm": "142",
+      "artist": "mommy",
+      "charts": [
+        {
+          "lvl": 11,
+          "style": "single",
+          "diffClass": "challenge",
+          "drawGroup": 4
+        }
+      ]
+    },
+    {
+      "name": "[T04] Shocking",
+      "name_translation": "",
+      "jacket": "itg/storm2025_wnb/[T04] ITL - [11] Shocking (SX) [sorae].jpg",
+      "bpm": "160",
+      "artist": "Getty",
+      "charts": [
+        {
+          "lvl": 11,
+          "style": "single",
+          "diffClass": "challenge",
+          "drawGroup": 4
+        }
+      ]
+    },
+    {
+      "name": "[T04] Swing Balboa",
+      "name_translation": "",
+      "jacket": "itg/storm2025_wnb/[T04] [09] Swing Balboa.jpg",
+      "bpm": "121",
+      "artist": "The Manhattan Transfer",
+      "charts": [
+        {
+          "lvl": 9,
+          "style": "single",
+          "diffClass": "challenge",
+          "drawGroup": 4
+        }
+      ]
+    },
+    {
+      "name": "[T04] COTTON-EYE JOE",
+      "name_translation": "",
+      "jacket": "itg/storm2025_wnb/[T04] [10] COTTON-EYE JOE.jpg",
+      "bpm": "132",
+      "artist": "REDNEX",
+      "charts": [
+        {
+          "lvl": 10,
+          "style": "single",
+          "diffClass": "challenge",
+          "drawGroup": 4
+        }
+      ]
+    },
+    {
+      "name": "[T04] Immunity (SH) (No CMOD)",
+      "name_translation": "",
+      "jacket": "itg/storm2025_wnb/[T04] [10] Immunity (SH) (No CMOD).jpg",
+      "bpm": "140",
+      "artist": "Zomboy",
+      "charts": [
+        {
+          "lvl": 8,
+          "style": "single",
+          "diffClass": "challenge",
+          "drawGroup": 4,
+          "flags": ["noCmod"]
+        }
+      ]
+    },
+    {
+      "name": "[T04] Kaede",
+      "name_translation": "",
+      "jacket": "itg/storm2025_wnb/[T04] [10] Kaede.jpg",
+      "bpm": "130",
+      "artist": "Nhato",
+      "charts": [
+        {
+          "lvl": 10,
+          "style": "single",
+          "diffClass": "challenge",
+          "drawGroup": 4
+        }
+      ]
+    },
+    {
+      "name": "[T04] Tike Tike Kardi",
+      "name_translation": "",
+      "jacket": "itg/storm2025_wnb/[T04] [10] Tike Tike Kardi.jpg",
+      "bpm": "100.000",
+      "artist": "Arash",
+      "charts": [
+        {
+          "lvl": 10,
+          "style": "single",
+          "diffClass": "challenge",
+          "drawGroup": 4
+        }
+      ]
+    },
+    {
+      "name": "[T04] 18 Mne Uzhe",
+      "name_translation": "",
+      "jacket": "itg/storm2025_wnb/[T04] [11] 18 Mne Uzhe (Haiducii Remix).jpg",
+      "bpm": "190",
+      "artist": "Resource feat. Reflex",
+      "charts": [
+        {
+          "lvl": 11,
+          "style": "single",
+          "diffClass": "challenge",
+          "drawGroup": 4
+        }
+      ]
+    },
+    {
+      "name": "[T04] Barracuda",
+      "name_translation": "",
+      "jacket": "itg/storm2025_wnb/[T04] [11] Barracuda.jpg",
+      "bpm": "130",
+      "artist": "Noisestorm",
+      "charts": [
+        {
+          "lvl": 11,
+          "style": "single",
+          "diffClass": "challenge",
+          "drawGroup": 4
+        }
+      ]
+    },
+    {
+      "name": "[T04] Revolution (Hard)",
+      "name_translation": "",
+      "jacket": "itg/storm2025_wnb/[T04] [11] Revolution [A. Astral and dimo] (SH).jpg",
+      "bpm": "209",
+      "artist": "BilliumMoto",
+      "charts": [
+        {
+          "lvl": 11,
+          "style": "single",
+          "diffClass": "challenge",
+          "drawGroup": 4
+        }
+      ]
+    },
+    {
+      "name": "[T05] GoodNES",
+      "name_translation": "",
+      "jacket": "itg/storm2025_wnb/[T05] ITL - [11] GoodNES (SX) [JNero].jpg",
+      "bpm": "250",
+      "artist": "Black Ace",
+      "charts": [
+        {
+          "lvl": 11,
+          "style": "single",
+          "diffClass": "challenge",
+          "drawGroup": 5
+        }
+      ]
+    },
+    {
+      "name": "[T05] Kill Everybody",
+      "name_translation": "",
+      "jacket": "itg/storm2025_wnb/[T05] ITL - [11] Kill Everybody (SX) [B. Abear].jpg",
+      "bpm": "140",
+      "artist": "Skrillex",
+      "charts": [
+        {
+          "lvl": 11,
+          "style": "single",
+          "diffClass": "challenge",
+          "drawGroup": 5
+        }
+      ]
+    },
+    {
+      "name": "[T05] Junk Mania",
+      "name_translation": "",
+      "jacket": "itg/storm2025_wnb/[T05] ITL - [12] Junk Mania (SX) [sorae].jpg",
+      "bpm": "165",
+      "artist": "udouddo&VALLEYSTONE",
+      "charts": [
+        {
+          "lvl": 12,
+          "style": "single",
+          "diffClass": "challenge",
+          "drawGroup": 5
+        }
+      ]
+    },
+    {
+      "name": "[T05] Turbocharger",
+      "name_translation": "",
+      "jacket": "itg/storm2025_wnb/[T05] ITL - [12] Turbocharger (SX) [Frondal].jpg",
+      "bpm": "128-170",
+      "artist": "A/I",
+      "charts": [
+        {
+          "lvl": 12,
+          "style": "single",
+          "diffClass": "challenge",
+          "drawGroup": 5
+        }
+      ]
+    },
+    {
+      "name": "[T05] A Friend Like Me",
+      "name_translation": "",
+      "jacket": "itg/storm2025_wnb/[T05] [10] A Friend Like Me [Sim Gretina Remix].jpg",
+      "bpm": "126.000",
+      "artist": "Sim Gretina",
+      "charts": [
+        {
+          "lvl": 10,
+          "style": "single",
+          "diffClass": "challenge",
+          "drawGroup": 5
+        }
+      ]
+    },
+    {
+      "name": "[T05] Shanti",
+      "name_translation": "",
+      "jacket": "itg/storm2025_wnb/[T05] [10] Shanti.jpg",
+      "bpm": "124",
+      "artist": "Zedd, Grey",
+      "charts": [
+        {
+          "lvl": 10,
+          "style": "single",
+          "diffClass": "challenge",
+          "drawGroup": 5
+        }
+      ]
+    },
+    {
+      "name": "[T05] Descensus",
+      "name_translation": "",
+      "jacket": "itg/storm2025_wnb/[T05] [11] Descensus.jpg",
+      "bpm": "123",
+      "artist": "Zedd, Dora Jar, Mesto",
+      "charts": [
+        {
+          "lvl": 11,
+          "style": "single",
+          "diffClass": "challenge",
+          "drawGroup": 5
+        }
+      ]
+    },
+    {
+      "name": "[T05] Invincible",
+      "name_translation": "",
+      "jacket": "itg/storm2025_wnb/[T05] [11] Invincible.jpg",
+      "bpm": "200",
+      "artist": "Deaf Kev",
+      "charts": [
+        {
+          "lvl": 11,
+          "style": "single",
+          "diffClass": "challenge",
+          "drawGroup": 5
+        }
+      ]
+    },
+    {
+      "name": "[T05] Nowhere (NO CMOD)",
+      "name_translation": "",
+      "jacket": "itg/storm2025_wnb/[T05] [11] Nowhere (NO CMOD).jpg",
+      "bpm": "70-140",
+      "artist": "Nhato",
+      "charts": [
+        {
+          "lvl": 10,
+          "style": "single",
+          "diffClass": "challenge",
+          "drawGroup": 5,
+          "flags": ["noCmod"]
+        }
+      ]
+    },
+    {
+      "name": "[T05] Satellite",
+      "name_translation": "",
+      "jacket": "itg/storm2025_wnb/[T05] [12] Satellite.jpg",
+      "bpm": "145",
+      "artist": "Valentino Khan",
+      "charts": [
+        {
+          "lvl": 12,
+          "style": "single",
+          "diffClass": "challenge",
+          "drawGroup": 5
+        }
+      ]
+    }
+  ]
+}
