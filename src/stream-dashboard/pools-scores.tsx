@@ -44,12 +44,12 @@ export function PoolsScores() {
     setPoolPlayers((prevPoolPlayers) =>
       prevPoolPlayers.map((_, poolPlayerIndex) => ({
         playerName: `Player ${poolPlayerIndex + 1}`,
-        scores: Array(numSongs).fill(0),
+        scores: [],
         isEliminated: false,
         isDisabled: false,
       })),
     );
-  }, [numSongs]);
+  }, []);
 
   const handleNameChange = useCallback((poolPlayerIndex: number) => {
     return (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -254,18 +254,13 @@ export function PoolsScores() {
             {Array.from({ length: numSongs }).map((_, index) => (
               <th key={index}>
                 Score {index + 1}
-                {numSongs > 1 && (
-                  <>
-                    {" "}
-                    <Button
-                      type="button"
-                      onClick={handleRemoveScore(index)}
-                      tabIndex={-1}
-                    >
-                      <BanCircle />
-                    </Button>
-                  </>
-                )}
+                <Button
+                  type="button"
+                  onClick={handleRemoveScore(index)}
+                  tabIndex={-1}
+                >
+                  <BanCircle />
+                </Button>
               </th>
             ))}
             <th>

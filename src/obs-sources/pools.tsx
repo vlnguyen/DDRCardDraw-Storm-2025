@@ -35,7 +35,7 @@ function getPoolPlayersResults(poolPlayers: PoolPlayer[]): PoolPlayerResult[] {
     poolPlayersResults.sort(
       (a, b) => b.scores[songIndex] - a.scores[songIndex],
     );
-    const allSongScores = poolPlayers.reduce(
+    const allSongScores = poolPlayersResults.reduce(
       (prevScores, currentPoolPlayer) => {
         return [...prevScores, currentPoolPlayer.scores[songIndex]];
       },
@@ -105,6 +105,29 @@ export function PoolsScoresSource() {
   const poolPlayersResults = useMemo(() => {
     return getPoolPlayersResults(poolPlayers);
   }, [poolPlayers]);
+
+  if (numSongs === 0) {
+    return (
+      <table className={styles.poolsScoresTable}>
+        <thead>
+          <tr>
+            <th>
+              <h3>Players</h3>
+            </th>
+          </tr>
+        </thead>
+        <tbody>
+          {poolPlayersResults.map(({ playerName }, poolPlayerResultIndex) => {
+            return (
+              <tr key={poolPlayerResultIndex}>
+                <td>{playerName}</td>
+              </tr>
+            );
+          })}
+        </tbody>
+      </table>
+    );
+  }
 
   return (
     <table className={styles.poolsScoresTable}>
