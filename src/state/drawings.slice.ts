@@ -200,7 +200,12 @@ export const drawingsSlice = createSlice({
       }
 
       Object.values(state.entities)
-        .filter((d) => d.setId === drawing.setId || d.id === drawingId)
+        .filter((d) => {
+          if (drawing.setId) {
+            return d.setId === drawing.setId || d.id === drawingId
+          }
+          return d.id === drawingId
+        })
         .forEach((d) => {
           switch (d.meta.type) {
             case "simple":
