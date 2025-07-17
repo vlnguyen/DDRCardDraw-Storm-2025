@@ -18,9 +18,9 @@
   },
   "defaults": {
     "flags": [],
-    "lowerLvlBound": 1,
+    "lowerLvlBound": 9,
     "difficulties": ["challenge", "expert"],
-    "upperLvlBound": 0,
+    "upperLvlBound": 11,
     "style": "single"
   },
   "i18n": {

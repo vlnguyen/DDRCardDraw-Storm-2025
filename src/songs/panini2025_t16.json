@@ -22,9 +22,9 @@
   },
   "defaults": {
     "flags": [],
-    "lowerLvlBound": 1,
+    "lowerLvlBound": 11,
     "difficulties": ["expert", "challenge", "difficult"],
-    "upperLvlBound": 0,
+    "upperLvlBound": 15,
     "style": "single"
   },
   "i18n": {
