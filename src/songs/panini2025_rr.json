@@ -1,0 +1,391 @@
+{
+  "meta": {
+    "menuParent": "events",
+    "flags": [],
+    "lastUpdated": 1752772790558,
+    "usesDrawGroups": false,
+    "styles": ["single", "double"],
+    "difficulties": [
+      {
+        "key": "challenge",
+        "color": "#0191F2"
+      },
+      {
+        "key": "expert",
+        "color": "#F64D8B"
+      }
+    ]
+  },
+  "defaults": {
+    "flags": [],
+    "lowerLvlBound": 1,
+    "difficulties": ["challenge", "expert"],
+    "upperLvlBound": 0,
+    "style": "single"
+  },
+  "i18n": {
+    "en": {
+      "name": "Panini Fest 2025 Round Robin",
+      "single": "Single",
+      "double": "Double",
+      "beginner": "Beginner",
+      "basic": "Basic",
+      "difficult": "Difficult",
+      "expert": "Expert",
+      "challenge": "Challenge",
+      "edit": "Edit",
+      "$abbr": {
+        "beginner": "Beg",
+        "basic": "Bas",
+        "difficult": "Dif",
+        "expert": "Exp",
+        "challenge": "Cha",
+        "edit": "Edit"
+      }
+    }
+  },
+  "songs": [
+    {
+      "name": "[09] Stairfax",
+      "name_translation": "",
+      "jacket": "itg/panini2025_rr/(-[Jayce]-) - Stairfax - [09].jpg",
+      "bpm": "100",
+      "artist": "Nokae",
+      "charts": [
+        {
+          "lvl": 9,
+          "style": "single",
+          "diffClass": "challenge"
+        }
+      ]
+    },
+    {
+      "name": "[10] 39 whites for a special prize",
+      "name_translation": "",
+      "jacket": "itg/panini2025_rr/39.jpg",
+      "bpm": "120",
+      "artist": "XYLÖZ",
+      "charts": [
+        {
+          "lvl": 10,
+          "style": "single",
+          "diffClass": "challenge"
+        }
+      ]
+    },
+    {
+      "name": "[10] Active",
+      "name_translation": "",
+      "jacket": "itg/panini2025_rr/Active.jpg",
+      "bpm": "160",
+      "artist": "Duke & Jones",
+      "charts": [
+        {
+          "lvl": 10,
+          "style": "single",
+          "diffClass": "challenge"
+        }
+      ]
+    },
+    {
+      "name": "[10] BENJAMIN",
+      "name_translation": "",
+      "jacket": "itg/panini2025_rr/Benjamin.jpg",
+      "bpm": "132",
+      "artist": "MARON (IOSYS)",
+      "charts": [
+        {
+          "lvl": 10,
+          "style": "single",
+          "diffClass": "challenge"
+        },
+        {
+          "lvl": 8,
+          "style": "double",
+          "diffClass": "expert"
+        },
+        {
+          "lvl": 10,
+          "style": "double",
+          "diffClass": "challenge"
+        }
+      ]
+    },
+    {
+      "name": "[09] Cotton Candy",
+      "name_translation": "",
+      "jacket": "itg/panini2025_rr/Cotton Candy.jpg",
+      "bpm": "140",
+      "artist": "RAVELA",
+      "charts": [
+        {
+          "lvl": 9,
+          "style": "single",
+          "diffClass": "expert"
+        }
+      ]
+    },
+    {
+      "name": "[11] Feel That Bass",
+      "name_translation": "",
+      "jacket": "itg/panini2025_rr/Feel That Bass.jpg",
+      "bpm": "145",
+      "artist": "VESK GREEN",
+      "charts": [
+        {
+          "lvl": 11,
+          "style": "single",
+          "diffClass": "expert"
+        }
+      ]
+    },
+    {
+      "name": "[10] Goron City",
+      "name_translation": "",
+      "jacket": "itg/panini2025_rr/Goron City.jpg",
+      "bpm": "110-124",
+      "artist": "Vector U, Player2",
+      "charts": [
+        {
+          "lvl": 10,
+          "style": "single",
+          "diffClass": "challenge"
+        }
+      ]
+    },
+    {
+      "name": "[09] Hello, Immortal Ocean",
+      "name_translation": "",
+      "jacket": "itg/panini2025_rr/Hello Immortal Ocean.jpg",
+      "bpm": "126",
+      "artist": "Studio DOMA",
+      "charts": [
+        {
+          "lvl": 9,
+          "style": "single",
+          "diffClass": "challenge"
+        }
+      ]
+    },
+    {
+      "name": "[10] Mr. Top Player",
+      "name_translation": "",
+      "jacket": "itg/panini2025_rr/Mr Top Player.jpg",
+      "bpm": "130",
+      "artist": "Shigeyuki Kameda",
+      "charts": [
+        {
+          "lvl": 10,
+          "style": "single",
+          "diffClass": "challenge"
+        }
+      ]
+    },
+    {
+      "name": "[11] Chance vs Marq '22",
+      "name_translation": "",
+      "jacket": "itg/panini2025_rr/Orion.jpg",
+      "bpm": "130",
+      "artist": "Getsix",
+      "charts": [
+        {
+          "lvl": 11,
+          "style": "single",
+          "diffClass": "challenge"
+        }
+      ]
+    },
+    {
+      "name": "[11] goplaypump",
+      "name_translation": "",
+      "jacket": "itg/panini2025_rr/Papasito.jpg",
+      "bpm": "128",
+      "artist": "Yakikaze & Cashew feat. KuTiNA",
+      "charts": [
+        {
+          "lvl": 11,
+          "style": "single",
+          "diffClass": "challenge"
+        }
+      ]
+    },
+    {
+      "name": "[11] Playing God",
+      "name_translation": "",
+      "jacket": "itg/panini2025_rr/Playing God - [Zaia].jpg",
+      "bpm": "137",
+      "artist": "Polyphia",
+      "charts": [
+        {
+          "lvl": 11,
+          "style": "single",
+          "diffClass": "expert"
+        }
+      ]
+    },
+    {
+      "name": "[11] Pop It Like A Pro",
+      "name_translation": "",
+      "jacket": "itg/panini2025_rr/Pop It Like A Pro.jpg",
+      "bpm": "150",
+      "artist": "Skrillex",
+      "charts": [
+        {
+          "lvl": 11,
+          "style": "single",
+          "diffClass": "challenge"
+        }
+      ]
+    },
+    {
+      "name": "[11] Chance vs VivaLaMoo '22",
+      "name_translation": "",
+      "jacket": "itg/panini2025_rr/The Queen.jpg",
+      "bpm": "125",
+      "artist": "M2U",
+      "charts": [
+        {
+          "lvl": 11,
+          "style": "single",
+          "diffClass": "challenge"
+        }
+      ]
+    },
+    {
+      "name": "[10] Better Now",
+      "name_translation": "",
+      "jacket": "itg/panini2025_rr/[11] Better Now.jpg",
+      "bpm": "128",
+      "artist": "Xtinctor, Synthtonix",
+      "charts": [
+        {
+          "lvl": 10,
+          "style": "single",
+          "diffClass": "expert"
+        }
+      ]
+    },
+    {
+      "name": "[11] GO! (Mahalo Mix)",
+      "name_translation": "",
+      "jacket": "itg/panini2025_rr/[11] []Flash[] GO! (Mahalo Mix).jpg",
+      "bpm": "154",
+      "artist": "DMAshura",
+      "charts": [
+        {
+          "lvl": 11,
+          "style": "single",
+          "diffClass": "challenge"
+        }
+      ]
+    },
+    {
+      "name": "[11] Gary, our favorite IIDX player",
+      "name_translation": "",
+      "jacket": "itg/panini2025_rr/[11] symbolic.jpg",
+      "bpm": "155",
+      "artist": "TaQ",
+      "charts": [
+        {
+          "lvl": 11,
+          "style": "single",
+          "diffClass": "expert"
+        },
+        {
+          "lvl": 9,
+          "style": "double",
+          "diffClass": "expert"
+        },
+        {
+          "lvl": 13,
+          "style": "double",
+          "diffClass": "challenge"
+        }
+      ]
+    },
+    {
+      "name": "[09] ACTIVATE",
+      "name_translation": "",
+      "jacket": "itg/panini2025_rr/[9] ACTIVATE.jpg",
+      "bpm": "92",
+      "artist": "COBRAH",
+      "charts": [
+        {
+          "lvl": 9,
+          "style": "single",
+          "diffClass": "challenge"
+        }
+      ]
+    },
+    {
+      "name": "[10]PEANUPEANUPEANUPEANUPEANUPEANUPEANUPEANUPEANUPEANU",
+      "name_translation": "",
+      "jacket": "itg/panini2025_rr/[H]Jacks(JA)(lv.2) Peanut Butter.jpg",
+      "bpm": "212",
+      "artist": "RuPaul",
+      "charts": [
+        {
+          "lvl": 10,
+          "style": "single",
+          "diffClass": "challenge"
+        }
+      ]
+    },
+    {
+      "name": "[09] Animal Rights",
+      "name_translation": "",
+      "jacket": "itg/panini2025_rr/[I]Doublestep(DS)(lv.2) Animal Rights.jpg",
+      "bpm": "128",
+      "artist": "Deadmau5 ft. Wolfgang Gartner",
+      "charts": [
+        {
+          "lvl": 9,
+          "style": "single",
+          "diffClass": "challenge"
+        }
+      ]
+    },
+    {
+      "name": "[10] Mr. Electron",
+      "name_translation": "",
+      "jacket": "itg/panini2025_rr/[MID] [10] Mr. Electron (SX) [CopperPuppy].jpg",
+      "bpm": "128",
+      "artist": "The Brig x Michael White",
+      "charts": [
+        {
+          "lvl": 10,
+          "style": "single",
+          "diffClass": "challenge"
+        }
+      ]
+    },
+    {
+      "name": "[11] Burning Flame",
+      "name_translation": "",
+      "jacket": "itg/panini2025_rr/[MID] [11] Burning Flame (SX) [Valex].jpg",
+      "bpm": "165",
+      "artist": "AJURIKA feat. SAK.",
+      "charts": [
+        {
+          "lvl": 11,
+          "style": "single",
+          "diffClass": "challenge"
+        }
+      ]
+    },
+    {
+      "name": "[10] heather",
+      "name_translation": "",
+      "jacket": "itg/panini2025_rr/glaive - heather.jpg",
+      "bpm": "200",
+      "artist": "glaive",
+      "charts": [
+        {
+          "lvl": 10,
+          "style": "single",
+          "diffClass": "challenge"
+        }
+      ]
+    }
+  ]
+}
