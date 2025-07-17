@@ -1,0 +1,582 @@
+{
+  "meta": {
+    "menuParent": "events",
+    "flags": [],
+    "lastUpdated": 1752772817914,
+    "usesDrawGroups": false,
+    "styles": ["single", "double"],
+    "difficulties": [
+      {
+        "key": "expert",
+        "color": "#F64D8B"
+      },
+      {
+        "key": "challenge",
+        "color": "#0191F2"
+      },
+      {
+        "key": "difficult",
+        "color": "#F2F52C"
+      }
+    ]
+  },
+  "defaults": {
+    "flags": [],
+    "lowerLvlBound": 11,
+    "difficulties": ["expert", "challenge", "difficult"],
+    "upperLvlBound": 15,
+    "style": "single"
+  },
+  "i18n": {
+    "en": {
+      "name": "Panini Fest 2025 Top 16",
+      "single": "Single",
+      "double": "Double",
+      "beginner": "Beginner",
+      "basic": "Basic",
+      "difficult": "Difficult",
+      "expert": "Expert",
+      "challenge": "Challenge",
+      "edit": "Edit",
+      "$abbr": {
+        "beginner": "Beg",
+        "basic": "Bas",
+        "difficult": "Dif",
+        "expert": "Exp",
+        "challenge": "Cha",
+        "edit": "Edit"
+      }
+    }
+  },
+  "songs": [
+    {
+      "name": "[13] 99 Red Galooms",
+      "name_translation": "",
+      "jacket": "itg/panini2025_t16/99 Glooms.jpg",
+      "bpm": "185",
+      "artist": "Sta",
+      "charts": [
+        {
+          "lvl": 13,
+          "style": "single",
+          "diffClass": "expert"
+        }
+      ]
+    },
+    {
+      "name": "[GF-A] Alerte salade verte",
+      "name_translation": "",
+      "jacket": "itg/panini2025_t16/Alerte salade verte.jpg",
+      "bpm": "160",
+      "artist": "Aujourd'hui",
+      "charts": [
+        {
+          "lvl": 13,
+          "style": "single",
+          "diffClass": "challenge"
+        }
+      ]
+    },
+    {
+      "name": "[GF-A] All Day",
+      "name_translation": "",
+      "jacket": "itg/panini2025_t16/All Day.jpg",
+      "bpm": "147",
+      "artist": "Viperactive",
+      "charts": [
+        {
+          "lvl": 13,
+          "style": "single",
+          "diffClass": "challenge"
+        }
+      ]
+    },
+    {
+      "name": "[12] Bounce Trippy",
+      "name_translation": "",
+      "jacket": "itg/panini2025_t16/Bounce Trippy.jpg",
+      "bpm": "185",
+      "artist": "Dustvoxx",
+      "charts": [
+        {
+          "lvl": 12,
+          "style": "single",
+          "diffClass": "challenge"
+        },
+        {
+          "lvl": 10,
+          "style": "double",
+          "diffClass": "expert"
+        },
+        {
+          "lvl": 12,
+          "style": "double",
+          "diffClass": "challenge"
+        }
+      ]
+    },
+    {
+      "name": "[11] Doughnut Planet",
+      "name_translation": "",
+      "jacket": "itg/panini2025_t16/Doughnut Planet (SX 11).jpg",
+      "bpm": "135",
+      "artist": "Pa's Lam System × PARKGOLF",
+      "charts": [
+        {
+          "lvl": 11,
+          "style": "single",
+          "diffClass": "challenge"
+        }
+      ]
+    },
+    {
+      "name": "[GF-A] Earth",
+      "name_translation": "",
+      "jacket": "itg/panini2025_t16/Earth.jpg",
+      "bpm": "152",
+      "artist": "GEOTHEORY",
+      "charts": [
+        {
+          "lvl": 13,
+          "style": "single",
+          "diffClass": "challenge"
+        }
+      ]
+    },
+    {
+      "name": "[13] Marq vs VivaLaMoo '23",
+      "name_translation": "",
+      "jacket": "itg/panini2025_t16/Engine.jpg",
+      "bpm": "174",
+      "artist": "eFeL",
+      "charts": [
+        {
+          "lvl": 13,
+          "style": "single",
+          "diffClass": "challenge"
+        }
+      ]
+    },
+    {
+      "name": "[GF-A] Get Enuf",
+      "name_translation": "",
+      "jacket": "itg/panini2025_t16/Get Enuf (KillJoy Remix).jpg",
+      "bpm": "147",
+      "artist": "killJoy",
+      "charts": [
+        {
+          "lvl": 13,
+          "style": "single",
+          "diffClass": "challenge"
+        }
+      ]
+    },
+    {
+      "name": "[GF-B3] YOU - KillerBeast",
+      "name_translation": "",
+      "jacket": "itg/panini2025_t16/KillerBeast.jpg",
+      "bpm": "160-220",
+      "artist": "かめりあ",
+      "charts": [
+        {
+          "lvl": 13,
+          "style": "single",
+          "diffClass": "expert"
+        }
+      ]
+    },
+    {
+      "name": "[14] VivaLaSpd",
+      "name_translation": "",
+      "jacket": "itg/panini2025_t16/MAXRAGE.jpg",
+      "bpm": "222",
+      "artist": "EBIMAYO",
+      "charts": [
+        {
+          "lvl": 14,
+          "style": "single",
+          "diffClass": "challenge"
+        }
+      ]
+    },
+    {
+      "name": "[12] Tony, the ITG player, not my cat, asked for this.",
+      "name_translation": "",
+      "jacket": "itg/panini2025_t16/Marianela (Que Pasa).jpg",
+      "bpm": "124",
+      "artist": "HUGEL",
+      "charts": [
+        {
+          "lvl": 12,
+          "style": "single",
+          "diffClass": "challenge"
+        }
+      ]
+    },
+    {
+      "name": "[GF-B5] GET - konmai whale song",
+      "name_translation": "",
+      "jacket": "itg/panini2025_t16/ORCA.jpg",
+      "bpm": "155",
+      "artist": "Camellia",
+      "charts": [
+        {
+          "lvl": 13,
+          "style": "single",
+          "diffClass": "expert"
+        }
+      ]
+    },
+    {
+      "name": "[GF-B6] ALTITUDE - SOBOK",
+      "name_translation": "",
+      "jacket": "itg/panini2025_t16/SOBOK.jpg",
+      "bpm": "146",
+      "artist": "Mameyudoufu",
+      "charts": [
+        {
+          "lvl": 14,
+          "style": "single",
+          "diffClass": "challenge"
+        }
+      ]
+    },
+    {
+      "name": "[14] This masterpiece wasn't played last year",
+      "name_translation": "",
+      "jacket": "itg/panini2025_t16/Sapphire on Fire [ITGAlex].jpg",
+      "bpm": "175",
+      "artist": "庭師",
+      "charts": [
+        {
+          "lvl": 14,
+          "style": "single",
+          "diffClass": "challenge"
+        }
+      ]
+    },
+    {
+      "name": "[GF-A] Seagull",
+      "name_translation": "",
+      "jacket": "itg/panini2025_t16/Seagull (Hard).jpg",
+      "bpm": "157",
+      "artist": "かめりあ",
+      "charts": [
+        {
+          "lvl": 13,
+          "style": "single",
+          "diffClass": "expert"
+        }
+      ]
+    },
+    {
+      "name": "[14] GOPLAYPUMP",
+      "name_translation": "",
+      "jacket": "itg/panini2025_t16/Solfeggietto.jpg",
+      "bpm": "157",
+      "artist": "Fiverwater",
+      "charts": [
+        {
+          "lvl": 14,
+          "style": "single",
+          "diffClass": "challenge"
+        }
+      ]
+    },
+    {
+      "name": "[12] Transport",
+      "name_translation": "",
+      "jacket": "itg/panini2025_t16/Transport.jpg",
+      "bpm": "147",
+      "artist": "Sota Fujimori",
+      "charts": [
+        {
+          "lvl": 12,
+          "style": "single",
+          "diffClass": "expert"
+        },
+        {
+          "lvl": 9,
+          "style": "double",
+          "diffClass": "difficult"
+        },
+        {
+          "lvl": 11,
+          "style": "double",
+          "diffClass": "expert"
+        },
+        {
+          "lvl": 13,
+          "style": "double",
+          "diffClass": "challenge"
+        }
+      ]
+    },
+    {
+      "name": "[14] Stamina in my tech tournament?!",
+      "name_translation": "",
+      "jacket": "itg/panini2025_t16/Unfolding (SX 14).jpg",
+      "bpm": "165",
+      "artist": "Etherwood",
+      "charts": [
+        {
+          "lvl": 14,
+          "style": "single",
+          "diffClass": "challenge"
+        }
+      ]
+    },
+    {
+      "name": "[GF-B4] DON'T - Unlimited",
+      "name_translation": "",
+      "jacket": "itg/panini2025_t16/Unlimited.jpg",
+      "bpm": "150",
+      "artist": "Similar Outskirts",
+      "charts": [
+        {
+          "lvl": 13,
+          "style": "single",
+          "diffClass": "challenge"
+        }
+      ]
+    },
+    {
+      "name": "[GF-A] VECTOR↑ZΣ",
+      "name_translation": "",
+      "jacket": "itg/panini2025_t16/VECTORIZE.jpg",
+      "bpm": "179",
+      "artist": "Trina Lydia",
+      "charts": [
+        {
+          "lvl": 13,
+          "style": "single",
+          "diffClass": "challenge"
+        }
+      ]
+    },
+    {
+      "name": "[GF-B1] I - Valderas",
+      "name_translation": "",
+      "jacket": "itg/panini2025_t16/Valderas.jpg",
+      "bpm": "101-140",
+      "artist": "MiddleIsland",
+      "charts": [
+        {
+          "lvl": 12,
+          "style": "single",
+          "diffClass": "challenge"
+        }
+      ]
+    },
+    {
+      "name": "[12] Marq vs Tony '24",
+      "name_translation": "",
+      "jacket": "itg/panini2025_t16/Valkyrie.jpg",
+      "bpm": "150",
+      "artist": "TRYDENY",
+      "charts": [
+        {
+          "lvl": 12,
+          "style": "single",
+          "diffClass": "challenge"
+        }
+      ]
+    },
+    {
+      "name": "[13] Void Virus",
+      "name_translation": "",
+      "jacket": "itg/panini2025_t16/Void Virus.jpg",
+      "bpm": "133",
+      "artist": "Akeos",
+      "charts": [
+        {
+          "lvl": 13,
+          "style": "single",
+          "diffClass": "challenge"
+        }
+      ]
+    },
+    {
+      "name": "[11] 13 Donkeys",
+      "name_translation": "",
+      "jacket": "itg/panini2025_t16/[11] 13 Donkeys.jpg",
+      "bpm": "155",
+      "artist": "Massive New Krew",
+      "charts": [
+        {
+          "lvl": 11,
+          "style": "single",
+          "diffClass": "challenge"
+        }
+      ]
+    },
+    {
+      "name": "[11] Authentic Red Rocks Experience",
+      "name_translation": "",
+      "jacket": "itg/panini2025_t16/[11] ACID.jpg",
+      "bpm": "140",
+      "artist": "Wooli & SampliFire",
+      "charts": [
+        {
+          "lvl": 11,
+          "style": "single",
+          "diffClass": "challenge"
+        }
+      ]
+    },
+    {
+      "name": "[11] Escape",
+      "name_translation": "",
+      "jacket": "itg/panini2025_t16/[11] Escape.jpg",
+      "bpm": "141",
+      "artist": "Sanaas",
+      "charts": [
+        {
+          "lvl": 11,
+          "style": "single",
+          "diffClass": "challenge"
+        }
+      ]
+    },
+    {
+      "name": "[11] Everything",
+      "name_translation": "",
+      "jacket": "itg/panini2025_t16/[11] Everything.jpg",
+      "bpm": "140",
+      "artist": "Darby",
+      "charts": [
+        {
+          "lvl": 11,
+          "style": "single",
+          "diffClass": "challenge"
+        }
+      ]
+    },
+    {
+      "name": "[11] Ghost Ship",
+      "name_translation": "",
+      "jacket": "itg/panini2025_t16/[11] Ghost Ship [SX].jpg",
+      "bpm": "110",
+      "artist": "Teminite",
+      "charts": [
+        {
+          "lvl": 11,
+          "style": "single",
+          "diffClass": "challenge"
+        }
+      ]
+    },
+    {
+      "name": "[12] Danger Drug",
+      "name_translation": "",
+      "jacket": "itg/panini2025_t16/[12] Danger Drug.jpg",
+      "bpm": "146",
+      "artist": "かめりあ",
+      "charts": [
+        {
+          "lvl": 12,
+          "style": "single",
+          "diffClass": "challenge"
+        }
+      ]
+    },
+    {
+      "name": "[12] Time",
+      "name_translation": "",
+      "jacket": "itg/panini2025_t16/[12] Time.jpg",
+      "bpm": "164",
+      "artist": "G Jones",
+      "charts": [
+        {
+          "lvl": 12,
+          "style": "single",
+          "diffClass": "challenge"
+        }
+      ]
+    },
+    {
+      "name": "[13] Pollinosis",
+      "name_translation": "",
+      "jacket": "itg/panini2025_t16/[13] Pollinosis (SX 13).jpg",
+      "bpm": "145",
+      "artist": "dj REMO-CON",
+      "charts": [
+        {
+          "lvl": 13,
+          "style": "single",
+          "diffClass": "challenge"
+        }
+      ]
+    },
+    {
+      "name": "[GF-B2] HOPE - The Battle Drop",
+      "name_translation": "",
+      "jacket": "itg/panini2025_t16/[13] The Battle Drop [SX].jpg",
+      "bpm": "170",
+      "artist": "Hommarju & Getty",
+      "charts": [
+        {
+          "lvl": 13,
+          "style": "single",
+          "diffClass": "challenge"
+        }
+      ]
+    },
+    {
+      "name": "[GF-B7] SICKNESS - Menace",
+      "name_translation": "",
+      "jacket": "itg/panini2025_t16/[15] Menace.jpg",
+      "bpm": "140",
+      "artist": "JAWNS",
+      "charts": [
+        {
+          "lvl": 15,
+          "style": "single",
+          "diffClass": "challenge"
+        }
+      ]
+    },
+    {
+      "name": "[GF-A] Night Thea+er Etude",
+      "name_translation": "",
+      "jacket": "itg/panini2025_t16/[Good-] Night Thea+er Etude.jpg",
+      "bpm": "155",
+      "artist": "seatrus",
+      "charts": [
+        {
+          "lvl": 14,
+          "style": "single",
+          "diffClass": "challenge"
+        }
+      ]
+    },
+    {
+      "name": "[11] Mr. Werewolf",
+      "name_translation": "",
+      "jacket": "itg/panini2025_t16/[UPR] [11] Mr. Werewolf (android52 Edit) [SX].jpg",
+      "bpm": "175",
+      "artist": "t+pazolite",
+      "charts": [
+        {
+          "lvl": 11,
+          "style": "single",
+          "diffClass": "challenge"
+        }
+      ]
+    },
+    {
+      "name": "[13] Elbow Grease",
+      "name_translation": "",
+      "jacket": "itg/panini2025_t16/[UPR] [13] Elbow Grease (SX) [Scrypts].jpg",
+      "bpm": "150",
+      "artist": "Ray Volpe & Soltan",
+      "charts": [
+        {
+          "lvl": 13,
+          "style": "single",
+          "diffClass": "challenge"
+        }
+      ]
+    }
+  ]
+}
